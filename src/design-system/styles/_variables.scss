@@ -1,0 +1,25 @@
+// Colors
+$colors: (
+    "purple": #7c5dfa,
+    "light-purple": #9277ff,
+    "light-grey": #dfe3fa,
+    "grey": #888eb0,
+    "blue-grey": #7e88c3,
+    "red": #ec5757,
+    "pink": #ff9797,
+    "white": #f8f8fb,
+    "black-10": #252945,
+    "black-30": #1e2139,
+    "black-50": #141625,
+    "black-70": #0c0e16
+);
+
+// Breakpoints
+$breakpoints: (
+    "xs": 0,
+    "sm": 576px,
+    "md": 768px,
+    "lg": 992px,
+    "xl": 1200px,
+    "xxl": 1400px
+);

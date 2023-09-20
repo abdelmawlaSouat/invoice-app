@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
 
-module.exports = nextConfig
+const path = require("path");
+
+const nextConfig = {
+  sassOptions: {
+    includePaths: ["./src/design-system/styles"],
+  },
+};
+
+module.exports = nextConfig;
