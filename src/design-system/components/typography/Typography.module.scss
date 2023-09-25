@@ -24,11 +24,10 @@
 
 .headingS {
     font-size: 0.85rem;
-    line-height: 1.5rem;
+    line-height: 1rem;
 
     @include breakpoint-min(map.get($breakpoints, "md")) {
         font-size: 0.9375rem;
-        line-height: 1.5rem;
     }
 }
 
@@ -39,11 +38,10 @@
 }
 
 .body {
-    font-size: 1rem;
+    font-size: 0.8215rem;
     line-height: 1.5rem;
 
     @include breakpoint-min(map.get($breakpoints, "md")) {
-        font-size: 1.125rem;
         line-height: 1.5rem;
     }
 }
