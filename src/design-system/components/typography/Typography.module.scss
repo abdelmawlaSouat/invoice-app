@@ -38,10 +38,5 @@
 }
 
 .body {
-    font-size: 0.8215rem;
     line-height: 1.5rem;
-
-    @include breakpoint-min(map.get($breakpoints, "md")) {
-        line-height: 1.5rem;
-    }
 }

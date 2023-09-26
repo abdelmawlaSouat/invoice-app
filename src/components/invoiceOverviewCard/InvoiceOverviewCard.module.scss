@@ -1,0 +1,38 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
+.firstRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hashtag {
+    color: map.get($colors, "blue-grey");
+}
+
+.id {
+    color: map.get($colors, "black-70");
+    font-weight: 700;
+}
+
+.secondRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.dueDate {
+    color: map.get($colors, "blue-grey");
+}
+
+.customerName {
+    color: #858bb2;
+}
+
+.amount {
+    color: map.get($colors, "black-70");
+    font-weight: 700;
+}

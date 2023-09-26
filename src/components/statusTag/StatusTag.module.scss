@@ -1,0 +1,25 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    width: fit-content;
+    padding: 14px 28px;
+}
+
+.paid {
+    color: #33d69f;
+    background-color: hsl(163, 67, 52, 10%);
+}
+
+.pending {
+    color: #ff8f00;
+    background-color: hsl(34, 100, 50, 10%);
+}
+
+.draft {
+    color: #373b53;
+    background-color: hsl(231, 20, 27, 5%);
+}
