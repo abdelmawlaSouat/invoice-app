@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // Colors
 $colors: (
     "purple": #7c5dfa,
@@ -22,4 +24,14 @@ $breakpoints: (
     "lg": 992px,
     "xl": 1200px,
     "xxl": 1400px
+);
+
+// Themes
+
+$light: (
+    "backgroundColor": map.get($colors, "white")
+);
+
+$dark: (
+    "backgroundColor": map.get($colors, "black-50")
 );

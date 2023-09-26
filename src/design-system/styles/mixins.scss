@@ -1,3 +1,11 @@
+@mixin spread-map($theme) {
+    @each $key, $value in $theme {
+        --#{$key}: #{$value};
+    }
+}
+
+// Media queries
+
 @mixin breakpoint-min($bp) {
     @media (min-width: $bp) {
         @content;
