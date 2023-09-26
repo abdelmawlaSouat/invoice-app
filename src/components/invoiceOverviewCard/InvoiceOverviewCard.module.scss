@@ -9,11 +9,11 @@
 }
 
 .hashtag {
-    color: map.get($colors, "blue-grey");
+    color: var(--textColorSecondary);
 }
 
 .id {
-    color: map.get($colors, "black-70");
+    color: var(--textColor);
     font-weight: 700;
 }
 
@@ -25,14 +25,14 @@
 }
 
 .dueDate {
-    color: map.get($colors, "blue-grey");
+    color: var(--textColorSecondary);
 }
 
 .customerName {
-    color: #858bb2;
+    color: var(--textColorSecondary);
 }
 
 .amount {
-    color: map.get($colors, "black-70");
+    color: var(--textColor);
     font-weight: 700;
 }

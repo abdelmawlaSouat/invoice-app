@@ -20,6 +20,10 @@
 }
 
 .draft {
-    color: #373b53;
-    background-color: hsl(231, 20, 27, 5%);
+    color: var(--secondaryButtonText);
+    background-color: var(--secondaryButtonBackground);
+
+    circle {
+        fill: var(--secondaryButtonText);
+    }
 }

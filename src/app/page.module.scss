@@ -6,3 +6,10 @@
   background-color: var(--appBackgroundColor);
   transition: background-color 0.2s;
 }
+
+.invoicesWrapper {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
