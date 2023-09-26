@@ -1,0 +1,11 @@
+name: Build the application
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Build the application
+        run: yarn build
