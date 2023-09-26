@@ -10,6 +10,7 @@ export const Logo = ({ size = 72 }: Props) => {
       viewBox="0 0 72 72"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-label="logo"
     >
       <path
         d="M0 0H52C63.0457 0 72 8.95431 72 20V52C72 63.0457 63.0457 72 52 72H0V0Z"

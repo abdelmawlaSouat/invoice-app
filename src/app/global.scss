@@ -1,0 +1,12 @@
+@use "sass:map";
+
+@import "variables";
+@import "mixins";
+
+:root {
+    @include spread-map($light);
+}
+
+:root.theme-dark {
+    @include spread-map($dark);
+}
