@@ -16,19 +16,26 @@ const defaultFilters = {
 };
 
 export default function Home() {
-  const [isInitialList, setIsInitialList] = useState(true);
   const [activeFilters, setActiveFilters] = useState(defaultFilters);
 
   const handleFilters = (key: Status, value: boolean) => {
-    if (isInitialList) {
-      setIsInitialList(false);
-    }
-
     setActiveFilters({
       ...activeFilters,
       [key]: value,
     });
   };
+
+  const noFiltersActive = Object.values(activeFilters).every(
+    (filter) => filter === false
+  );
+
+  const invoicesToDisplay = invoices
+    .filter(
+      (invoice) => noFiltersActive || activeFilters[invoice.status as Status]
+    )
+    .map((invoice) => (
+      <InvoiceOverviewCard key={invoice.id} invoice={invoice} />
+    ));
 
   return (
     <main className={styles.main}>
@@ -41,7 +48,8 @@ export default function Home() {
               Invoices
             </Typography>
             <Typography variant="body" className={styles.invoicesLength}>
-              {invoices.length} invoices
+              {invoicesToDisplay.length} invoice
+              {invoicesToDisplay.length > 1 && "s"}
             </Typography>
           </div>
 
@@ -57,16 +65,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className={styles.invoicesWrapper}>
-          {invoices
-            .filter(
-              (invoice) =>
-                isInitialList || activeFilters[invoice.status as Status]
-            )
-            .map((invoice) => (
-              <InvoiceOverviewCard key={invoice.id} invoice={invoice} />
-            ))}
-        </div>
+        <div className={styles.invoicesWrapper}>{invoicesToDisplay}</div>
       </div>
     </main>
   );
