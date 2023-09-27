@@ -3,7 +3,7 @@ import { Card } from "@/design-system/components/card";
 import { InvoiceOverview } from "@/types/InvoiceOverview";
 import styles from "./InvoiceOverviewCard.module.scss";
 import { FC } from "react";
-import { StatusTag } from "../statusTag";
+import { Status, StatusTag } from "../statusTag";
 
 interface InvoiceOverviewCardProps {
   invoice: InvoiceOverview;
@@ -12,12 +12,12 @@ interface InvoiceOverviewCardProps {
 export const InvoiceOverviewCard: FC<InvoiceOverviewCardProps> = ({
   invoice,
 }) => {
-  const dueDate = new Date(invoice.dueDate).toLocaleDateString("en-BE", {
+  const dueDate = new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
-  const amount = invoice.amount.toLocaleString("en-BE", {
+  const amount = invoice.total.toLocaleString("en-BE", {
     style: "currency",
     currency: "EUR",
   });
@@ -31,7 +31,7 @@ export const InvoiceOverviewCard: FC<InvoiceOverviewCardProps> = ({
         </Typography>
 
         <Typography variant="body" className={styles.customerName}>
-          {invoice.customer}
+          {invoice.clientName}
         </Typography>
       </div>
 
@@ -46,7 +46,7 @@ export const InvoiceOverviewCard: FC<InvoiceOverviewCardProps> = ({
           </Typography>
         </div>
 
-        <StatusTag status={invoice.status} />
+        <StatusTag status={invoice.status as Status} />
       </div>
     </Card>
   );
