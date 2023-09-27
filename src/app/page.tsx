@@ -8,6 +8,7 @@ import { Typography } from "@/design-system/components";
 import { FilterByStatus } from "@/components/FilterByStatus";
 import { useState } from "react";
 import { Status } from "@/components/statusTag";
+import { EmptyListMessage } from "@/components/emptyListMessage";
 
 const defaultFilters = {
   paid: false,
@@ -65,7 +66,13 @@ export default function Home() {
           </div>
         </div>
 
-        <div className={styles.invoicesWrapper}>{invoicesToDisplay}</div>
+        <div className={styles.invoicesWrapper}>
+          {invoicesToDisplay.length > 0 ? (
+            invoicesToDisplay
+          ) : (
+            <EmptyListMessage className={styles.emptyListMessage} />
+          )}
+        </div>
       </div>
     </main>
   );
