@@ -1,3 +1,6 @@
+@use "sass:map";
+@import "variables";
+
 .main {
   display: flex;
   flex-direction: column;
@@ -33,4 +36,22 @@
 
 .emptyListMessage {
   margin-top: 6.25rem;
+}
+
+.btnsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.addInvoiceBtn {
+  background-color: map.get($colors, "purple");
+  color: #fff;
+  padding: 6px 1rem 6px 6px;
+
+  > span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 }

@@ -4,11 +4,12 @@ import { Navbar } from "@/components/navbar";
 import styles from "./page.module.scss";
 import { InvoiceOverviewCard } from "@/components/invoiceOverviewCard";
 import invoices from "@/constants/invoices";
-import { Typography } from "@/design-system/components";
+import { Button, Typography } from "@/design-system/components";
 import { FilterByStatus } from "@/components/FilterByStatus";
 import { useState } from "react";
 import { Status } from "@/components/statusTag";
 import { EmptyListMessage } from "@/components/emptyListMessage";
+import { Add } from "@/design-system/icons";
 
 const defaultFilters = {
   paid: false,
@@ -54,15 +55,21 @@ export default function Home() {
             </Typography>
           </div>
 
-          <div>
+          <div className={styles.btnsWrapper}>
             <FilterByStatus
               activeFilters={activeFilters}
               onChange={handleFilters}
             />
 
-            {/* AddInvoice btn
-            => HERE
-            */}
+            <Button
+              className={styles.addInvoiceBtn}
+              onClick={() => {
+                alert("COMING SOON !");
+              }}
+            >
+              <Add />
+              <span>New</span>
+            </Button>
           </div>
         </div>
 

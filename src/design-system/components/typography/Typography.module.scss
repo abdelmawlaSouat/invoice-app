@@ -23,12 +23,8 @@
 }
 
 .headingS {
-    font-size: 0.85rem;
+    font-size: 0.9375rem;
     line-height: 1rem;
-
-    @include breakpoint-min(map.get($breakpoints, "md")) {
-        font-size: 0.9375rem;
-    }
 }
 
 .headingL,

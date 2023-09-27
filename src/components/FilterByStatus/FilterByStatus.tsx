@@ -36,7 +36,7 @@ export const FilterByStatus: FC<FilterByStatusProps> = ({
       <Popover.Root>
         <Popover.Trigger asChild>
           <button className={styles.trigger}>
-            <Typography variant="headingM">Filter by status</Typography>
+            <Typography variant="headingM">Filter</Typography>
             <DownArrow />
           </button>
         </Popover.Trigger>
