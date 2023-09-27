@@ -35,16 +35,18 @@ $light: (
     "cardBackgroundColor": #fff,
     "textColor": map.get($colors, "black-70"),
     "textColorSecondary": map.get($colors, "blue-grey"),
-    "secondaryButtonText": #373b53,
-    "secondaryButtonBackground": #f4f4f5
+    "secondaryButtonText": map.get($colors, "black-10"),
+    "secondaryButtonBackground": #f4f4f5,
+    "checkboxBackgroundColor": map.get($colors, "light-grey")
 );
 
 $dark: (
     "appBackgroundColor": map.get($colors, "black-50"),
     "navbarBackgroundColor": map.get($colors, "black-30"),
-    "cardBackgroundColor": map.get($colors, "black-30"),
+    "cardBackgroundColor": map.get($colors, "black-20"),
     "textColor": map.get($colors, "white"),
     "textColorSecondary": map.get($colors, "white"),
     "secondaryButtonText": #fff,
-    "secondaryButtonBackground": #292c44
+    "secondaryButtonBackground": #292c44,
+    "checkboxBackgroundColor": map.get($colors, "black-30")
 );

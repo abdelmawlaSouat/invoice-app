@@ -1,5 +1,4 @@
-import { Typography } from "@/design-system/components";
-import { Card } from "@/design-system/components/card";
+import { Typography, Card } from "@/design-system/components";
 import { InvoiceOverview } from "@/types/InvoiceOverview";
 import styles from "./InvoiceOverviewCard.module.scss";
 import { FC } from "react";
