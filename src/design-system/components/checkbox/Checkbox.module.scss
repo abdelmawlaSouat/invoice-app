@@ -26,6 +26,7 @@
 }
 .root:hover {
     border: 1px solid map.get($colors, "purple");
+    cursor: pointer;
 }
 
 .indicator {

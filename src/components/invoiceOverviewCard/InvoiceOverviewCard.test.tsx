@@ -5,11 +5,12 @@ describe("InvoiceOverviewCard", () => {
   test("should display all the data", () => {
     render(
       <InvoiceOverviewCard
+        // @ts-ignore
         invoice={{
           id: "1FFFED",
-          customer: "John Doe",
-          dueDate: "2021-09-01",
-          amount: 100,
+          clientName: "John Doe",
+          paymentDue: "2021-09-01",
+          total: 100,
           status: "paid",
         }}
       />

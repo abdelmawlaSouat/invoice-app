@@ -6,7 +6,7 @@ export const Check = () => {
         stroke="#FFF"
         strokeWidth="2"
         fill="none"
-        fill-rule="evenodd"
+        fillRule="evenodd"
       />
     </svg>
   );
