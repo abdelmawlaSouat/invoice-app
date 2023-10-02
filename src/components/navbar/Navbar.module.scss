@@ -7,6 +7,12 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--navbarBackgroundColor);
+
+    @include breakpoint-min(map.get($breakpoints, "xl")) {
+        flex-direction: column;
+        height: 100vh;
+        position: fixed;
+    }
 }
 
 .contentWrapper {
@@ -14,9 +20,20 @@
     align-items: center;
     gap: 1.5rem;
     padding: 1.25rem 1.5rem;
+
+    @include breakpoint-min(map.get($breakpoints, "xl")) {
+        flex-direction: column;
+    }
 }
 
 .imgWrapper {
-    padding-left: 1.5rem;
-    border-left: 1px solid #494e6e;
+    @include breakpoint-max(map.get($breakpoints, "sm")) {
+        padding-left: 1.5rem;
+        border-left: 1px solid #494e6e;
+    }
+
+    @include breakpoint-min(map.get($breakpoints, "xl")) {
+        border-top: 1px solid #494e6e;
+        padding-top: 1.5rem;
+    }
 }

@@ -1,12 +1,21 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
 .wrapper {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     border-radius: 0.5rem;
     text-transform: uppercase;
     font-weight: 700;
     width: fit-content;
-    padding: 14px 28px;
+    padding: 0.875rem 1.125rem;
+
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        min-width: 7.375rem;
+    }
 }
 
 .paid {

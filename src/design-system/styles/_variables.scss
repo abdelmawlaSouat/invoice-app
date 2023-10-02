@@ -43,7 +43,7 @@ $light: (
 $dark: (
     "appBackgroundColor": map.get($colors, "black-50"),
     "navbarBackgroundColor": map.get($colors, "black-30"),
-    "cardBackgroundColor": map.get($colors, "black-20"),
+    "cardBackgroundColor": #1d2239,
     "textColor": map.get($colors, "white"),
     "textColorSecondary": map.get($colors, "white"),
     "secondaryButtonText": #fff,

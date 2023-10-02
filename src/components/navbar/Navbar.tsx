@@ -4,10 +4,16 @@ import Image from "next/image";
 import styles from "./Navbar.module.scss";
 import { ThemeSwitcher } from "../themeSwitcher";
 import Link from "next/link";
+import classNames from "classnames";
+import { FC } from "react";
 
-export const Navbar = () => {
+interface NavbarProps {
+  className?: string;
+}
+
+export const Navbar: FC<NavbarProps> = ({ className }) => {
   return (
-    <nav className={styles.wrapper}>
+    <nav className={classNames(styles.wrapper, className)}>
       <Link href="/">
         <Logo />
       </Link>

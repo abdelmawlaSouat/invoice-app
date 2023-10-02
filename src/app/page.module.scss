@@ -1,17 +1,34 @@
 @use "sass:map";
 @import "variables";
+@import "mixins";
 
 .main {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   min-height: 100vh;
   background-color: var(--appBackgroundColor);
   transition: background-color 0.2s;
+
+  @include breakpoint-min(map.get($breakpoints, "xl")) {
+    flex-direction: row;
+  }
 }
 
 .content {
   padding: 2rem 1.5rem;
+
+  @include breakpoint-min(map.get($breakpoints, "sm")) {
+    padding: 4rem 3rem;
+  }
+
+  @include breakpoint-min(map.get($breakpoints, "md")) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4.8rem 0;
+    gap: 4rem;
+    width: 100%;
+  }
 }
 
 .invoicesWrapper {
@@ -24,6 +41,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include breakpoint-min(map.get($breakpoints, "md")) {
+    min-width: 750px;
+  }
 }
 
 .title {
