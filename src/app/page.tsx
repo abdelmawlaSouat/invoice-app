@@ -10,6 +10,8 @@ import { useState } from "react";
 import { Status } from "@/components/statusTag";
 import { EmptyListMessage } from "@/components/emptyListMessage";
 import { Add } from "@/design-system/icons";
+import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
+import { useWindowSize } from "@/design-system/hooks";
 
 const defaultFilters = {
   paid: false,
@@ -19,6 +21,7 @@ const defaultFilters = {
 
 export default function Home() {
   const [activeFilters, setActiveFilters] = useState(defaultFilters);
+  const { width } = useWindowSize();
 
   const handleFilters = (key: Status, value: boolean) => {
     setActiveFilters({
@@ -49,6 +52,7 @@ export default function Home() {
             <Typography variant="headingL" tag="h1" className={styles.title}>
               Invoices
             </Typography>
+
             <Typography variant="body" className={styles.invoicesLength}>
               {invoicesToDisplay.length} invoice
               {invoicesToDisplay.length > 1 && "s"}
@@ -68,7 +72,7 @@ export default function Home() {
               }}
             >
               <Add />
-              <span>New</span>
+              <span>{width >= BREAKPOINTS.md ? "New Invoice" : "New"}</span>
             </Button>
           </div>
         </div>

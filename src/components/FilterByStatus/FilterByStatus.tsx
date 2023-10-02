@@ -6,6 +6,8 @@ import * as Popover from "@radix-ui/react-popover";
 import { FC } from "react";
 import { Status } from "../statusTag";
 import styles from "./FilterByStatus.module.scss";
+import { useWindowSize } from "@/design-system/hooks";
+import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 
 const checkBoxes = [
   {
@@ -31,19 +33,23 @@ export const FilterByStatus: FC<FilterByStatusProps> = ({
   activeFilters,
   onChange,
 }) => {
+  const { width } = useWindowSize();
+
   return (
     <div>
       <Popover.Root>
         <Popover.Trigger asChild>
           <button className={styles.trigger}>
-            <Typography variant="headingM">Filter</Typography>
+            <Typography variant="headingM">
+              {width >= BREAKPOINTS.md ? "Filter by status" : "Filter"}
+            </Typography>
             <DownArrow />
           </button>
         </Popover.Trigger>
 
         <Popover.Portal>
           <Popover.Content sideOffset={20} className={styles.content}>
-            <Card>
+            <Card className={styles.card}>
               {checkBoxes.map((checkBox) => (
                 <Checkbox
                   key={checkBox.id}

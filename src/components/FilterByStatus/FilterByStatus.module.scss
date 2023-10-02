@@ -8,6 +8,10 @@
     color: var(--textColor);
 }
 
+.card {
+    background-color: var(--filtersCardBackgroundColor);
+}
+
 .content {
     width: 12rem;
     max-height: var(--radix-popover-content-available-height);

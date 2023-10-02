@@ -12,9 +12,7 @@ interface InvoiceOverviewCardProps {
 export const InvoiceOverviewCard: FC<InvoiceOverviewCardProps> = ({
   invoice,
 }) => {
-  const { width, height } = useWindowSize();
-
-  console.log(width, height);
+  const { width } = useWindowSize();
 
   return width >= BREAKPOINTS.md ? (
     <DesktopCard invoice={invoice} />
