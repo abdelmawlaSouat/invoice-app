@@ -17,7 +17,9 @@ describe("FilterByStatus", () => {
       />
     );
 
-    expect(screen.getByRole("button", { name: "Filter" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Filter by status" })
+    ).toBeInTheDocument();
 
     await user.click(screen.getByText("Filter by status"));
 
@@ -44,7 +46,7 @@ describe("FilterByStatus", () => {
       />
     );
 
-    await user.click(screen.getByText("Filter"));
+    await user.click(screen.getByText("Filter by status"));
 
     expect(screen.getByRole("checkbox", { name: "Pending" })).toHaveAttribute(
       "aria-checked",

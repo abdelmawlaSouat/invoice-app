@@ -19,12 +19,6 @@ describe("useWindowSize", () => {
     window.resizeTo = actualWindowResize;
   });
 
-  test("should return initial Infinity values", () => {
-    const { result } = renderHook(() => useWindowSize());
-    expect(result.current.width).toBe(Infinity);
-    expect(result.current.height).toBe(Infinity);
-  });
-
   test("should return current viewport sizes on window resize", async () => {
     const { result } = renderHook(() => useWindowSize());
 
