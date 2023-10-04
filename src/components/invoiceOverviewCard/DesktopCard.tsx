@@ -23,7 +23,7 @@ export const DesktopCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
   return (
     <Card className={styles.wrapper}>
       <div className={styles.leftPart}>
-        <Typography variant="body" className={styles.id}>
+        <Typography variant="headingS" className={styles.id}>
           <span className={styles.hashtag}>#</span>
           {invoice.id}
         </Typography>
@@ -38,7 +38,7 @@ export const DesktopCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
       </div>
 
       <div className={styles.rightPart}>
-        <Typography variant="body" className={styles.amount}>
+        <Typography variant="headingS" className={styles.amount}>
           {amount}
         </Typography>
 

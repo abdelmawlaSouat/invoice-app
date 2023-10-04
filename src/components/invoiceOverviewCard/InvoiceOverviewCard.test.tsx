@@ -1,18 +1,20 @@
 import { render, screen } from "@testing-library/react";
 import { InvoiceOverviewCard } from "./InvoiceOverviewCard";
+import { InvoiceOverview } from "@/types/InvoiceOverview";
 
 describe("InvoiceOverviewCard", () => {
   test("should display all the data", () => {
     render(
       <InvoiceOverviewCard
-        // @ts-ignore
-        invoice={{
-          id: "1FFFED",
-          clientName: "John Doe",
-          paymentDue: "2021-09-01",
-          total: 100,
-          status: "paid",
-        }}
+        invoice={
+          {
+            id: "1FFFED",
+            clientName: "John Doe",
+            paymentDue: "2021-09-01",
+            total: 100,
+            status: "paid",
+          } as InvoiceOverview
+        }
       />
     );
 

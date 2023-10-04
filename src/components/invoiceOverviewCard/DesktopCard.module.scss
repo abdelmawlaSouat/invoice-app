@@ -10,6 +10,10 @@
     @include breakpoint-min(map.get($breakpoints, "md")) {
         padding: 2rem;
     }
+
+    p {
+        margin: 0;
+    }
 }
 
 .leftPart {

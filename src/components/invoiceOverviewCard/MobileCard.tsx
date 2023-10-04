@@ -20,9 +20,9 @@ export const MobileCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
   });
 
   return (
-    <Card>
+    <Card className={styles.wrapper}>
       <div className={styles.firstRow}>
-        <Typography variant="body" className={styles.id}>
+        <Typography variant="headingS" className={styles.id}>
           <span className={styles.hashtag}>#</span>
           {invoice.id}
         </Typography>
@@ -38,7 +38,7 @@ export const MobileCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
             {`Due ${dueDate}`}
           </Typography>
 
-          <Typography variant="body" className={styles.amount}>
+          <Typography variant="headingS" className={styles.amount}>
             {amount}
           </Typography>
         </div>

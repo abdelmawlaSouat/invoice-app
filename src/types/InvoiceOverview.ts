@@ -1,5 +1,3 @@
-import { Status } from "@/components/statusTag";
-
 export interface InvoiceOverview {
   id: string;
   createdAt: string;

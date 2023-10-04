@@ -40,7 +40,7 @@ export const FilterByStatus: FC<FilterByStatusProps> = ({
       <Popover.Root>
         <Popover.Trigger asChild>
           <button className={styles.trigger}>
-            <Typography variant="headingM">
+            <Typography variant="headingS">
               {width >= BREAKPOINTS.md ? "Filter by status" : "Filter"}
             </Typography>
             <DownArrow />
