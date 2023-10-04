@@ -1,0 +1,43 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
+.wrapper p {
+    margin: 0;
+}
+
+.firstRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hashtag {
+    color: var(--textColorSecondary);
+}
+
+.id {
+    color: var(--textColor);
+    font-weight: 700;
+}
+
+.secondRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+p.dueDate {
+    color: var(--textColorSecondary);
+    margin-bottom: 0.5rem;
+}
+
+.customerName {
+    color: var(--textColorSecondary);
+}
+
+.amount {
+    color: var(--textColor);
+    font-weight: 700;
+}

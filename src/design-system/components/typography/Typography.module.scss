@@ -3,8 +3,12 @@
 @import "mixins";
 
 .headingL {
-    font-size: 2rem;
-    line-height: 1.7rem;
+    font-size: 1.5rem;
+
+    @include breakpoint-min(map.get($breakpoints, "sm")) {
+        font-size: 2rem;
+        line-height: 1.7rem;
+    }
 
     @include breakpoint-min(map.get($breakpoints, "md")) {
         font-size: 2.25rem;
@@ -23,25 +27,22 @@
 }
 
 .headingS {
-    font-size: 0.85rem;
+    font-size: 0.9375rem;
     line-height: 1rem;
-
-    @include breakpoint-min(map.get($breakpoints, "md")) {
-        font-size: 0.9375rem;
-    }
 }
 
 .headingL,
-.headingM {
+.headingM,
+.headingS {
     font-weight: 700;
     margin: 0;
 }
 
 .body {
-    font-size: 0.8215rem;
+    font-size: 0.8125rem;
     line-height: 1.5rem;
 
     @include breakpoint-min(map.get($breakpoints, "md")) {
-        line-height: 1.5rem;
+        font-size: 1rem;
     }
 }

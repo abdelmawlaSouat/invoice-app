@@ -1,0 +1,42 @@
+@use "sass:map";
+@import "variables";
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+}
+
+.root {
+    background-color: var(--checkboxBackgroundColor);
+    border: 0;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.isChecked {
+        background-color: map.get($colors, "purple");
+        border: 0;
+    }
+}
+.root:hover {
+    border: 1px solid map.get($colors, "purple");
+    cursor: pointer;
+}
+
+.indicator {
+    color: #fff;
+    position: relative;
+    top: -2px;
+}
+
+.label {
+    cursor: pointer;
+    color: var(--textColor);
+    padding-left: 0.875rem;
+}
