@@ -3,7 +3,7 @@ import { InvoiceOverview } from "@/types/InvoiceOverview";
 import styles from "./DesktopCard.module.scss";
 import { FC } from "react";
 import { Status, StatusTag } from "../statusTag";
-import { LeftArrow } from "@/design-system/icons";
+import { RightArrow } from "@/design-system/icons";
 
 interface InvoiceOverviewCardProps {
   invoice: InvoiceOverview;
@@ -44,7 +44,7 @@ export const DesktopCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
 
         <StatusTag status={invoice.status as Status} />
 
-        <LeftArrow />
+        <RightArrow />
       </div>
     </Card>
   );
