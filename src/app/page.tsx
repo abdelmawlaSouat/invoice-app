@@ -1,6 +1,5 @@
 "use client";
 
-import { Navbar } from "@/components/navbar";
 import styles from "./page.module.scss";
 import { InvoiceOverviewCard } from "@/components/invoiceOverviewCard";
 import invoices from "@/constants/invoices";
@@ -12,6 +11,7 @@ import { EmptyListMessage } from "@/components/emptyListMessage";
 import { Add } from "@/design-system/icons";
 import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 import { useWindowSize } from "@/design-system/hooks";
+import Link from "next/link";
 
 const defaultFilters = {
   paid: false,
@@ -39,13 +39,17 @@ export default function Home() {
       (invoice) => noFiltersActive || activeFilters[invoice.status as Status]
     )
     .map((invoice) => (
-      <InvoiceOverviewCard key={invoice.id} invoice={invoice} />
+      <Link
+        href={`/invoice/${invoice.id}`}
+        key={invoice.id}
+        className={styles.invoiceWrapperLink}
+      >
+        <InvoiceOverviewCard invoice={invoice} />
+      </Link>
     ));
 
   return (
     <main className={styles.main}>
-      <Navbar />
-
       <div className={styles.content}>
         <div className={styles.header}>
           <div>
