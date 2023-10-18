@@ -3,14 +3,17 @@
 @import "mixins";
 
 .wrapper {
-    padding: 2rem 1.5rem 20vh 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
     min-height: 100vh;
     background-color: var(--appBackgroundColor);
     transition: background-color 0.2s;
     color: var(--textColor);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1.5rem;
 }
 
 .statusCard {
@@ -26,10 +29,6 @@
 }
 
 .ctasWrapper {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     display: flex;
     justify-content: space-between;
 }

@@ -13,17 +13,23 @@ type Props = {
 export default function Invoice({ invoice }: Props) {
   return (
     <main className={styles.wrapper}>
-      <GoBackLink />
+      <div className={styles.content}>
+        <GoBackLink />
 
-      <Card className={styles.statusCard}>
-        <Typography className={styles.secondaryText} variant="body" tag="span">
-          Status
-        </Typography>
+        <Card className={styles.statusCard}>
+          <Typography
+            className={styles.secondaryText}
+            variant="body"
+            tag="span"
+          >
+            Status
+          </Typography>
 
-        <StatusTag status={invoice.status as Status} />
-      </Card>
+          <StatusTag status={invoice.status as Status} />
+        </Card>
 
-      <InvoiceDetailCard invoice={invoice} />
+        <InvoiceDetailCard invoice={invoice} />
+      </div>
 
       <Card className={styles.ctasWrapper}>
         <Button
