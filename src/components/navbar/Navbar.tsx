@@ -1,3 +1,5 @@
+"use client";
+
 import { Logo } from "@/design-system/icons";
 import userIcon from "./user.png";
 import Image from "next/image";

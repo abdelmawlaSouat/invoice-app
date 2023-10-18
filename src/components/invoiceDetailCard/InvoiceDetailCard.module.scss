@@ -1,0 +1,71 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.secondaryText {
+    color: var(--textColorSecondary);
+    margin: 0;
+    line-height: 1.125rem;
+}
+
+.addressWrapper {
+    display: flex;
+    flex-direction: column;
+
+    span {
+        margin-bottom: 0.25rem;
+    }
+}
+
+.descriptionWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.datesAndContactWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.clientName {
+    margin-bottom: 0.25rem;
+}
+
+.propertyLabel {
+    margin-bottom: 1em;
+    display: inline-block;
+}
+
+.wrapper .itemsCard {
+    background-color: var(--itemsCardBackgroundColor);
+    padding: 1.5rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.itemWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+
+.quantity {
+    color: var(--textColorSecondary);
+    margin: 0.5rem 0;
+    font-weight: bold;
+}
+
+.itemsFooter {
+    padding: 1.5rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    color: var(--itemsCardFooterText);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--itemsCardFooterBackgroundColor);
+}

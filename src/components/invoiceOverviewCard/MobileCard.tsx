@@ -1,11 +1,11 @@
 import { Typography, Card } from "@/design-system/components";
-import { InvoiceOverview } from "@/types/InvoiceOverview";
+import { Invoice } from "@/types";
 import styles from "./MobileCard.module.scss";
 import { FC } from "react";
 import { Status, StatusTag } from "../statusTag";
 
 interface InvoiceOverviewCardProps {
-  invoice: InvoiceOverview;
+  invoice: Invoice;
 }
 
 export const MobileCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {

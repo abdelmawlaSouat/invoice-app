@@ -1,4 +1,4 @@
-export interface InvoiceOverview {
+export type Invoice = {
   id: string;
   createdAt: string;
   paymentDue: string;
@@ -26,4 +26,4 @@ export interface InvoiceOverview {
     total: number;
   }[];
   total: number;
-}
+};

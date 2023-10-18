@@ -38,7 +38,10 @@ $light: (
     "secondaryButtonText": map.get($colors, "black-10"),
     "secondaryButtonBackground": #f4f4f5,
     "checkboxBackgroundColor": map.get($colors, "light-grey"),
-    "filtersCardBackgroundColor": #fff
+    "filtersCardBackgroundColor": #fff,
+    "itemsCardBackgroundColor": #f9fafe,
+    "itemsCardFooterBackgroundColor": map.get($colors, "black-10"),
+    "itemsCardFooterText": map.get($colors, "white")
 );
 
 $dark: (
@@ -50,5 +53,8 @@ $dark: (
     "secondaryButtonText": #fff,
     "secondaryButtonBackground": #292c44,
     "checkboxBackgroundColor": #1d2239,
-    "filtersCardBackgroundColor": #252944
+    "filtersCardBackgroundColor": #252944,
+    "itemsCardBackgroundColor": map.get($colors, "black-20"),
+    "itemsCardFooterBackgroundColor": map.get($colors, "black-70"),
+    "itemsCardFooterText": map.get($colors, "white")
 );
