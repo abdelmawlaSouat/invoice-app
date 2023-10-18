@@ -1,8 +1,9 @@
+"use client"; // should be removed !!!
 import styles from "./invoice.module.scss";
 
 import { GoBackLink, InvoiceDetailCard, StatusTag } from "@/components";
 import type { Status } from "@/components";
-import { Card, Typography } from "@/design-system/components";
+import { Button, Card, Typography } from "@/design-system/components";
 import { Invoice } from "@/types";
 
 type Props = {
@@ -23,6 +24,33 @@ export default function Invoice({ invoice }: Props) {
       </Card>
 
       <InvoiceDetailCard invoice={invoice} />
+
+      <Card className={styles.ctasWrapper}>
+        <Button
+          className={styles.editBtn}
+          onClick={() => {
+            alert("Edit");
+          }}
+        >
+          Edit
+        </Button>
+        <Button
+          className={styles.deleteBtn}
+          onClick={() => {
+            alert("Delete");
+          }}
+        >
+          Delete
+        </Button>
+        <Button
+          className={styles.markAsPaidBtn}
+          onClick={() => {
+            alert("Mark as Paid");
+          }}
+        >
+          Mark as Paid
+        </Button>
+      </Card>
     </main>
   );
 }
