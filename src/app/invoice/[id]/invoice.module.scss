@@ -1,0 +1,22 @@
+.wrapper {
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: 100vh;
+    background-color: var(--appBackgroundColor);
+    transition: background-color 0.2s;
+    color: var(--textColor);
+}
+
+.statusCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.secondaryText {
+    color: var(--textColorSecondary);
+    margin: 0;
+    line-height: 1.125rem;
+}

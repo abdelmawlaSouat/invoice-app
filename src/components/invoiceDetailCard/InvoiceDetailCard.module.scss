@@ -1,0 +1,40 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.secondaryText {
+    color: var(--textColorSecondary);
+    margin: 0;
+    line-height: 1.125rem;
+}
+
+.addressWrapper {
+    display: flex;
+    flex-direction: column;
+
+    span {
+        margin-bottom: 0.25rem;
+    }
+}
+
+.descriptionWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.clientName {
+    margin-bottom: 0.5rem;
+}
+
+.propertyLabel {
+    margin-bottom: 1em;
+    display: inline-block;
+}

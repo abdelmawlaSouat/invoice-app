@@ -1,5 +1,5 @@
 import { Typography, Card } from "@/design-system/components";
-import { Invoice } from "@/types/Invoice";
+import { Invoice } from "@/types";
 import styles from "./DesktopCard.module.scss";
 import { FC } from "react";
 import { Status, StatusTag } from "../statusTag";

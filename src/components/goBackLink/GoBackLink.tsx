@@ -1,20 +1,14 @@
-"use client";
-
 import { Typography } from "@/design-system/components";
 import { LeftArrow } from "@/design-system/icons";
-import { useRouter } from "next/navigation";
 import styles from "./GoBackLink.module.scss";
+import Link from "next/link";
 
 export const GoBackLink = () => {
-  const router = useRouter();
-
   return (
-    <button className={styles.wrapper} onClick={() => router.back()}>
+    <Link href="/" className={styles.wrapper}>
       <LeftArrow />
 
-      <Typography className={styles.text} variant="headingS" tag="span">
-        Go back
-      </Typography>
-    </button>
+      <Typography variant="headingS">Go back</Typography>
+    </Link>
   );
 };

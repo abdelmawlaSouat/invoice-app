@@ -1,9 +1,6 @@
 .wrapper {
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-}
-
-.text {
-    margin-left: 1.5rem;
+    text-decoration: none;
+    color: var(--textColor);
+    display: flex;
+    gap: 1.5rem;
 }

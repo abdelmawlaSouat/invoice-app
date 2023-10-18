@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { InvoiceOverviewCard } from "./InvoiceOverviewCard";
-import { Invoice } from "@/types/Invoice";
+import { Invoice } from "@/types";
 
 describe("InvoiceOverviewCard", () => {
   test("should display all the data", () => {

@@ -5,3 +5,4 @@ export * from "./invoiceOverviewCard";
 export * from "./navbar";
 export * from "./statusTag";
 export * from "./themeSwitcher";
+export * from "./invoiceDetailCard";

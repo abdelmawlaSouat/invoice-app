@@ -1,4 +1,4 @@
-import { Invoice } from "@/types/Invoice";
+import { Invoice } from "@/types";
 import { FC } from "react";
 import { useWindowSize } from "@/design-system/hooks";
 import { DesktopCard } from "./DesktopCard";
