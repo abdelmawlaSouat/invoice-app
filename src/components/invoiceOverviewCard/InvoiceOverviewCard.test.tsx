@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { InvoiceOverviewCard } from "./InvoiceOverviewCard";
-import { InvoiceOverview } from "@/types/InvoiceOverview";
+import { Invoice } from "@/types/Invoice";
 
 describe("InvoiceOverviewCard", () => {
   test("should display all the data", () => {
@@ -13,7 +13,7 @@ describe("InvoiceOverviewCard", () => {
             paymentDue: "2021-09-01",
             total: 100,
             status: "paid",
-          } as InvoiceOverview
+          } as Invoice
         }
       />
     );

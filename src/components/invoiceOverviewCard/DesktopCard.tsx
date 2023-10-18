@@ -1,12 +1,12 @@
 import { Typography, Card } from "@/design-system/components";
-import { InvoiceOverview } from "@/types/InvoiceOverview";
+import { Invoice } from "@/types/Invoice";
 import styles from "./DesktopCard.module.scss";
 import { FC } from "react";
 import { Status, StatusTag } from "../statusTag";
 import { RightArrow } from "@/design-system/icons";
 
 interface InvoiceOverviewCardProps {
-  invoice: InvoiceOverview;
+  invoice: Invoice;
 }
 
 export const DesktopCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
