@@ -1,13 +1,34 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
 .wrapper {
     display: flex;
     flex-direction: column;
     gap: 2em;
+
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        padding: 2rem;
+    }
 }
 
 .secondaryText {
     color: var(--textColorSecondary);
     margin: 0;
     line-height: 1.125rem;
+}
+
+.idAndSenderAddressWrapper {
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.invoiceId {
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        margin-bottom: 1rem;
+    }
 }
 
 .addressWrapper {
@@ -22,12 +43,21 @@
 .descriptionWrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
-.datesAndContactWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
+.datesWrapper > div:last-child {
+    margin-bottom: 2rem;
+
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        margin-bottom: 0;
+    }
+}
+.creationDateWrapper {
+    margin-bottom: 2rem;
 }
 
 .clientName {
@@ -39,33 +69,16 @@
     display: inline-block;
 }
 
-.wrapper .itemsCard {
-    background-color: var(--itemsCardBackgroundColor);
-    padding: 1.5rem 0 0 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.mobileItemsCard {
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        display: none;
+    }
 }
 
-.itemWrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1.5rem;
-}
+.desktopItemsCard {
+    display: none;
 
-.quantity {
-    color: var(--textColorSecondary);
-    margin: 0.5rem 0;
-    font-weight: bold;
-}
-
-.itemsFooter {
-    padding: 1.5rem;
-    border-radius: 0 0 0.5rem 0.5rem;
-    color: var(--itemsCardFooterText);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--itemsCardFooterBackgroundColor);
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        display: block;
+    }
 }
