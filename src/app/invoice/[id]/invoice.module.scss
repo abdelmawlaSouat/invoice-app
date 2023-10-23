@@ -7,6 +7,12 @@
     background-color: var(--appBackgroundColor);
     transition: background-color 0.2s;
     color: var(--textColor);
+
+    @include breakpoint-min(map.get($breakpoints, "lg")) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .content {
@@ -14,12 +20,43 @@
     flex-direction: column;
     gap: 2rem;
     padding: 2rem 1.5rem;
+
+    @include breakpoint-min(map.get($breakpoints, "lg")) {
+        width: 45.625rem;
+        margin-left: 6.25rem;
+    }
 }
 
-.statusCard {
+.ctaGroupOnDesktop {
+    @include breakpoint-max(map.get($breakpoints, "md")) {
+        display: none;
+    }
+}
+
+.statusAndCtasWrapper {
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.statusWrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        justify-content: initial;
+        gap: 1.25rem;
+    }
+}
+
+.CtaGroup {
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        display: flex;
+        gap: 0.5rem;
+    }
 }
 
 .secondaryText {
@@ -46,4 +83,10 @@
 .markAsPaidBtn {
     background-color: map.get($colors, "purple");
     color: map.get($colors, "white");
+}
+
+.ctaGroupOnMobile {
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        display: none;
+    }
 }
