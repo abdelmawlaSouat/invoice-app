@@ -11,11 +11,13 @@ type InvoiceDetailCardProps = {
 };
 
 export const InvoiceDetailCard = ({ invoice }: InvoiceDetailCardProps) => {
-  const dueDate = new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  const dueDate = invoice.paymentDue
+    ? new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    : null;
 
   const createdAt = new Date(invoice.createdAt).toLocaleDateString("en-BE", {
     year: "numeric",
@@ -41,7 +43,7 @@ export const InvoiceDetailCard = ({ invoice }: InvoiceDetailCardProps) => {
           </Typography>
         </div>
 
-        <AddressData address={invoice.senderAddress} />
+        <AddressData address={invoice.company.address} />
       </div>
 
       <div className={styles.descriptionWrapper}>
@@ -81,10 +83,10 @@ export const InvoiceDetailCard = ({ invoice }: InvoiceDetailCardProps) => {
           </Typography>
 
           <Typography className={styles.clientName} variant="headingS">
-            {invoice.clientName}
+            {invoice.client.name}
           </Typography>
 
-          <AddressData address={invoice.clientAddress} />
+          <AddressData address={invoice.client.address} />
         </div>
 
         <div>
@@ -96,16 +98,16 @@ export const InvoiceDetailCard = ({ invoice }: InvoiceDetailCardProps) => {
             Sent to
           </Typography>
 
-          <Typography variant="headingS">{invoice.clientEmail}</Typography>
+          <Typography variant="headingS">{invoice.client.email}</Typography>
         </div>
       </div>
 
       <div className={styles.mobileItemsCard}>
-        <MobileItemsCard items={invoice.items} total={invoice.total} />
+        <MobileItemsCard items={invoice.products} total={invoice.total} />
       </div>
 
       <div className={styles.desktopItemsCard}>
-        <DesktopItemsCard items={invoice.items} total={invoice.total} />
+        <DesktopItemsCard items={invoice.products} total={invoice.total} />
       </div>
     </Card>
   );

@@ -9,11 +9,13 @@ describe("InvoiceOverviewCard", () => {
         invoice={
           {
             id: "1FFFED",
-            clientName: "John Doe",
+            client: {
+              name: "John Doe",
+            },
             paymentDue: "2021-09-01",
             total: 100,
-            status: "paid",
-          } as Invoice
+            status: "PAID",
+          } as any
         }
       />
     );

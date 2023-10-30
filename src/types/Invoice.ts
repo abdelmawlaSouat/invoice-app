@@ -1,39 +1,36 @@
 export type Invoice = {
-  id: string;
-  createdAt: string;
-  paymentDue: string;
+  id: number;
+  createdAt: Date;
+  paymentDue: Date | null;
   status: string;
   description: string;
   total: number;
-
   products: {
     id: number;
     name: string;
     quantity: number;
     price: number;
     total: number;
-    invoiceId: string;
+    invoiceId: number;
   }[];
-
   client: {
     id: string;
     name: string;
     email: string;
     address: {
-      id: string;
+      id: number;
       street: string;
       city: string;
       postCode: string;
       country: string;
     };
   };
-
   company: {
     id: string;
     name: string;
     email: string;
     address: {
-      id: string;
+      id: number;
       street: string;
       city: string;
       postCode: string;

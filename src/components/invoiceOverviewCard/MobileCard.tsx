@@ -9,11 +9,13 @@ interface InvoiceOverviewCardProps {
 }
 
 export const MobileCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
-  const dueDate = new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  const dueDate = invoice.paymentDue
+    ? new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    : null;
   const amount = invoice.total.toLocaleString("en-BE", {
     style: "currency",
     currency: "EUR",
@@ -28,7 +30,7 @@ export const MobileCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
         </Typography>
 
         <Typography variant="body" className={styles.customerName}>
-          {invoice.clientName}
+          {invoice.client.name}
         </Typography>
       </div>
 

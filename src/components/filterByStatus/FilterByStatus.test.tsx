@@ -9,9 +9,9 @@ describe("FilterByStatus", () => {
     render(
       <FilterByStatus
         activeFilters={{
-          paid: false,
-          pending: false,
-          draft: false,
+          PAID: false,
+          PENDING: false,
+          DRAFT: false,
         }}
         onChange={() => {}}
       />
@@ -38,9 +38,9 @@ describe("FilterByStatus", () => {
     render(
       <FilterByStatus
         activeFilters={{
-          paid: false,
-          pending: true,
-          draft: false,
+          PAID: false,
+          PENDING: true,
+          DRAFT: false,
         }}
         onChange={onChangeMock}
       />
