@@ -55,6 +55,6 @@ describe("FilterByStatus", () => {
 
     await user.click(screen.getByRole("checkbox", { name: "Draft" }));
 
-    expect(onChangeMock).toHaveBeenCalledWith("draft", true);
+    expect(onChangeMock).toHaveBeenCalledWith("DRAFT", true);
   });
 });
