@@ -24,7 +24,7 @@ model Product {
   price     Float
   total     Float
   invoiceId Int
-  invoice   Invoice @relation(fields: [invoiceId], references: [id])
+  invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
 }
 
 model Company {
