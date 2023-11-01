@@ -8,6 +8,7 @@ import { Button, Card, Typography } from "@/design-system/components";
 import { Invoice } from "@/types";
 import classNames from "classnames";
 import { useState } from "react";
+import { redirect, useRouter } from "next/navigation";
 
 type Props = {
   invoice: Invoice;
@@ -15,11 +16,13 @@ type Props = {
 
 const CallToActionGroup = ({
   className,
+  status,
   onEdited,
   onDeleted,
   onMarkedAsPaid,
 }: {
   className?: string;
+  status: Status;
   onEdited: () => void;
   onDeleted: () => void;
   onMarkedAsPaid: () => void;
@@ -33,14 +36,25 @@ const CallToActionGroup = ({
       Delete
     </Button>
 
-    <Button className={styles.markAsPaidBtn} onClick={onMarkedAsPaid}>
-      Mark as Paid
-    </Button>
+    {status === "PENDING" && (
+      <Button className={styles.markAsPaidBtn} onClick={onMarkedAsPaid}>
+        Mark as Paid
+      </Button>
+    )}
   </div>
 );
 
 export default function Invoice({ invoice }: Props) {
   const [modalIsOpened, setModalIsOpened] = useState(false);
+  const [status, setStatus] = useState(invoice.status);
+  const router = useRouter();
+
+  const handleOnMarkedAsPaid = async () => {
+    const res = await fetch(`/api/update-status?id=${invoice.id}&status=PAID`);
+    const updatedInvoice = await res.json();
+
+    setStatus(updatedInvoice.status || invoice.status);
+  };
 
   return (
     <main className={styles.wrapper}>
@@ -57,19 +71,20 @@ export default function Invoice({ invoice }: Props) {
               Status
             </Typography>
 
-            <StatusTag status={invoice.status as Status} />
+            <StatusTag status={status as Status} />
           </div>
 
           <div className={styles.ctaGroupOnDesktop}>
             <CallToActionGroup
+              status={invoice.status as Status}
               className={styles.CtaGroup}
               onEdited={() => {
                 alert("Edit");
               }}
-              onDeleted={() => setModalIsOpened(true)}
-              onMarkedAsPaid={() => {
-                alert("Mark as Paid");
+              onDeleted={() => {
+                setModalIsOpened(true);
               }}
+              onMarkedAsPaid={handleOnMarkedAsPaid}
             />
           </div>
         </Card>
@@ -79,18 +94,28 @@ export default function Invoice({ invoice }: Props) {
 
       <Card className={styles.ctaGroupOnMobile}>
         <CallToActionGroup
+          status={invoice.status as Status}
           onEdited={() => {
             alert("Edit");
           }}
-          onDeleted={() => setModalIsOpened(true)}
-          onMarkedAsPaid={() => {
-            alert("Mark as Paid");
+          onDeleted={() => {
+            setModalIsOpened(true);
           }}
+          onMarkedAsPaid={handleOnMarkedAsPaid}
         />
       </Card>
 
       <DeleteInvoiceModal
-        onDeleted={() => {}}
+        onDeleted={async () => {
+          const res = await fetch(`/api/delete-invoice?id=${invoice.id}`);
+          const deletedInvoice = await res.json();
+
+          if (deletedInvoice) {
+            setModalIsOpened(false);
+
+            router.push("/");
+          }
+        }}
         onCanceled={() => setModalIsOpened(false)}
         isOpen={modalIsOpened}
         invoiceID={invoice.id}

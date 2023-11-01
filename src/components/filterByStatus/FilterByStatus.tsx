@@ -11,15 +11,15 @@ import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 
 const checkBoxes = [
   {
-    id: "paid",
+    id: "PAID",
     label: "Paid",
   },
   {
-    id: "pending",
+    id: "PENDING",
     label: "Pending",
   },
   {
-    id: "draft",
+    id: "DRAFT",
     label: "Draft",
   },
 ];

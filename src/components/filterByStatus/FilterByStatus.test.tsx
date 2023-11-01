@@ -9,9 +9,9 @@ describe("FilterByStatus", () => {
     render(
       <FilterByStatus
         activeFilters={{
-          paid: false,
-          pending: false,
-          draft: false,
+          PAID: false,
+          PENDING: false,
+          DRAFT: false,
         }}
         onChange={() => {}}
       />
@@ -38,9 +38,9 @@ describe("FilterByStatus", () => {
     render(
       <FilterByStatus
         activeFilters={{
-          paid: false,
-          pending: true,
-          draft: false,
+          PAID: false,
+          PENDING: true,
+          DRAFT: false,
         }}
         onChange={onChangeMock}
       />
@@ -55,6 +55,6 @@ describe("FilterByStatus", () => {
 
     await user.click(screen.getByRole("checkbox", { name: "Draft" }));
 
-    expect(onChangeMock).toHaveBeenCalledWith("draft", true);
+    expect(onChangeMock).toHaveBeenCalledWith("DRAFT", true);
   });
 });

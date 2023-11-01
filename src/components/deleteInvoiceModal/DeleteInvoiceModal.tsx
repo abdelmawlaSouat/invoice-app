@@ -2,7 +2,7 @@ import { Button, Modal, Typography } from "@/design-system/components";
 import styles from "./DeleteInvoiceModal.module.scss";
 
 type DeleteInvoiceModalProps = {
-  invoiceID: string;
+  invoiceID: number;
   isOpen: boolean;
   onCanceled: () => void;
   onDeleted: () => void;

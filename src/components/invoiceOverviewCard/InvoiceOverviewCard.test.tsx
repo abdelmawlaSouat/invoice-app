@@ -9,11 +9,13 @@ describe("InvoiceOverviewCard", () => {
         invoice={
           {
             id: "1FFFED",
-            clientName: "John Doe",
+            client: {
+              name: "John Doe",
+            },
             paymentDue: "2021-09-01",
             total: 100,
-            status: "paid",
-          } as Invoice
+            status: "PAID",
+          } as any
         }
       />
     );
@@ -22,6 +24,6 @@ describe("InvoiceOverviewCard", () => {
     expect(screen.getByText("John Doe")).toBeInTheDocument();
     expect(screen.getByText("Due 1 Sept 2021")).toBeInTheDocument();
     expect(screen.getByText("€100.00")).toBeInTheDocument();
-    expect(screen.getByText("paid")).toBeInTheDocument();
+    expect(screen.getByText("PAID")).toBeInTheDocument();
   });
 });
