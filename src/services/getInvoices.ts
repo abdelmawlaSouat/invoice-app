@@ -1,7 +1,12 @@
-import { Invoice } from "@/types";
+import { Invoice, ResponseStatus } from "@/types";
 import { PrismaClient } from "@prisma/client";
 
-export const getInvoices = async () => {
+type GetInvoicesResponse = {
+  invoices: Invoice[];
+  status: ResponseStatus;
+};
+
+export const getInvoices = async (): Promise<GetInvoicesResponse> => {
   let invoices: Invoice[] = [];
 
   try {
@@ -22,7 +27,11 @@ export const getInvoices = async () => {
         },
       },
     });
-  } finally {
-    return invoices;
+
+    return { status: "OK", invoices };
+  } catch (error) {
+    console.error(error);
+
+    return { status: "KO", invoices };
   }
 };
