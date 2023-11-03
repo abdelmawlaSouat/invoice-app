@@ -2,10 +2,9 @@
 import styles from "./invoice.module.scss";
 
 import { GoBackLink, InvoiceDetailCard, StatusTag } from "@/components";
-import type { Status } from "@/components";
 import { DeleteInvoiceModal } from "@/components";
 import { Button, Card, Typography } from "@/design-system/components";
-import { Invoice } from "@/types";
+import { Invoice, InvoiceStatus } from "@/types";
 import classNames from "classnames";
 import { useState } from "react";
 import { redirect, useRouter } from "next/navigation";
@@ -22,7 +21,7 @@ const CallToActionGroup = ({
   onMarkedAsPaid,
 }: {
   className?: string;
-  status: Status;
+  status: InvoiceStatus;
   onEdited: () => void;
   onDeleted: () => void;
   onMarkedAsPaid: () => void;
@@ -71,12 +70,12 @@ export default function Invoice({ invoice }: Props) {
               Status
             </Typography>
 
-            <StatusTag status={status as Status} />
+            <StatusTag status={status as InvoiceStatus} />
           </div>
 
           <div className={styles.ctaGroupOnDesktop}>
             <CallToActionGroup
-              status={invoice.status as Status}
+              status={invoice.status as InvoiceStatus}
               className={styles.CtaGroup}
               onEdited={() => {
                 alert("Edit");
@@ -94,7 +93,7 @@ export default function Invoice({ invoice }: Props) {
 
       <Card className={styles.ctaGroupOnMobile}>
         <CallToActionGroup
-          status={invoice.status as Status}
+          status={invoice.status as InvoiceStatus}
           onEdited={() => {
             alert("Edit");
           }}

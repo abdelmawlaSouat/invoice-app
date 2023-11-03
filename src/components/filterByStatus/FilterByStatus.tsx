@@ -4,10 +4,10 @@ import { Checkbox, Typography, Card } from "@/design-system/components";
 import { DownArrow } from "@/design-system/icons";
 import * as Popover from "@radix-ui/react-popover";
 import { FC } from "react";
-import { Status } from "../statusTag";
 import styles from "./FilterByStatus.module.scss";
 import { useWindowSize } from "@/design-system/hooks";
 import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
+import { InvoiceStatus } from "@/types";
 
 const checkBoxes = [
   {
@@ -25,8 +25,8 @@ const checkBoxes = [
 ];
 
 interface FilterByStatusProps {
-  activeFilters: Record<Status, boolean>;
-  onChange: (key: Status, value: boolean) => void;
+  activeFilters: Record<InvoiceStatus, boolean>;
+  onChange: (key: InvoiceStatus, value: boolean) => void;
 }
 
 export const FilterByStatus: FC<FilterByStatusProps> = ({
@@ -55,9 +55,9 @@ export const FilterByStatus: FC<FilterByStatusProps> = ({
                   key={checkBox.id}
                   label={checkBox.label}
                   onChange={(value) => {
-                    onChange(checkBox.id as Status, value);
+                    onChange(checkBox.id as InvoiceStatus, value);
                   }}
-                  checked={activeFilters[checkBox.id as Status]}
+                  checked={activeFilters[checkBox.id as InvoiceStatus]}
                   id={checkBox.id}
                 />
               ))}

@@ -3,11 +3,10 @@ import { useWindowSize } from "@/design-system/hooks";
 import { useState } from "react";
 import {
   InvoiceOverviewCard,
-  Status,
   FilterByStatus,
   EmptyListMessage,
 } from "@/components";
-import { Invoice } from "@/types";
+import { Invoice, InvoiceStatus } from "@/types";
 import Link from "next/link";
 import styles from "./InvoiceList.module.scss";
 import { Button, Typography } from "@/design-system/components";
@@ -28,7 +27,7 @@ export const InvoiceList = ({ invoices }: Props) => {
   const [activeFilters, setActiveFilters] = useState(defaultFilters);
   const { width } = useWindowSize();
 
-  const handleFilters = (key: Status, value: boolean) => {
+  const handleFilters = (key: InvoiceStatus, value: boolean) => {
     setActiveFilters({
       ...activeFilters,
       [key]: value,
@@ -41,7 +40,7 @@ export const InvoiceList = ({ invoices }: Props) => {
 
   const invoicesToDisplay = invoices
     .filter(
-      (invoice) => noFiltersActive || activeFilters[invoice.status as Status]
+      (invoice) => noFiltersActive || activeFilters[invoice.status as InvoiceStatus]
     )
     .map((invoice) => (
       <Link

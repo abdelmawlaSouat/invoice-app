@@ -3,11 +3,11 @@ import styles from "./StatusTag.module.scss";
 import { FC } from "react";
 import { Oval } from "@/design-system/icons";
 import classNames from "classnames";
+import { InvoiceStatus } from "@/types";
 
-export type Status = "PAID" | "PENDING" | "DRAFT";
 
 interface StatusTagProps {
-  status: Status;
+  status: InvoiceStatus;
 }
 
 const statusColors = {

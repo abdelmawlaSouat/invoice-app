@@ -1,5 +1,5 @@
-import { Status } from "@/components";
 import { updateStatus } from "@/services";
+import { InvoiceStatus } from "@/types";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -10,7 +10,7 @@ export async function GET(request: Request) {
     return new Response("Missing id or status", { status: 400 });
   }
 
-  const updatedInvoice = await updateStatus(parseInt(id), newStatus as Status);
+  const updatedInvoice = await updateStatus(parseInt(id), newStatus as InvoiceStatus);
 
   return Response.json(updatedInvoice);
 }
