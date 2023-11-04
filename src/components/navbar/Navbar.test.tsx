@@ -12,7 +12,7 @@ describe("Navbar", () => {
     expect(screen.getByRole("link", { name: "logo" })).toBeInTheDocument();
 
     expect(
-      screen.getByRole("button", { name: "theme-switcher-dark-mode" })
+      screen.getByRole("button", { name: "theme-switcher-light-mode" })
     ).toBeInTheDocument();
   });
 });

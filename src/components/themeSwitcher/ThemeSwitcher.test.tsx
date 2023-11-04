@@ -8,16 +8,16 @@ describe("ThemeSwitcher", () => {
 
     render(<ThemeSwitcher />);
 
+    const button = screen.getByRole("button", {
+      name: "theme-switcher-light-mode",
+    });
+
+    expect(button).toBeInTheDocument();
+
+    await user.click(button);
+
     expect(
       screen.getByRole("button", { name: "theme-switcher-dark-mode" })
-    ).toBeInTheDocument();
-
-    await user.click(
-      screen.getByRole("button", { name: "theme-switcher-dark-mode" })
-    );
-
-    expect(
-      screen.getByRole("button", { name: "theme-switcher-light-mode" })
     ).toBeInTheDocument();
   });
 });
