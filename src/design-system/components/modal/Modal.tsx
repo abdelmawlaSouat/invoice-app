@@ -4,10 +4,10 @@ import { ReactNode } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import styles from "./Modal.module.scss";
 
-export interface ModalProps {
+export type ModalProps = {
   open: boolean;
   children: ReactNode;
-}
+};
 
 export const Modal = ({ open, children }: ModalProps) => {
   return (

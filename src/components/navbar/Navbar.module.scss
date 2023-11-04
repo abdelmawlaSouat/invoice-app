@@ -16,6 +16,12 @@
     }
 }
 
+.logo {
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        width: 6.4375rem;
+    }
+}
+
 .contentWrapper {
     display: flex;
     align-items: center;

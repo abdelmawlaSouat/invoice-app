@@ -1,17 +1,45 @@
+import { Invoice, ResponseStatus } from "@/types";
 import { PrismaClient } from "@prisma/client";
 
-export const deleteInvoice = async (id: number) => {
+type DeleteInvoiceResponse = {
+  invoice: Invoice;
+  status: ResponseStatus;
+};
+
+export const deleteInvoice = async (
+  id: number,
+): Promise<DeleteInvoiceResponse> => {
+  let invoice: Invoice = {} as Invoice;
+
   try {
     const prisma = new PrismaClient();
 
-    await prisma.invoice.delete({
+    invoice = await prisma.invoice.update({
       where: {
         id,
       },
+      data: {
+        status: "DELETED",
+      },
+      include: {
+        products: true,
+        company: {
+          include: {
+            address: true,
+          },
+        },
+        client: {
+          include: {
+            address: true,
+          },
+        },
+      },
     });
+
+    return { status: "OK", invoice };
   } catch (error) {
-    console.log(error);
-  } finally {
-    return { status: "ok" };
+    console.error(error);
+
+    return { status: "OK", invoice };
   }
 };

@@ -1,18 +1,15 @@
 "use client";
 import { useWindowSize } from "@/design-system/hooks";
 import { useState } from "react";
-import {
-  InvoiceOverviewCard,
-  Status,
-  FilterByStatus,
-  EmptyListMessage,
-} from "@/components";
-import { Invoice } from "@/types";
+import { Invoice, InvoiceStatus } from "@/types";
 import Link from "next/link";
 import styles from "./InvoiceList.module.scss";
 import { Button, Typography } from "@/design-system/components";
 import { Add } from "@/design-system/icons";
 import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
+import { FilterByStatus } from "../filterByStatus";
+import { InvoiceOverviewCard } from "../invoiceOverviewCard";
+import { EmptyListMessage } from "../emptyListMessage";
 
 const defaultFilters = {
   PAID: false,
@@ -28,7 +25,7 @@ export const InvoiceList = ({ invoices }: Props) => {
   const [activeFilters, setActiveFilters] = useState(defaultFilters);
   const { width } = useWindowSize();
 
-  const handleFilters = (key: Status, value: boolean) => {
+  const handleFilters = (key: InvoiceStatus, value: boolean) => {
     setActiveFilters({
       ...activeFilters,
       [key]: value,
@@ -36,12 +33,13 @@ export const InvoiceList = ({ invoices }: Props) => {
   };
 
   const noFiltersActive = Object.values(activeFilters).every(
-    (filter) => filter === false
+    (filter) => filter === false,
   );
 
   const invoicesToDisplay = invoices
     .filter(
-      (invoice) => noFiltersActive || activeFilters[invoice.status as Status]
+      (invoice) =>
+        noFiltersActive || activeFilters[invoice.status as InvoiceStatus],
     )
     .map((invoice) => (
       <Link

@@ -1,8 +1,15 @@
-import { Status } from "@/components";
-import { Invoice } from "@/types";
+import { Invoice, InvoiceStatus, ResponseStatus } from "@/types";
 import { PrismaClient } from "@prisma/client";
 
-export const updateStatus = async (id: number, newStatus: Status) => {
+type UpdateStatusResponse = {
+  invoice: Invoice;
+  status: ResponseStatus;
+};
+
+export const updateStatus = async (
+  id: number,
+  newStatus: InvoiceStatus,
+): Promise<UpdateStatusResponse> => {
   let invoice: Invoice = {} as Invoice;
 
   try {
@@ -29,9 +36,11 @@ export const updateStatus = async (id: number, newStatus: Status) => {
         },
       },
     });
+
+    return { status: "OK", invoice };
   } catch (error) {
-    console.log(error);
-  } finally {
-    return invoice;
+    console.error(error);
+
+    return { status: "KO", invoice };
   }
 };

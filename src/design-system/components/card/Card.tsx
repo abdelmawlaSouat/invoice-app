@@ -2,10 +2,10 @@ import { FC, ReactNode } from "react";
 import styles from "./Card.module.scss";
 import classNames from "classnames";
 
-interface CardProps {
+type CardProps = {
   className?: string;
   children: ReactNode;
-}
+};
 
 export const Card: FC<CardProps> = ({ children, className }) => {
   return (

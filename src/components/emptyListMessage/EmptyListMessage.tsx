@@ -5,9 +5,9 @@ import { Typography } from "@/design-system/components";
 import classNames from "classnames";
 import { FC } from "react";
 
-interface EmptyListMessageProps {
+type EmptyListMessageProps = {
   className?: string;
-}
+};
 
 export const EmptyListMessage: FC<EmptyListMessageProps> = ({ className }) => {
   return (

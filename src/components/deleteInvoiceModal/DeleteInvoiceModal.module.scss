@@ -7,14 +7,11 @@
     color: map.get($colors, "white");
 }
 
-.description {
-    color: var(--textColorSecondary);
-}
-
 .content {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    color: var(--textColor);
 }
 
 .footer {

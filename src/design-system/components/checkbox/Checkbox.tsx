@@ -7,12 +7,12 @@ import { Typography } from "../typography";
 import classNames from "classnames";
 import { Check } from "@/design-system/icons";
 
-export interface CheckboxProps {
+export type CheckboxProps = {
   label: string;
   onChange: (value: boolean) => void;
   checked: boolean;
   id?: string;
-}
+};
 
 export const Checkbox: FC<CheckboxProps> = ({
   id,

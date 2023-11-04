@@ -5,18 +5,16 @@ import { DesktopCard } from "./DesktopCard";
 import { MobileCard } from "./MobileCard";
 import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 
-interface InvoiceOverviewCardProps {
+type InvoiceOverviewCardProps = {
   invoice: Invoice;
-}
+};
 
 export const InvoiceOverviewCard: FC<InvoiceOverviewCardProps> = ({
   invoice,
 }) => {
   const { width } = useWindowSize();
 
-  return width >= BREAKPOINTS.md ? (
-    <DesktopCard invoice={invoice} />
-  ) : (
-    <MobileCard invoice={invoice} />
-  );
+  const InvoiceCard = width >= BREAKPOINTS.md ? DesktopCard : MobileCard;
+
+  return <InvoiceCard invoice={invoice} />;
 };

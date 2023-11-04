@@ -1,23 +1,25 @@
-import { Button, Modal, Typography } from "@/design-system/components";
+import { Button, Card, Modal, Typography } from "@/design-system/components";
 import styles from "./DeleteInvoiceModal.module.scss";
 
 type DeleteInvoiceModalProps = {
   invoiceID: number;
   isOpen: boolean;
-  onCanceled: () => void;
-  onDeleted: () => void;
+  onClose: () => void;
+  onDelete: () => void;
 };
 
 export const DeleteInvoiceModal = ({
   invoiceID,
   isOpen,
-  onDeleted,
-  onCanceled,
+  onDelete,
+  onClose,
 }: DeleteInvoiceModalProps) => {
   return (
     <Modal open={isOpen}>
-      <div className={styles.content}>
-        <Typography variant="headingM">Confirm Deletion</Typography>
+      <Card className={styles.content}>
+        <Typography className={styles.title} variant="headingM">
+          Confirm Deletion
+        </Typography>
 
         <Typography variant="body" className={styles.description}>
           Are you sure you want to delete invoice <strong>#{invoiceID}</strong>?
@@ -25,13 +27,13 @@ export const DeleteInvoiceModal = ({
         </Typography>
 
         <div className={styles.footer}>
-          <Button onClick={onCanceled}>Cancel</Button>
+          <Button onClick={onClose}>Cancel</Button>
 
-          <Button className={styles.deleteBtn} onClick={onDeleted}>
+          <Button className={styles.deleteBtn} onClick={onDelete}>
             Delete
           </Button>
         </div>
-      </div>
+      </Card>
     </Modal>
   );
 };

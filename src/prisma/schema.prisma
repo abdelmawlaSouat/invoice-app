@@ -48,8 +48,8 @@ model Client {
 model Invoice {
   id          Int       @id @default(autoincrement())
   createdAt   DateTime
-  paymentDue  DateTime?
-  status      Status
+  paymentDue  DateTime
+  status      InvoiceStatus
   description String
   total       Float
   clientId    String
@@ -59,8 +59,9 @@ model Invoice {
   products    Product[]
 }
 
-enum Status {
+enum InvoiceStatus {
+  DELETED
+  DRAFT
   PAID
   PENDING
-  DRAFT
 }

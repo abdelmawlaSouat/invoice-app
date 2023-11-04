@@ -1,13 +1,13 @@
 import { Typography, Card } from "@/design-system/components";
-import { Invoice } from "@/types";
+import { Invoice, InvoiceStatus } from "@/types";
 import styles from "./DesktopCard.module.scss";
 import { FC } from "react";
-import { Status, StatusTag } from "../statusTag";
+import { StatusTag } from "../statusTag";
 import { RightArrow } from "@/design-system/icons";
 
-interface InvoiceOverviewCardProps {
+type InvoiceOverviewCardProps = {
   invoice: Invoice;
-}
+};
 
 export const DesktopCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
   const dueDate = invoice.paymentDue
@@ -44,7 +44,7 @@ export const DesktopCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
           {amount}
         </Typography>
 
-        <StatusTag status={invoice.status as Status} />
+        <StatusTag status={invoice.status as InvoiceStatus} />
 
         <RightArrow />
       </div>
