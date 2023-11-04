@@ -41,7 +41,9 @@ $light: (
     "filtersCardBackgroundColor": #fff,
     "itemsCardBackgroundColor": #f9fafe,
     "itemsCardFooterBackgroundColor": map.get($colors, "black-10"),
-    "itemsCardFooterText": map.get($colors, "white")
+    "itemsCardFooterText": map.get($colors, "white"),
+    "inputBorderColor": map.get($colors, "light-grey"),
+    "inputBackgroundColor": map.get($colors, "white")
 );
 
 $dark: (
@@ -56,5 +58,7 @@ $dark: (
     "filtersCardBackgroundColor": #252944,
     "itemsCardBackgroundColor": map.get($colors, "black-20"),
     "itemsCardFooterBackgroundColor": map.get($colors, "black-70"),
-    "itemsCardFooterText": map.get($colors, "white")
+    "itemsCardFooterText": map.get($colors, "white"),
+    "inputBorderColor": map.get($colors, "black-30"),
+    "inputBackgroundColor": map.get($colors, "black-30")
 );
