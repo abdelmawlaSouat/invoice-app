@@ -2,11 +2,11 @@ import { Typography, Card } from "@/design-system/components";
 import { Invoice, InvoiceStatus } from "@/types";
 import styles from "./MobileCard.module.scss";
 import { FC } from "react";
-import {  StatusTag } from "../statusTag";
+import { StatusTag } from "../statusTag";
 
-interface InvoiceOverviewCardProps {
+type InvoiceOverviewCardProps = {
   invoice: Invoice;
-}
+};
 
 export const MobileCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
   const dueDate = invoice.paymentDue

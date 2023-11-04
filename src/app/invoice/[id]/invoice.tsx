@@ -1,59 +1,64 @@
-"use client"; // should be removed !!!
+"use client";
 import styles from "./invoice.module.scss";
 
-import { GoBackLink, InvoiceDetailCard, StatusTag } from "@/components";
+import {
+  CallToActionGroup,
+  GoBackLink,
+  InvoiceDetailCard,
+  StatusTag,
+} from "@/components";
 import { DeleteInvoiceModal } from "@/components";
-import { Button, Card, Typography } from "@/design-system/components";
+import { Card, Typography } from "@/design-system/components";
 import { Invoice, InvoiceStatus } from "@/types";
-import classNames from "classnames";
 import { useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useWindowSize } from "@/design-system/hooks";
+import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 
 type Props = {
   invoice: Invoice;
 };
 
-const CallToActionGroup = ({
-  className,
-  status,
-  onEdited,
-  onDeleted,
-  onMarkedAsPaid,
-}: {
-  className?: string;
-  status: InvoiceStatus;
-  onEdited: () => void;
-  onDeleted: () => void;
-  onMarkedAsPaid: () => void;
-}) => (
-  <div className={classNames(styles.ctasWrapper, className)}>
-    <Button className={styles.editBtn} onClick={onEdited}>
-      Edit
-    </Button>
-
-    <Button className={styles.deleteBtn} onClick={onDeleted}>
-      Delete
-    </Button>
-
-    {status === "PENDING" && (
-      <Button className={styles.markAsPaidBtn} onClick={onMarkedAsPaid}>
-        Mark as Paid
-      </Button>
-    )}
-  </div>
-);
-
 export default function Invoice({ invoice }: Props) {
-  const [modalIsOpened, setModalIsOpened] = useState(false);
+  const [isModalOpened, setisModalOpened] = useState(false);
   const [status, setStatus] = useState(invoice.status);
-  const router = useRouter();
+  const { push } = useRouter();
+  const { width } = useWindowSize();
 
-  const handleOnMarkedAsPaid = async () => {
-    const res = await fetch(`/api/update-status?id=${invoice.id}&status=PAID`);
-    const updatedInvoice = await res.json();
+  const handleonMarkAsPaid = async () => {
+    try {
+      const res = await fetch(
+        `/api/update-status?id=${invoice.id}&status=PAID`
+      );
 
-    setStatus(updatedInvoice.status || invoice.status);
+      const updatedInvoice = await res.json();
+
+      setStatus(updatedInvoice.status || invoice.status);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  const handleOnDelete = async () => {
+    try {
+      const res = await fetch(`/api/delete-invoice?id=${invoice.id}`);
+      const deletedInvoice = await res.json();
+
+      if (deletedInvoice) {
+        setisModalOpened(false);
+
+        push("/");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleonEdit = () => {
+    alert("Edit");
+  };
+
+  const toggleDeleteModal = () => setisModalOpened(!isModalOpened);
 
   return (
     <main className={styles.wrapper}>
@@ -77,13 +82,9 @@ export default function Invoice({ invoice }: Props) {
             <CallToActionGroup
               status={invoice.status as InvoiceStatus}
               className={styles.CtaGroup}
-              onEdited={() => {
-                alert("Edit");
-              }}
-              onDeleted={() => {
-                setModalIsOpened(true);
-              }}
-              onMarkedAsPaid={handleOnMarkedAsPaid}
+              onEdit={handleonEdit}
+              onDelete={toggleDeleteModal}
+              onMarkAsPaid={handleonMarkAsPaid}
             />
           </div>
         </Card>
@@ -91,32 +92,21 @@ export default function Invoice({ invoice }: Props) {
         <InvoiceDetailCard invoice={invoice} />
       </div>
 
-      <Card className={styles.ctaGroupOnMobile}>
-        <CallToActionGroup
-          status={invoice.status as InvoiceStatus}
-          onEdited={() => {
-            alert("Edit");
-          }}
-          onDeleted={() => {
-            setModalIsOpened(true);
-          }}
-          onMarkedAsPaid={handleOnMarkedAsPaid}
-        />
-      </Card>
+      {width < BREAKPOINTS.md && (
+        <Card>
+          <CallToActionGroup
+            status={invoice.status as InvoiceStatus}
+            onEdit={handleonEdit}
+            onDelete={toggleDeleteModal}
+            onMarkAsPaid={handleonMarkAsPaid}
+          />
+        </Card>
+      )}
 
       <DeleteInvoiceModal
-        onDeleted={async () => {
-          const res = await fetch(`/api/delete-invoice?id=${invoice.id}`);
-          const deletedInvoice = await res.json();
-
-          if (deletedInvoice) {
-            setModalIsOpened(false);
-
-            router.push("/");
-          }
-        }}
-        onCanceled={() => setModalIsOpened(false)}
-        isOpen={modalIsOpened}
+        onDelete={handleOnDelete}
+        onClose={toggleDeleteModal}
+        isOpen={isModalOpened}
         invoiceID={invoice.id}
       />
     </main>

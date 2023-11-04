@@ -1,7 +1,7 @@
-interface Props {
+type Props = {
   size?: number;
   color?: string;
-}
+};
 
 export const Moon = ({ size = 20, color = "#7E88C3" }: Props) => {
   return (

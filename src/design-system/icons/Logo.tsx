@@ -1,12 +1,14 @@
-interface Props {
+type Props = {
   size?: number;
-}
+  className?: string;
+};
 
-export const Logo = ({ size = 72 }: Props) => {
+export const Logo = ({ size = 72, className }: Props) => {
   return (
     <svg
       width={size}
       height={size}
+      className={className}
       viewBox="0 0 72 72"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -10,7 +10,14 @@ export async function GET(request: Request) {
     return new Response("Missing id or status", { status: 400 });
   }
 
-  const updatedInvoice = await updateStatus(parseInt(id), newStatus as InvoiceStatus);
+  try {
+    const response = await updateStatus(
+      parseInt(id),
+      newStatus as InvoiceStatus
+    );
 
-  return Response.json(updatedInvoice);
+    return Response.json(response);
+  } catch (error) {
+    return new Response(`${error}`, { status: 500 });
+  }
 }

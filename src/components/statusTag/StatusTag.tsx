@@ -5,10 +5,9 @@ import { Oval } from "@/design-system/icons";
 import classNames from "classnames";
 import { InvoiceStatus } from "@/types";
 
-
-interface StatusTagProps {
+type StatusTagProps = {
   status: InvoiceStatus;
-}
+};
 
 const statusColors = {
   PAID: "#33D69F",

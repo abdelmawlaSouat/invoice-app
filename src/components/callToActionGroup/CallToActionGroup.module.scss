@@ -1,0 +1,23 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
+.ctasWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.editBtn {
+    background-color: var(--itemsCardBackgroundColor);
+    color: var(--textColorSecondary);
+}
+
+.deleteBtn {
+    background-color: map.get($colors, "red");
+    color: map.get($colors, "white");
+}
+
+.markAsPaidBtn {
+    background-color: map.get($colors, "purple");
+    color: map.get($colors, "white");
+}

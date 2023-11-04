@@ -5,12 +5,15 @@ import classNames from "classnames";
 import { AddressData } from "./AddressData";
 import { MobileItemsCard } from "./MobileItemsCard";
 import { DesktopItemsCard } from "./DesktopItemsCard";
+import { useWindowSize } from "@/design-system/hooks";
+import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 
 type InvoiceDetailCardProps = {
   invoice: Invoice;
 };
 
 export const InvoiceDetailCard = ({ invoice }: InvoiceDetailCardProps) => {
+  const { width } = useWindowSize();
   const dueDate = invoice.paymentDue
     ? new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
         year: "numeric",
@@ -24,6 +27,9 @@ export const InvoiceDetailCard = ({ invoice }: InvoiceDetailCardProps) => {
     month: "short",
     day: "numeric",
   });
+
+  const ItemsCard =
+    width >= BREAKPOINTS.md ? DesktopItemsCard : MobileItemsCard;
 
   return (
     <Card className={styles.wrapper}>
@@ -102,13 +108,7 @@ export const InvoiceDetailCard = ({ invoice }: InvoiceDetailCardProps) => {
         </div>
       </div>
 
-      <div className={styles.mobileItemsCard}>
-        <MobileItemsCard items={invoice.products} total={invoice.total} />
-      </div>
-
-      <div className={styles.desktopItemsCard}>
-        <DesktopItemsCard items={invoice.products} total={invoice.total} />
-      </div>
+      <ItemsCard items={invoice.products} total={invoice.total} />
     </Card>
   );
 };

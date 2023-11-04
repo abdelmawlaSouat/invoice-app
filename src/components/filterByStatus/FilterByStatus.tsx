@@ -24,10 +24,10 @@ const checkBoxes = [
   },
 ];
 
-interface FilterByStatusProps {
+type FilterByStatusProps = {
   activeFilters: Record<InvoiceStatus, boolean>;
   onChange: (key: InvoiceStatus, value: boolean) => void;
-}
+};
 
 export const FilterByStatus: FC<FilterByStatusProps> = ({
   activeFilters,

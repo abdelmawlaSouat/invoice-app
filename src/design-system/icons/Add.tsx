@@ -1,8 +1,8 @@
-interface Props {
+type Props = {
   size?: number;
   circleColor?: string;
   iconColor?: string;
-}
+};
 
 export const Add = ({
   size = 32,

@@ -18,13 +18,14 @@ export const ThemeSwitcher = () => {
     localStorage.setItem("theme", "light");
     setTheme("light");
   };
+
   useEffect(() => {
     const theme = localStorage.getItem("theme");
 
     if (theme === "dark") {
-      setLightMode();
-    } else {
       setDarkMode();
+    } else {
+      setLightMode();
     }
   }, []);
 

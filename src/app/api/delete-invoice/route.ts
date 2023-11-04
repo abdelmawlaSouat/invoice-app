@@ -8,7 +8,11 @@ export async function GET(request: Request) {
     return new Response("Missing id", { status: 400 });
   }
 
-  const response = await deleteInvoice(parseInt(id));
+  try {
+    const response = await deleteInvoice(parseInt(id));
 
-  return Response.json(response);
+    return Response.json(response);
+  } catch (error) {
+    return new Response(`${error}`, { status: 500 });
+  }
 }

@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Status" AS ENUM ('PAID', 'PENDING', 'DRAFT');
+CREATE TYPE "InvoiceStatus" AS ENUM ('DELETED', 'DRAFT', 'PAID', 'PENDING');
 
 -- CreateTable
 CREATE TABLE "Address" (
@@ -49,7 +49,7 @@ CREATE TABLE "Invoice" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL,
     "paymentDue" TIMESTAMP(3) NOT NULL,
-    "status" "Status" NOT NULL,
+    "status" "InvoiceStatus" NOT NULL,
     "description" TEXT NOT NULL,
     "total" DOUBLE PRECISION NOT NULL,
     "clientId" TEXT NOT NULL,

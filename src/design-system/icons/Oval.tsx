@@ -1,7 +1,7 @@
-interface Props {
+type Props = {
   size?: number;
   color: string;
-}
+};
 
 export const Oval = ({ size = 8, color = "#33D69F" }: Props) => {
   return (
