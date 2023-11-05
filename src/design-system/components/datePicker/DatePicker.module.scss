@@ -1,0 +1,52 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    color: var(--textColorSecondary);
+    font-size: 0.8125rem;
+}
+
+input.datePicker {
+    height: 3rem;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid var(--inputBorderColor);
+    font-size: 0.8125rem;
+    padding: 0 1.125rem;
+    line-height: 1.5rem;
+    font-weight: bold;
+    background-color: var(--inputBackgroundColor);
+    color: var(--textColor);
+    padding: 1rem;
+
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        font-size: 1rem;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: map.get($colors, "purple");
+    }
+}
+
+.calendar {
+    background-color: var(--inputBackgroundColor);
+    padding: 1.5rem;
+    border: 0;
+    box-shadow:
+        0 0 0 1px var(--inputBorderColor),
+        0 4px 11px 0 rgba(0, 0, 0, 0.18);
+}
+
+.day {
+    font-weight: bold;
+    transition: color 0.1s;
+    margin: 0;
+}
