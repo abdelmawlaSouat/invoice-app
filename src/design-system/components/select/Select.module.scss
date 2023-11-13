@@ -1,0 +1,91 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.label {
+    color: var(--textColorSecondary);
+    font-size: 0.8125rem;
+}
+
+.trigger {
+    height: 3rem;
+    border-radius: 4px;
+    border: 1px solid var(--inputBorderColor);
+    padding: 0 1.125rem;
+    font-size: 0.8125rem;
+    line-height: 1.5rem;
+    font-weight: bold;
+    background-color: var(--inputBackgroundColor);
+    color: var(--textColor);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        font-size: 1rem;
+    }
+
+    &:focus,
+    &:hover,
+    &:focus-visible {
+        outline: none;
+        border: 1px solid map.get($colors, "purple");
+    }
+}
+
+.icon {
+    color: map.get($colors, "purple");
+}
+
+.content {
+    overflow: hidden;
+    background-color: var(--inputBackgroundColor);
+    color: var(--textColor);
+    border-radius: 6px;
+    box-shadow:
+        0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+        0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+}
+
+.item {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    user-select: none;
+    height: 47px;
+    box-sizing: border-box;
+
+    &[data-highlighted] {
+        outline: none;
+        color: map.get($colors, "purple");
+    }
+}
+
+.itemIndicator {
+    position: absolute;
+    left: 0;
+    width: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scrollButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    background-color: var(--inputBackgroundColor);
+    color: map.get($colors, "purple");
+    cursor: default;
+}

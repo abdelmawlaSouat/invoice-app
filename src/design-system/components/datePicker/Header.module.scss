@@ -1,0 +1,18 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--inputBackgroundColor);
+}
+
+.arrowBtn {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.title {
+    color: var(--textColor);
+    font-weight: bold;
+    margin: 0;
+}
