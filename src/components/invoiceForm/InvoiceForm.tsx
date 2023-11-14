@@ -49,6 +49,7 @@ export const InvoiceForm = ({
       clientPostCode: invoice?.client.address.postCode ?? "",
       clientCountry: invoice?.client.address.country ?? "",
       projectDescription: invoice?.description ?? "",
+      paymentTerms: "",
     },
   });
 
@@ -114,7 +115,7 @@ export const InvoiceForm = ({
         <Controller
           control={control}
           name="creationDate"
-          render={({ field: { onChange, onBlur, value, ref } }) => (
+          render={({ field: { onChange, value } }) => (
             <DatePicker
               label="Invoice Date"
               onChange={onChange}
@@ -123,7 +124,13 @@ export const InvoiceForm = ({
           )}
         />
 
-        <PaymentTermsSelect />
+        <Controller
+          control={control}
+          name="paymentTerms"
+          render={({ field: { onChange, value } }) => (
+            <PaymentTermsSelect onChange={onChange} value={value} />
+          )}
+        />
 
         <TextField
           label="Project Description"
