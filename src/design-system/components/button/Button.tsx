@@ -1,17 +1,16 @@
-import { FC, ReactNode } from "react";
+import { ButtonHTMLAttributes, FC, ReactNode } from "react";
 import { Typography } from "../typography";
 import styles from "./Button.module.scss";
 import classNames from "classnames";
 
 type ButtonProps = {
   children: ReactNode;
-  onClick: () => void;
   className?: string;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button: FC<ButtonProps> = ({ onClick, children, className }) => {
+export const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
   return (
-    <button onClick={onClick} className={classNames(styles.wrapper, className)}>
+    <button className={classNames(styles.wrapper, className)} {...props}>
       <Typography variant="headingS" tag="span">
         {children}
       </Typography>

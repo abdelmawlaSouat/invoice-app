@@ -7,14 +7,21 @@ import styles from "./InvoiceFormModal.module.scss";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Typography } from "@/design-system/components";
 import { ReactNode } from "react";
+import { Invoice } from "@/types";
 
 export type ModalProps = {
   title: ReactNode;
   open: boolean;
   onClose: () => void;
+  invoice?: Invoice;
 };
 
-export const InvoiceFormModal = ({ open, onClose, title }: ModalProps) => {
+export const InvoiceFormModal = ({
+  open,
+  onClose,
+  title,
+  invoice,
+}: ModalProps) => {
   return (
     <Dialog.Root open={open}>
       <Dialog.Portal>
@@ -24,7 +31,7 @@ export const InvoiceFormModal = ({ open, onClose, title }: ModalProps) => {
             {title}
           </Typography>
 
-          <InvoiceForm />
+          <InvoiceForm invoice={invoice} />
 
           <Dialog.Close asChild>
             <button

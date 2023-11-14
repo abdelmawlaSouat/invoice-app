@@ -134,6 +134,7 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
         }
         open={isEditInvoiceModalOpened}
         onClose={handleonEdit}
+        invoice={invoice}
       />
     </main>
   );

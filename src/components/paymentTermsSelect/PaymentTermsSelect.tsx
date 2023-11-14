@@ -39,13 +39,13 @@ export const PaymentTermsSelect = () => {
     <div>
       <Select.Root label="Payment Terms">
         {paymentTermsList.map((item) => (
-          <>
+          <div key={item.value}>
             <Select.SelectItem value={item.value}>
               {item.label}
             </Select.SelectItem>
 
             <Select.Separator className={styles.separator} />
-          </>
+          </div>
         ))}
       </Select.Root>
     </div>
