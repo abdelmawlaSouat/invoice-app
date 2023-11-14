@@ -35,10 +35,10 @@ export const InvoiceDetailCard = ({ invoice }: InvoiceDetailCardProps) => {
     <Card className={styles.wrapper}>
       <div className={styles.idAndSenderAddressWrapper}>
         <div>
-          <Typography
-            className={styles.invoiceId}
-            variant="headingS"
-          >{`#${invoice.id}`}</Typography>
+          <Typography className={styles.invoiceId} variant="headingS">
+            <span className={styles.hashtag}>#</span>
+            {invoice.id}
+          </Typography>
 
           <Typography
             className={styles.secondaryText}

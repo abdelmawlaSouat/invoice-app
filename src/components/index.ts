@@ -6,3 +6,4 @@ export * from "./themeSwitcher";
 export * from "./invoiceDetailCard";
 export * from "./deleteInvoiceModal";
 export * from "./callToActionGroup";
+export * from "./invoiceFormModal";

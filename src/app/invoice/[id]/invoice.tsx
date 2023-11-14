@@ -7,20 +7,32 @@ import {
   InvoiceDetailCard,
   StatusTag,
 } from "@/components";
-import { DeleteInvoiceModal } from "@/components";
 import { Card, Typography } from "@/design-system/components";
 import { Invoice, InvoiceStatus } from "@/types";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useWindowSize } from "@/design-system/hooks";
 import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
+import dynamic from "next/dynamic";
 
-type Props = {
+const InvoiceFormModal = dynamic(() =>
+  import("@/components").then((mod) => mod.InvoiceFormModal)
+);
+
+const DeleteInvoiceModal = dynamic(() =>
+  import("@/components").then((mod) => mod.DeleteInvoiceModal)
+);
+
+type InvoiceDetailProps = {
   invoice: Invoice;
 };
 
-export default function Invoice({ invoice }: Props) {
-  const [isModalOpened, setisModalOpened] = useState(false);
+export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
+  const [isDeleteInvoiceModalOpened, setIsDeleteInvoiceModalOpened] =
+    useState(false);
+  const [isEditInvoiceModalOpened, setIsEditInvoiceModalOpened] =
+    useState(false);
+
   const [status, setStatus] = useState(invoice.status);
   const { push } = useRouter();
   const { width } = useWindowSize();
@@ -31,7 +43,7 @@ export default function Invoice({ invoice }: Props) {
         `/api/update-status?id=${invoice.id}&status=PAID`
       );
 
-      const updatedInvoice = await res.json();
+      const { invoice: updatedInvoice } = await res.json();
 
       setStatus(updatedInvoice.status || invoice.status);
     } catch (error) {
@@ -45,7 +57,7 @@ export default function Invoice({ invoice }: Props) {
       const deletedInvoice = await res.json();
 
       if (deletedInvoice) {
-        setisModalOpened(false);
+        setIsDeleteInvoiceModalOpened(false);
 
         push("/");
       }
@@ -55,10 +67,11 @@ export default function Invoice({ invoice }: Props) {
   };
 
   const handleonEdit = () => {
-    alert("Edit");
+    setIsEditInvoiceModalOpened(!isEditInvoiceModalOpened);
   };
 
-  const toggleDeleteModal = () => setisModalOpened(!isModalOpened);
+  const toggleDeleteModal = () =>
+    setIsDeleteInvoiceModalOpened(!isDeleteInvoiceModalOpened);
 
   return (
     <main className={styles.wrapper}>
@@ -103,11 +116,24 @@ export default function Invoice({ invoice }: Props) {
         </Card>
       )}
 
+      {/* MODALS LIST */}
+
       <DeleteInvoiceModal
         onDelete={handleOnDelete}
         onClose={toggleDeleteModal}
-        isOpen={isModalOpened}
+        isOpen={isDeleteInvoiceModalOpened}
         invoiceID={invoice.id}
+      />
+
+      <InvoiceFormModal
+        title={
+          <>
+            Edit <span className={styles.hashtag}>#</span>
+            {invoice.id}
+          </>
+        }
+        open={isEditInvoiceModalOpened}
+        onClose={handleonEdit}
       />
     </main>
   );
