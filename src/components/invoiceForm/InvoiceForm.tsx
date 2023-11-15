@@ -15,6 +15,8 @@ import {
 import { Invoice } from "@/types";
 import { schema } from "./zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Select } from "@/design-system/components/select";
+import { StatusSelect } from "../statusSelect";
 
 // type Inputs = {
 //   example: string;
@@ -23,11 +25,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 export type InvoiceFormProps = {
   invoice?: Invoice;
+  onClose: () => void;
+
   // onSubmit?: SubmitHandler<Inputs>;
 };
 
 export const InvoiceForm = ({
   invoice, // onSubmit = (data) => console.log(data),
+  onClose,
 }: InvoiceFormProps) => {
   const {
     handleSubmit,
@@ -37,25 +42,28 @@ export const InvoiceForm = ({
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      creationDate: invoice?.createdAt ?? "",
-      companyStreet: invoice?.company.address.street ?? "",
-      companyCity: invoice?.company.address.city ?? "",
-      companyPostCode: invoice?.company.address.postCode ?? "",
-      companyCountry: invoice?.company.address.country ?? "",
-      clientName: invoice?.client.name ?? "",
-      clientEmail: invoice?.client.email ?? "",
-      clientStreet: invoice?.client.address.street ?? "",
-      clientCity: invoice?.client.address.city ?? "",
-      clientPostCode: invoice?.client.address.postCode ?? "",
-      clientCountry: invoice?.client.address.country ?? "",
-      projectDescription: invoice?.description ?? "",
+      creationDate: invoice?.createdAt || "",
+      companyStreet: invoice?.company.address.street || "",
+      companyCity: invoice?.company.address.city || "",
+      companyPostCode: invoice?.company.address.postCode || "",
+      companyCountry: invoice?.company.address.country || "",
+      clientName: invoice?.client.name || "",
+      clientEmail: invoice?.client.email || "",
+      clientStreet: invoice?.client.address.street || "",
+      clientCity: invoice?.client.address.city || "",
+      clientPostCode: invoice?.client.address.postCode || "",
+      clientCountry: invoice?.client.address.country || "",
+      projectDescription: invoice?.description || "",
       paymentTerms: "",
+      status: invoice?.status || "",
     },
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
 
   console.log("Errors", errors);
+
+  console.log("INVOICE", invoice);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} tabIndex={0}>
@@ -91,24 +99,12 @@ export const InvoiceForm = ({
         <TextField label="Street Address" {...register("clientStreet")} />
 
         <div className={styles.row}>
-          <TextField
-            label="City"
-            {...register("clientCity")}
-            defaultValue={invoice?.client.address.city ?? ""}
-          />
+          <TextField label="City" {...register("clientCity")} />
 
-          <TextField
-            label="Post Code"
-            {...register("clientPostCode")}
-            defaultValue={invoice?.client.address.postCode ?? ""}
-          />
+          <TextField label="Post Code" {...register("clientPostCode")} />
         </div>
 
-        <TextField
-          label="Country"
-          {...register("clientCountry")}
-          defaultValue={invoice?.client.address.country ?? ""}
-        />
+        <TextField label="Country" {...register("clientCountry")} />
       </div>
 
       <div className={styles.section}>
@@ -132,14 +128,27 @@ export const InvoiceForm = ({
           )}
         />
 
+        <Controller
+          control={control}
+          name="status"
+          render={({ field: { onChange, value } }) => (
+            <StatusSelect onChange={onChange} value={value} />
+          )}
+        />
+
         <TextField
           label="Project Description"
-          defaultValue={invoice?.description ?? ""}
           {...register("projectDescription")}
         />
       </div>
 
-      <Button type="submit">SEND</Button>
+      <div className={styles.ctasWrapper}>
+        <Button onClick={onClose}>Cancel</Button>
+
+        <Button className={styles.submitBtn} type="submit">
+          Save changes
+        </Button>
+      </div>
     </form>
   );
 };

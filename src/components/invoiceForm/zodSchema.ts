@@ -14,4 +14,5 @@ export const schema = z.object({
   clientCountry: z.string(),
   projectDescription: z.string(),
   paymentTerms: z.string(),
+  status: z.string(),
 });

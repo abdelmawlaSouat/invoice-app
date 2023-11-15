@@ -27,11 +27,9 @@ export const InvoiceFormModal = ({
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay} />
         <Dialog.Content className={styles.content}>
-          <Typography variant="headingM" tag="h3">
-            {title}
-          </Typography>
+          <Dialog.Title>{title}</Dialog.Title>
 
-          <InvoiceForm invoice={invoice} />
+          <InvoiceForm invoice={invoice} onClose={onClose} />
 
           <Dialog.Close asChild>
             <button

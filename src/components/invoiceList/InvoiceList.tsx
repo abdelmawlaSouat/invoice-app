@@ -10,6 +10,7 @@ import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 import { FilterByStatus } from "../filterByStatus";
 import { InvoiceOverviewCard } from "../invoiceOverviewCard";
 import { EmptyListMessage } from "../emptyListMessage";
+import { InvoiceFormModal } from "../invoiceFormModal";
 
 const defaultFilters = {
   PAID: false,
@@ -24,6 +25,8 @@ type Props = {
 export const InvoiceList = ({ invoices }: Props) => {
   const [activeFilters, setActiveFilters] = useState(defaultFilters);
   const { width } = useWindowSize();
+  const [isCreateInvoiceModalOpened, setIsCreateInvoiceModalOpened] =
+    useState(false);
 
   const handleFilters = (key: InvoiceStatus, value: boolean) => {
     setActiveFilters({
@@ -33,13 +36,13 @@ export const InvoiceList = ({ invoices }: Props) => {
   };
 
   const noFiltersActive = Object.values(activeFilters).every(
-    (filter) => filter === false,
+    (filter) => filter === false
   );
 
   const invoicesToDisplay = invoices
     .filter(
       (invoice) =>
-        noFiltersActive || activeFilters[invoice.status as InvoiceStatus],
+        noFiltersActive || activeFilters[invoice.status as InvoiceStatus]
     )
     .map((invoice) => (
       <Link
@@ -50,6 +53,10 @@ export const InvoiceList = ({ invoices }: Props) => {
         <InvoiceOverviewCard invoice={invoice} />
       </Link>
     ));
+
+  const handleonCreateInvoice = () => {
+    setIsCreateInvoiceModalOpened(!isCreateInvoiceModalOpened);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -73,9 +80,7 @@ export const InvoiceList = ({ invoices }: Props) => {
 
           <Button
             className={styles.addInvoiceBtn}
-            onClick={() => {
-              alert("COMING SOON !");
-            }}
+            onClick={handleonCreateInvoice}
           >
             <Add />
             <span>{width >= BREAKPOINTS.md ? "New Invoice" : "New"}</span>
@@ -90,6 +95,12 @@ export const InvoiceList = ({ invoices }: Props) => {
           <EmptyListMessage className={styles.emptyListMessage} />
         )}
       </div>
+
+      <InvoiceFormModal
+        title="New Invoice"
+        open={isCreateInvoiceModalOpened}
+        onClose={handleonCreateInvoice}
+      />
     </div>
   );
 };

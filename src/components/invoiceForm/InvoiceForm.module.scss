@@ -28,3 +28,14 @@
         max-width: 8.5rem;
     }
 }
+
+.submitBtn {
+    background-color: map.get($colors, "purple");
+    color: white;
+}
+
+.ctasWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
