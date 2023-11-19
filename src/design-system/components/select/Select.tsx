@@ -7,17 +7,26 @@ import { ReactNode } from "react";
 
 type SelectProps = {
   label: string;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
   children: ReactNode;
 };
 
-export const Select = ({ label, children }: SelectProps) => {
+export const Select = ({
+  label,
+  value,
+  onChange,
+  placeholder,
+  children,
+}: SelectProps) => {
   return (
     <div className={styles.wrapper}>
       <label className={styles.label}>{label}</label>
 
-      <RadixSelect.Root>
+      <RadixSelect.Root value={value} onValueChange={onChange}>
         <RadixSelect.Trigger className={styles.trigger}>
-          <RadixSelect.Value placeholder="Net 30 Days" />
+          <RadixSelect.Value placeholder={placeholder} />
           <RadixSelect.Icon className={styles.icon}>
             <ChevronDownIcon />
           </RadixSelect.Icon>

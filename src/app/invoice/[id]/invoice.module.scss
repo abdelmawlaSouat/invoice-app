@@ -52,6 +52,10 @@
     }
 }
 
+.hashtag {
+    color: var(--textColorSecondary);
+}
+
 .CtaGroup {
     @include breakpoint-min(map.get($breakpoints, "md")) {
         display: flex;

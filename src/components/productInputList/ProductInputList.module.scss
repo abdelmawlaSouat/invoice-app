@@ -1,0 +1,15 @@
+@use "sass:map";
+@import "variables";
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.label {
+    color: map.get($colors, "purple");
+    font-weight: bold;
+    margin: 0;
+    font-size: 1rem;
+}

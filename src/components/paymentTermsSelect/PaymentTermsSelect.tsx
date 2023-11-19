@@ -34,18 +34,31 @@ const paymentTermsList = [
   },
 ];
 
-export const PaymentTermsSelect = () => {
+type PaymentTermsSelectProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
+
+export const PaymentTermsSelect = ({
+  value,
+  onChange,
+}: PaymentTermsSelectProps) => {
   return (
     <div>
-      <Select.Root label="Payment Terms">
+      <Select.Root
+        label="Payment Terms"
+        placeholder={paymentTermsList[0].label}
+        value={value}
+        onChange={onChange}
+      >
         {paymentTermsList.map((item) => (
-          <>
+          <div key={item.value}>
             <Select.SelectItem value={item.value}>
               {item.label}
             </Select.SelectItem>
 
             <Select.Separator className={styles.separator} />
-          </>
+          </div>
         ))}
       </Select.Root>
     </div>

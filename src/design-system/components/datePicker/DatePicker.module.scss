@@ -25,6 +25,7 @@ input.datePicker {
     background-color: var(--inputBackgroundColor);
     color: var(--textColor);
     padding: 1rem;
+    width: 100%;
 
     @include breakpoint-min(map.get($breakpoints, "md")) {
         font-size: 1rem;
