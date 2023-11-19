@@ -2,22 +2,27 @@
 
 import { InputHTMLAttributes, Ref, forwardRef } from "react";
 import styles from "./TextField.module.scss";
+import classNames from "classnames";
 
 type TextFieldProps = {
   label: string;
-  type?: "text" | "email";
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const TextField = forwardRef(
   (
-    { label, type = "text", ...props }: TextFieldProps,
+    { label, type = "text", className, ...props }: TextFieldProps,
     ref: Ref<HTMLInputElement>
   ) => {
     return (
       <div className={styles.wrapper}>
         <label className={styles.label}>{label}</label>
 
-        <input className={styles.input} type={type} ref={ref} {...props} />
+        <input
+          className={classNames(styles.input, className)}
+          type={type}
+          ref={ref}
+          {...props}
+        />
       </div>
     );
   }

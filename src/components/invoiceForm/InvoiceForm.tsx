@@ -9,6 +9,7 @@ import { PaymentTermsSelect } from "../paymentTermsSelect";
 import {
   Controller,
   FieldValues,
+  FormProvider,
   SubmitHandler,
   useForm,
 } from "react-hook-form";
@@ -17,28 +18,22 @@ import { schema } from "./zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Select } from "@/design-system/components/select";
 import { StatusSelect } from "../statusSelect";
-
-// type Inputs = {
-//   example: string;
-//   exampleRequired: string;
-// };
+import { ProductInputGroup } from "../productInputGroup";
+import classNames from "classnames";
+import { ProductInputList } from "../productInputList";
 
 export type InvoiceFormProps = {
   invoice?: Invoice;
   onClose: () => void;
-
-  // onSubmit?: SubmitHandler<Inputs>;
 };
 
-export const InvoiceForm = ({
-  invoice, // onSubmit = (data) => console.log(data),
-  onClose,
-}: InvoiceFormProps) => {
+export const InvoiceForm = ({ invoice, onClose }: InvoiceFormProps) => {
   const {
     handleSubmit,
     register,
     control,
-    formState: { errors },
+    formState,
+    ...reactHookFormMethods
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -56,99 +51,111 @@ export const InvoiceForm = ({
       projectDescription: invoice?.description || "",
       paymentTerms: "",
       status: invoice?.status || "",
+      products: invoice?.products.map(({ name, quantity, price, total }) => ({
+        name,
+        quantity,
+        price,
+        total,
+      })),
     },
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
 
-  console.log("Errors", errors);
-
-  console.log("INVOICE", invoice);
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} tabIndex={0}>
-      <div className={styles.section}>
-        <Typography variant="body" className={styles.label}>
-          Bill From
-        </Typography>
+    <FormProvider
+      handleSubmit={handleSubmit}
+      register={register}
+      control={control}
+      formState={formState}
+      {...reactHookFormMethods}
+    >
+      <form onSubmit={handleSubmit(onSubmit)} tabIndex={0}>
+        <div className={styles.section}>
+          <Typography variant="body" className={styles.label}>
+            Bill From
+          </Typography>
 
-        <TextField label="Street Address" {...register("companyStreet")} />
+          <TextField label="Street Address" {...register("companyStreet")} />
 
-        <div className={styles.row}>
-          <TextField label="City" {...register("companyCity")} />
+          <div className={styles.row}>
+            <TextField label="City" {...register("companyCity")} />
 
-          <TextField label="Post Code" {...register("companyPostCode")} />
+            <TextField label="Post Code" {...register("companyPostCode")} />
+          </div>
+
+          <TextField label="Country" {...register("companyCountry")} />
         </div>
 
-        <TextField label="Country" {...register("companyCountry")} />
-      </div>
+        <div className={styles.section}>
+          <Typography variant="body" className={styles.label}>
+            Bill To
+          </Typography>
 
-      <div className={styles.section}>
-        <Typography variant="body" className={styles.label}>
-          Bill To
-        </Typography>
+          <TextField label="Client's Name" {...register("clientName")} />
 
-        <TextField label="Client's Name" {...register("clientName")} />
+          <TextField
+            label="Client's Email"
+            type="email"
+            {...register("clientEmail")}
+          />
 
-        <TextField
-          label="Client's Email"
-          type="email"
-          {...register("clientEmail")}
-        />
+          <TextField label="Street Address" {...register("clientStreet")} />
 
-        <TextField label="Street Address" {...register("clientStreet")} />
+          <div className={styles.row}>
+            <TextField label="City" {...register("clientCity")} />
 
-        <div className={styles.row}>
-          <TextField label="City" {...register("clientCity")} />
+            <TextField label="Post Code" {...register("clientPostCode")} />
+          </div>
 
-          <TextField label="Post Code" {...register("clientPostCode")} />
+          <TextField label="Country" {...register("clientCountry")} />
         </div>
 
-        <TextField label="Country" {...register("clientCountry")} />
-      </div>
+        <div className={styles.section}>
+          <Controller
+            control={control}
+            name="creationDate"
+            render={({ field: { onChange, value } }) => (
+              <DatePicker
+                label="Invoice Date"
+                onChange={onChange}
+                value={value as Date}
+              />
+            )}
+          />
 
-      <div className={styles.section}>
-        <Controller
-          control={control}
-          name="creationDate"
-          render={({ field: { onChange, value } }) => (
-            <DatePicker
-              label="Invoice Date"
-              onChange={onChange}
-              value={value as Date}
-            />
-          )}
-        />
+          <Controller
+            control={control}
+            name="paymentTerms"
+            render={({ field: { onChange, value } }) => (
+              <PaymentTermsSelect onChange={onChange} value={value} />
+            )}
+          />
 
-        <Controller
-          control={control}
-          name="paymentTerms"
-          render={({ field: { onChange, value } }) => (
-            <PaymentTermsSelect onChange={onChange} value={value} />
-          )}
-        />
+          <Controller
+            control={control}
+            name="status"
+            render={({ field: { onChange, value } }) => (
+              <StatusSelect onChange={onChange} value={value} />
+            )}
+          />
 
-        <Controller
-          control={control}
-          name="status"
-          render={({ field: { onChange, value } }) => (
-            <StatusSelect onChange={onChange} value={value} />
-          )}
-        />
+          <TextField
+            label="Project Description"
+            {...register("projectDescription")}
+          />
+        </div>
 
-        <TextField
-          label="Project Description"
-          {...register("projectDescription")}
-        />
-      </div>
+        <ProductInputList className={styles.section} />
 
-      <div className={styles.ctasWrapper}>
-        <Button onClick={onClose}>Cancel</Button>
+        <div className={styles.ctasWrapper}>
+          <Button onClick={onClose}>Cancel</Button>
 
-        <Button className={styles.submitBtn} type="submit">
-          Save changes
-        </Button>
-      </div>
-    </form>
+          <Button className={styles.submitBtn} type="submit">
+            Save changes
+          </Button>
+        </div>
+      </form>
+    </FormProvider>
   );
 };

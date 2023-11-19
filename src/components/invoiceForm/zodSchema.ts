@@ -15,4 +15,12 @@ export const schema = z.object({
   projectDescription: z.string(),
   paymentTerms: z.string(),
   status: z.string(),
+  products: z.array(
+    z.object({
+      name: z.string(),
+      quantity: z.number(),
+      price: z.number(),
+      total: z.number(),
+    })
+  ),
 });
