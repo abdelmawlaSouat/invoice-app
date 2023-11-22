@@ -13,21 +13,24 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
-import { Invoice } from "@/types";
+import { Invoice, PaymentTerms } from "@/types";
 import { schema } from "./zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Select } from "@/design-system/components/select";
 import { StatusSelect } from "../statusSelect";
-import { ProductInputGroup } from "../productInputGroup";
-import classNames from "classnames";
 import { ProductInputList } from "../productInputList";
+import { getDaysCounterBetween2Days } from "@/utils";
 
 export type InvoiceFormProps = {
   invoice?: Invoice;
   onClose: () => void;
+  onSubmit: SubmitHandler<FieldValues>;
 };
 
-export const InvoiceForm = ({ invoice, onClose }: InvoiceFormProps) => {
+export const InvoiceForm = ({
+  invoice,
+  onClose,
+  onSubmit,
+}: InvoiceFormProps) => {
   const {
     handleSubmit,
     register,
@@ -37,20 +40,22 @@ export const InvoiceForm = ({ invoice, onClose }: InvoiceFormProps) => {
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      creationDate: invoice?.createdAt || "",
-      companyStreet: invoice?.company.address.street || "",
-      companyCity: invoice?.company.address.city || "",
-      companyPostCode: invoice?.company.address.postCode || "",
-      companyCountry: invoice?.company.address.country || "",
-      clientName: invoice?.client.name || "",
-      clientEmail: invoice?.client.email || "",
-      clientStreet: invoice?.client.address.street || "",
-      clientCity: invoice?.client.address.city || "",
-      clientPostCode: invoice?.client.address.postCode || "",
-      clientCountry: invoice?.client.address.country || "",
-      projectDescription: invoice?.description || "",
-      paymentTerms: "",
-      status: invoice?.status || "",
+      creationDate: invoice?.createdAt || new Date(),
+      companyName: invoice?.company.name,
+      companyEmail: invoice?.company.email,
+      companyStreet: invoice?.company.address.street,
+      companyCity: invoice?.company.address.city,
+      companyPostCode: invoice?.company.address.postCode,
+      companyCountry: invoice?.company.address.country,
+      clientName: invoice?.client.name,
+      clientEmail: invoice?.client.email,
+      clientStreet: invoice?.client.address.street,
+      clientCity: invoice?.client.address.city,
+      clientPostCode: invoice?.client.address.postCode,
+      clientCountry: invoice?.client.address.country,
+      projectDescription: invoice?.description,
+      paymentTerms: invoice?.paymentTerms || PaymentTerms.Net_30_Days,
+      status: invoice?.status || "DRAFT",
       products: invoice?.products.map(({ name, quantity, price, total }) => ({
         name,
         quantity,
@@ -60,8 +65,6 @@ export const InvoiceForm = ({ invoice, onClose }: InvoiceFormProps) => {
     },
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
-
   return (
     <FormProvider
       handleSubmit={handleSubmit}
@@ -70,11 +73,26 @@ export const InvoiceForm = ({ invoice, onClose }: InvoiceFormProps) => {
       formState={formState}
       {...reactHookFormMethods}
     >
-      <form onSubmit={handleSubmit(onSubmit)} tabIndex={0}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={styles.wrapper}
+        tabIndex={0}
+      >
         <div className={styles.section}>
           <Typography variant="body" className={styles.label}>
             Bill From
           </Typography>
+
+          <TextField
+            label="Company's Name"
+            {...register("companyName", { required: true })}
+          />
+
+          <TextField
+            label="Company's Email"
+            type="email"
+            {...register("companyEmail")}
+          />
 
           <TextField label="Street Address" {...register("companyStreet")} />
 
@@ -92,7 +110,10 @@ export const InvoiceForm = ({ invoice, onClose }: InvoiceFormProps) => {
             Bill To
           </Typography>
 
-          <TextField label="Client's Name" {...register("clientName")} />
+          <TextField
+            label="Client's Name"
+            {...register("clientName", { required: true })}
+          />
 
           <TextField
             label="Client's Email"

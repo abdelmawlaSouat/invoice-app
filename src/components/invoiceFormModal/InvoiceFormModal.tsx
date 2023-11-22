@@ -5,15 +5,16 @@ import { InvoiceForm } from "../invoiceForm";
 import * as Dialog from "@radix-ui/react-dialog";
 import styles from "./InvoiceFormModal.module.scss";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import { Typography } from "@/design-system/components";
 import { ReactNode } from "react";
 import { Invoice } from "@/types";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
 export type ModalProps = {
   title: ReactNode;
   open: boolean;
   onClose: () => void;
   invoice?: Invoice;
+  onSubmit: SubmitHandler<FieldValues>;
 };
 
 export const InvoiceFormModal = ({
@@ -21,6 +22,7 @@ export const InvoiceFormModal = ({
   onClose,
   title,
   invoice,
+  onSubmit,
 }: ModalProps) => {
   return (
     <Dialog.Root open={open}>
@@ -29,7 +31,11 @@ export const InvoiceFormModal = ({
         <Dialog.Content className={styles.content}>
           <Dialog.Title>{title}</Dialog.Title>
 
-          <InvoiceForm invoice={invoice} onClose={onClose} />
+          <InvoiceForm
+            invoice={invoice}
+            onClose={onClose}
+            onSubmit={onSubmit}
+          />
 
           <Dialog.Close asChild>
             <button

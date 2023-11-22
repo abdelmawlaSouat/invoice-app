@@ -1,6 +1,10 @@
 @use "sass:map";
 @import "variables";
 
+.wrapper {
+    padding-bottom: 6rem;
+}
+
 
 .label {
     color: map.get($colors, "purple");
@@ -38,4 +42,12 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, .102);
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 1rem;
+    background: var(--cardBackgroundColor);
+    
 }

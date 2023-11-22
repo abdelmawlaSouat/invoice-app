@@ -2,6 +2,8 @@ import { z } from "zod";
 
 export const schema = z.object({
   creationDate: z.date(),
+  companyName: z.string(),
+  companyEmail: z.string(),
   companyStreet: z.string(),
   companyCity: z.string(),
   companyPostCode: z.string(),
@@ -18,9 +20,9 @@ export const schema = z.object({
   products: z.array(
     z.object({
       name: z.string(),
-      quantity: z.number(),
-      price: z.number(),
-      total: z.number(),
+      quantity: z.coerce.number(),
+      price: z.coerce.number(),
+      total: z.coerce.number(),
     })
   ),
 });

@@ -18,11 +18,11 @@ const defaultFilters = {
   DRAFT: false,
 };
 
-type Props = {
+type InvoiceListProps = {
   invoices: Invoice[];
 };
 
-export const InvoiceList = ({ invoices }: Props) => {
+export const InvoiceList = ({ invoices }: InvoiceListProps) => {
   const [activeFilters, setActiveFilters] = useState(defaultFilters);
   const { width } = useWindowSize();
   const [isCreateInvoiceModalOpened, setIsCreateInvoiceModalOpened] =
@@ -56,6 +56,18 @@ export const InvoiceList = ({ invoices }: Props) => {
 
   const handleonCreateInvoice = () => {
     setIsCreateInvoiceModalOpened(!isCreateInvoiceModalOpened);
+  };
+
+  // TODO: Add the new invoice in the list + add a toaster
+  const handleOnSubmit = async (data: any) => {
+    try {
+      await fetch(`/api/create-invoice`, {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -100,6 +112,7 @@ export const InvoiceList = ({ invoices }: Props) => {
         title="New Invoice"
         open={isCreateInvoiceModalOpened}
         onClose={handleonCreateInvoice}
+        onSubmit={handleOnSubmit}
       />
     </div>
   );
