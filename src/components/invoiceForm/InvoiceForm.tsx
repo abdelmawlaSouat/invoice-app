@@ -18,7 +18,6 @@ import { schema } from "./zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { StatusSelect } from "../statusSelect";
 import { ProductInputList } from "../productInputList";
-import { getDaysCounterBetween2Days } from "@/utils";
 
 export type InvoiceFormProps = {
   invoice?: Invoice;
@@ -39,6 +38,7 @@ export const InvoiceForm = ({
     ...reactHookFormMethods
   } = useForm({
     resolver: zodResolver(schema),
+    mode: "onBlur",
     defaultValues: {
       creationDate: invoice?.createdAt || new Date(),
       companyName: invoice?.company.name,
@@ -118,10 +118,7 @@ export const InvoiceForm = ({
             Bill From
           </Typography>
 
-          <TextField
-            label="Company's Name"
-            {...register("companyName", { required: true })}
-          />
+          <TextField label="Company's Name" {...register("companyName")} />
 
           <TextField
             label="Company's Email"
@@ -145,10 +142,7 @@ export const InvoiceForm = ({
             Bill To
           </Typography>
 
-          <TextField
-            label="Client's Name"
-            {...register("clientName", { required: true })}
-          />
+          <TextField label="Client's Name" {...register("clientName")} />
 
           <TextField
             label="Client's Email"
