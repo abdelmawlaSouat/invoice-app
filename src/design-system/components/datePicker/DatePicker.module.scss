@@ -46,6 +46,10 @@ input.datePicker {
         0 4px 11px 0 rgba(0, 0, 0, 0.18);
 }
 
+.calendarIcon {
+    pointer-events: none;
+}
+
 .day {
     font-weight: bold;
     transition: color 0.1s;

@@ -24,7 +24,7 @@ export const DatePicker = ({ label, value, onChange }: DatePickerProps) => {
         onChange={(date) => onChange(date)}
         className={styles.datePicker}
         calendarClassName={styles.calendar}
-        icon={<CalendarIcon color="#7E88C3" />}
+        icon={<CalendarIcon className={styles.calendarIcon} color="#7E88C3" />}
         showIcon
         renderCustomHeader={({
           date,

@@ -79,6 +79,41 @@ export const InvoiceForm = ({
         tabIndex={0}
       >
         <div className={styles.section}>
+          <Controller
+            control={control}
+            name="creationDate"
+            render={({ field: { onChange, value } }) => (
+              <DatePicker
+                label="Invoice Date"
+                onChange={onChange}
+                value={value as Date}
+              />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="paymentTerms"
+            render={({ field: { onChange, value } }) => (
+              <PaymentTermsSelect onChange={onChange} value={value} />
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="status"
+            render={({ field: { onChange, value } }) => (
+              <StatusSelect onChange={onChange} value={value} />
+            )}
+          />
+
+          <TextField
+            label="Project Description"
+            {...register("projectDescription")}
+          />
+        </div>
+
+        <div className={styles.section}>
           <Typography variant="body" className={styles.label}>
             Bill From
           </Typography>
@@ -130,41 +165,6 @@ export const InvoiceForm = ({
           </div>
 
           <TextField label="Country" {...register("clientCountry")} />
-        </div>
-
-        <div className={styles.section}>
-          <Controller
-            control={control}
-            name="creationDate"
-            render={({ field: { onChange, value } }) => (
-              <DatePicker
-                label="Invoice Date"
-                onChange={onChange}
-                value={value as Date}
-              />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="paymentTerms"
-            render={({ field: { onChange, value } }) => (
-              <PaymentTermsSelect onChange={onChange} value={value} />
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="status"
-            render={({ field: { onChange, value } }) => (
-              <StatusSelect onChange={onChange} value={value} />
-            )}
-          />
-
-          <TextField
-            label="Project Description"
-            {...register("projectDescription")}
-          />
         </div>
 
         <ProductInputList className={styles.section} />
