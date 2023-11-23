@@ -82,11 +82,12 @@ export const InvoiceForm = ({
           <Controller
             control={control}
             name="creationDate"
-            render={({ field: { onChange, value } }) => (
+            render={({ field: { onChange, value, name } }) => (
               <DatePicker
                 label="Invoice Date"
                 onChange={onChange}
-                value={value as Date}
+                value={value}
+                name={name}
               />
             )}
           />

@@ -8,6 +8,17 @@
     gap: 0.5rem;
 }
 
+.headerWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 12px;
+}
+
 .label {
     color: var(--textColorSecondary);
     font-size: 0.8125rem;
