@@ -41,6 +41,12 @@ const data = {
               price: 1800.9,
               total: 1800.9,
             },
+            {
+              name: "Website Redesign",
+              quantity: 555,
+              price: 45,
+              total: 24975,
+            },
           ],
         },
       },

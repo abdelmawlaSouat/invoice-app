@@ -17,29 +17,49 @@ export type CreateInvoicePayload = {
     };
   };
   client: {
-    create: {
-      name: string;
-      email: string;
-      address: {
-        create: {
-          street: string;
-          city: string;
-          postCode: string;
-          country: string;
+    connectOrCreate: {
+      where: {
+        email: string;
+      };
+      create: {
+        name: string;
+        email: string;
+        address: {
+          connectOrCreate: {
+            where: {
+              id: string;
+            };
+            create: {
+              street: string;
+              city: string;
+              postCode: string;
+              country: string;
+            };
+          };
         };
       };
     };
   };
   company: {
-    create: {
-      name: string;
-      email: string;
-      address: {
-        create: {
-          street: string;
-          city: string;
-          postCode: string;
-          country: string;
+    connectOrCreate: {
+      where: {
+        email: string;
+      };
+      create: {
+        name: string;
+        email: string;
+        address: {
+          connectOrCreate: {
+            where: {
+              id: string;
+            };
+            create: {
+              street: string;
+              city: string;
+              postCode: string;
+              country: string;
+            };
+          };
         };
       };
     };
@@ -47,7 +67,7 @@ export type CreateInvoicePayload = {
 };
 
 type CreateInvoiceResponse = {
-  invoice: any;
+  invoice: unknown;
   status: ResponseStatus;
 };
 
@@ -59,7 +79,9 @@ export const createInvoice = async (
   try {
     const prisma = new PrismaClient();
 
-    invoice = await prisma.invoice.create({ data });
+    invoice = await prisma.invoice.create({
+      data,
+    });
 
     return { status: "OK", invoice };
   } catch (error) {

@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Address {
-  id       Int      @id @default(autoincrement())
+  id       String   @id @default(uuid())
   street   String?
   city     String?
   postCode String?
@@ -18,7 +18,7 @@ model Address {
 }
 
 model Product {
-  id        Int     @id @default(autoincrement())
+  id        String  @id @default(uuid())
   name      String
   quantity  Int
   price     Float
@@ -30,8 +30,8 @@ model Product {
 model Company {
   id        String    @id @default(uuid())
   email     String    @unique
-  name      String?
-  addressId Int       @unique
+  name      String    @unique
+  addressId String    @unique
   address   Address   @relation(fields: [addressId], references: [id])
   invoices  Invoice[]
 }
@@ -39,8 +39,8 @@ model Company {
 model Client {
   id        String    @id @default(uuid())
   email     String    @unique
-  name      String?
-  addressId Int       @unique
+  name      String    @unique
+  addressId String    @unique
   address   Address   @relation(fields: [addressId], references: [id])
   invoices  Invoice[]
 }
