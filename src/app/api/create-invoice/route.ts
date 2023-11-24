@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     paymentDue,
     status: invoice.status,
     description: invoice.projectDescription,
-    total: invoice.total || 0,
+    total: parseFloat(invoice.total) || 0,
     products: { create: invoice.products },
     client: {
       create: {

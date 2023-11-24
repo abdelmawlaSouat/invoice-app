@@ -3,11 +3,9 @@ import { z } from "zod";
 const emptyMessage = "cannot be empty";
 
 export const schema = z.object({
-  creationDate: z
-    .date({
-      invalid_type_error: "must be a valid date",
-    })
-    .max(new Date(), { message: "cannot be set to a future date" }),
+  creationDate: z.date({
+    invalid_type_error: "must be a valid date",
+  }),
   companyName: z.string().min(2, { message: emptyMessage }),
   companyEmail: z.string().min(1, { message: emptyMessage }).email({
     message: "must be a valid email",
@@ -27,6 +25,7 @@ export const schema = z.object({
   projectDescription: z.string(),
   paymentTerms: z.string(),
   status: z.string(),
+  total: z.string(),
   products: z.array(
     z.object({
       name: z.string(),

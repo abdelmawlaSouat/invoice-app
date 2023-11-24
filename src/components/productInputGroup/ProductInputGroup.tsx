@@ -16,8 +16,14 @@ export const ProductInputGroup = ({
 
   const updateTotal = () => {
     const { quantity, price } = getValues(fieldName);
+    const { total } = getValues();
 
-    setValue(`${fieldName}.total`, quantity * price);
+    const totalProductPrice = quantity * price;
+
+    const totalInvoicePrice = parseInt(total) + totalProductPrice;
+
+    setValue(`${fieldName}.total`, totalProductPrice);
+    setValue("total", totalInvoicePrice.toString());
   };
 
   return (

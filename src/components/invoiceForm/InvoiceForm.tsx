@@ -38,7 +38,6 @@ export const InvoiceForm = ({
     ...reactHookFormMethods
   } = useForm({
     resolver: zodResolver(schema),
-    mode: "onBlur",
     defaultValues: {
       creationDate: invoice?.createdAt || new Date(),
       companyName: invoice?.company.name,
@@ -62,8 +61,11 @@ export const InvoiceForm = ({
         price,
         total,
       })),
+      total: invoice?.total || 0,
     },
   });
+
+  console.log("Errors", formState.errors);
 
   return (
     <FormProvider

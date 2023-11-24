@@ -1,14 +1,16 @@
-import { Button, Typography } from "@/design-system/components";
+import { Typography } from "@/design-system/components";
 import { ProductInputGroup } from "../productInputGroup";
 import styles from "./ProductInputList.module.scss";
 import classNames from "classnames";
-import { useFieldArray } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { IoMdAdd } from "react-icons/io";
 
 export type ProductInputListProps = {
   className?: string;
 };
 
 export const ProductInputList = ({ className }: ProductInputListProps) => {
+  const { getValues, setValue } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     name: "products",
   });
@@ -21,6 +23,15 @@ export const ProductInputList = ({ className }: ProductInputListProps) => {
       total: 0,
     });
 
+  const handleonRemoveItem = (index: number) => {
+    const { total: totalProductPrice } = getValues(`products.${index}`);
+    const { total } = getValues();
+    const totalInvoicePrice = parseInt(total) - totalProductPrice;
+
+    setValue("total", totalInvoicePrice);
+    remove(index);
+  };
+
   return (
     <div className={classNames(styles.wrapper, className)}>
       <Typography variant="body" className={styles.label}>
@@ -28,14 +39,18 @@ export const ProductInputList = ({ className }: ProductInputListProps) => {
       </Typography>
 
       {fields.map((field, index) => (
-        <ProductInputGroup
-          key={field.id}
-          fieldName={`products.${index}`}
-          onRemove={() => remove(index)}
-        />
+        <div className={styles.inputGroupWrapper} key={field.id}>
+          <ProductInputGroup
+            fieldName={`products.${index}`}
+            onRemove={() => handleonRemoveItem(index)}
+          />
+        </div>
       ))}
 
-      <Button onClick={addNewItem}>Add New Item</Button>
+      <button className={styles.addItemBtn} onClick={addNewItem}>
+        <IoMdAdd />
+        <span>Add Item</span>
+      </button>
     </div>
   );
 };
