@@ -29,7 +29,7 @@ export const InvoiceFormModal = ({
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay} />
         <Dialog.Content className={styles.content}>
-          <Dialog.Title>{title}</Dialog.Title>
+          <Dialog.Title className={styles.title}>{title}</Dialog.Title>
 
           <InvoiceForm
             invoice={invoice}

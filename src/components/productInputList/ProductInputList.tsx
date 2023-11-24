@@ -49,7 +49,10 @@ export const ProductInputList = ({ className }: ProductInputListProps) => {
 
       <button className={styles.addItemBtn} onClick={addNewItem}>
         <IoMdAdd />
-        <span>Add Item</span>
+
+        <Typography variant="body" tag="span">
+          Add Item
+        </Typography>
       </button>
     </div>
   );

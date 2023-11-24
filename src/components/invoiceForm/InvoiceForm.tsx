@@ -75,11 +75,7 @@ export const InvoiceForm = ({
       formState={formState}
       {...reactHookFormMethods}
     >
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={styles.wrapper}
-        tabIndex={0}
-      >
+      <form onSubmit={handleSubmit(onSubmit)} tabIndex={0}>
         <div className={styles.section}>
           <Controller
             control={control}
