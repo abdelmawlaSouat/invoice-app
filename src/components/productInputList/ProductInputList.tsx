@@ -26,9 +26,9 @@ export const ProductInputList = ({ className }: ProductInputListProps) => {
   const handleonRemoveItem = (index: number) => {
     const { total: totalProductPrice } = getValues(`products.${index}`);
     const { total } = getValues();
-    const totalInvoicePrice = parseInt(total) - totalProductPrice;
+    const totalInvoicePrice = total - totalProductPrice;
 
-    setValue("total", totalInvoicePrice);
+    setValue("total", parseFloat(totalInvoicePrice.toFixed(2)));
     remove(index);
   };
 

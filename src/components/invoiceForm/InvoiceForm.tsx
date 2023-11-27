@@ -13,11 +13,13 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
-import { Invoice, PaymentTerms } from "@/types";
+import { Invoice, PaymentTerms, Person } from "@/types";
 import { schema } from "./zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { StatusSelect } from "../statusSelect";
 import { ProductInputList } from "../productInputList";
+import { useState } from "react";
+import { ConfirmFillDataModal } from "../confirmFillDataModal";
 
 export type InvoiceFormProps = {
   invoice?: Invoice;
@@ -33,6 +35,8 @@ export const InvoiceForm = ({
   const {
     handleSubmit,
     register,
+    setError,
+    setValue,
     control,
     formState,
     ...reactHookFormMethods
@@ -65,12 +69,89 @@ export const InvoiceForm = ({
     },
   });
 
-  console.log("Errors", formState.errors);
+  const [modalState, setModalState] = useState({
+    isOpened: false,
+    personType: "",
+    data: null,
+  });
+
+  const setValuesBasedOnThePersonType = (
+    type: "company" | "client",
+    data: Person | null
+  ) => {
+    if (!data) {
+      return;
+    }
+
+    setValue(`${type}Name`, data.name);
+    setValue(`${type}Email`, data.email);
+    setValue(`${type}Street`, data.address.street);
+    setValue(`${type}City`, data.address.city);
+    setValue(`${type}PostCode`, data.address.postCode);
+    setValue(`${type}Country`, data.address.country);
+  };
+
+  const onModalConfirm = () => {
+    setValuesBasedOnThePersonType(
+      modalState.personType as "company" | "client",
+      modalState.data
+    );
+
+    setModalState({
+      ...modalState,
+      isOpened: false,
+      data: null,
+      personType: "",
+    });
+  };
+
+  const onModalClose = () => setModalState({ ...modalState, isOpened: false });
+
+  console.log(
+    "Errors",
+    formState.errors,
+    typeof invoice?.total,
+    invoice?.total
+  );
+
+  const onInputBlur = async (
+    event: React.FocusEvent<HTMLInputElement>,
+    personType: "company" | "client",
+    propertyName: "name" | "email"
+  ) => {
+    console.log(event.target.name, event.target.value, personType);
+
+    const res = await fetch(
+      `/api/check-${personType}-existence?propertyName=${propertyName}&value=${event.target.value}`
+    );
+
+    const { data } = await res.json();
+
+    if (data) {
+      setModalState({
+        isOpened: true,
+        personType,
+        data,
+      });
+    }
+  };
+
+  const onClientInputBlur = async (
+    event: React.FocusEvent<HTMLInputElement>,
+    propertyName: "name" | "email"
+  ) => onInputBlur(event, "client", propertyName);
+
+  const onCompanyInputBlur = async (
+    event: React.FocusEvent<HTMLInputElement>,
+    propertyName: "name" | "email"
+  ) => onInputBlur(event, "company", propertyName);
 
   return (
     <FormProvider
       handleSubmit={handleSubmit}
       register={register}
+      setError={setError}
+      setValue={setValue}
       control={control}
       formState={formState}
       {...reactHookFormMethods}
@@ -117,12 +198,19 @@ export const InvoiceForm = ({
             Bill From
           </Typography>
 
-          <TextField label="Company's Name" {...register("companyName")} />
+          <TextField
+            label="Company's Name"
+            {...register("companyName", {
+              onBlur: (event) => onCompanyInputBlur(event, "name"),
+            })}
+          />
 
           <TextField
             label="Company's Email"
             type="email"
-            {...register("companyEmail")}
+            {...register("companyEmail", {
+              onBlur: (event) => onCompanyInputBlur(event, "email"),
+            })}
           />
 
           <TextField label="Street Address" {...register("companyStreet")} />
@@ -141,12 +229,19 @@ export const InvoiceForm = ({
             Bill To
           </Typography>
 
-          <TextField label="Client's Name" {...register("clientName")} />
+          <TextField
+            label="Client's Name"
+            {...register("clientName", {
+              onBlur: (event) => onClientInputBlur(event, "name"),
+            })}
+          />
 
           <TextField
             label="Client's Email"
             type="email"
-            {...register("clientEmail")}
+            {...register("clientEmail", {
+              onBlur: (event) => onClientInputBlur(event, "email"),
+            })}
           />
 
           <TextField label="Street Address" {...register("clientStreet")} />
@@ -162,6 +257,8 @@ export const InvoiceForm = ({
 
         <ProductInputList className={styles.section} />
 
+        <input type="hidden" {...register("total", { valueAsNumber: true })} />
+
         <div className={styles.ctasWrapper}>
           <Button onClick={onClose}>Cancel</Button>
 
@@ -170,6 +267,13 @@ export const InvoiceForm = ({
           </Button>
         </div>
       </form>
+
+      <ConfirmFillDataModal
+        open={modalState.isOpened}
+        personType={modalState.personType}
+        onClose={onModalClose}
+        onConfirm={onModalConfirm}
+      />
     </FormProvider>
   );
 };

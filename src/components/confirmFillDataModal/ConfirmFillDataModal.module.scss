@@ -1,0 +1,40 @@
+@use "sass:map";
+@import "variables";
+
+.modalOverlay,
+.modalContent {
+    z-index: 9;
+}
+
+.description {
+    font-size: 1rem;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    align-items: center;
+    padding: 2rem 1rem 0.5rem;
+    border-top: 1px solid #efefef;
+}
+
+.confirmBtn {
+    background-color: map.get($colors, "purple");
+    color: white;
+}
+
+.warningWrapper {
+    display: flex;
+    gap: 0.5rem;
+    background-color: #fef9ec;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.warningMessage {
+    width: fit-content;
+    margin: 0;
+    font-size: 1rem;
+}

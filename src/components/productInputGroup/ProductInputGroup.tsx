@@ -18,12 +18,11 @@ export const ProductInputGroup = ({
     const { quantity, price } = getValues(fieldName);
     const { total } = getValues();
 
-    const totalProductPrice = quantity * price;
+    const totalProductPrice = price * quantity;
+    const totalInvoicePrice = total + totalProductPrice;
 
-    const totalInvoicePrice = parseInt(total) + totalProductPrice;
-
-    setValue(`${fieldName}.total`, totalProductPrice);
-    setValue("total", totalInvoicePrice.toString());
+    setValue(`${fieldName}.total`, parseFloat(totalProductPrice.toFixed(2)));
+    setValue("total", parseFloat(totalInvoicePrice.toFixed(2)));
   };
 
   return (
@@ -37,6 +36,7 @@ export const ProductInputGroup = ({
           label="Qty."
           {...register(`${fieldName}.quantity`, {
             onChange: updateTotal,
+            valueAsNumber: true,
           })}
         />
 
@@ -47,6 +47,7 @@ export const ProductInputGroup = ({
           label="Price"
           {...register(`${fieldName}.price`, {
             onChange: updateTotal,
+            valueAsNumber: true,
           })}
         />
 
@@ -56,7 +57,9 @@ export const ProductInputGroup = ({
           step="0.01"
           label="Total"
           disabled
-          {...register(`${fieldName}.total`)}
+          {...register(`${fieldName}.total`, {
+            valueAsNumber: true,
+          })}
         />
 
         <button className={styles.deleteBtn} onClick={onRemove}>

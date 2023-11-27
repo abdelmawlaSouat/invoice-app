@@ -25,7 +25,7 @@ export const schema = z.object({
   projectDescription: z.string(),
   paymentTerms: z.string(),
   status: z.string(),
-  total: z.string(),
+  total: z.number(),
   products: z.array(
     z.object({
       name: z.string(),
