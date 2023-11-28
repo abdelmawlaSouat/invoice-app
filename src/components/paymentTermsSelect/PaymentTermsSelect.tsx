@@ -6,7 +6,7 @@ import { PaymentTermsList } from "@/constants/paymentTermList";
 import { PaymentTerms } from "@/types";
 
 type PaymentTermsSelectProps = {
-  value: PaymentTerms;
+  value: string;
   onChange: (value: string) => void;
 };
 
@@ -18,7 +18,7 @@ export const PaymentTermsSelect = ({
     <div>
       <Select.Root
         label="Payment Terms"
-        placeholder={PaymentTermsList[value].label}
+        placeholder={PaymentTermsList[value as PaymentTerms].label}
         value={value}
         onChange={onChange}
       >
