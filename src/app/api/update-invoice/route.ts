@@ -1,4 +1,4 @@
-import { createInvoice } from "@/services";
+import { updateInvoice } from "@/services";
 import { addDaysToDate } from "@/utils";
 
 export async function POST(request: Request) {
@@ -67,47 +67,29 @@ export async function POST(request: Request) {
     description: invoice.projectDescription,
     total: parseFloat(invoice.total) || 0,
     products: {
+      deleteMany: {},
       create: invoice.products,
     },
     client: {
       connectOrCreate: {
         where: {
-          email: invoice.clientEmail,
-          AND: [
-            {
-              name: invoice.clientName,
-            },
-            {
-              address: {
-                street: invoice.clientStreet,
-                city: invoice.clientCity,
-                postCode: invoice.clientPostCode,
-                country: invoice.clientCountry,
-              },
-            },
-          ],
+          email_name_addressId: {
+            email: clientData.email,
+            name: clientData.name,
+            addressId: invoice.clientAddressID,
+          },
         },
-
         create: clientData,
       },
     },
     company: {
       connectOrCreate: {
         where: {
-          email: invoice.companyEmail,
-          AND: [
-            {
-              name: invoice.companyName,
-            },
-            {
-              address: {
-                street: invoice.companyStreet,
-                city: invoice.companyCity,
-                postCode: invoice.companyPostCode,
-                country: invoice.companyCountry,
-              },
-            },
-          ],
+          email_name_addressId: {
+            email: companyData.email,
+            name: companyData.name,
+            addressId: invoice.companyAddressID,
+          },
         },
         create: companyData,
       },
@@ -115,7 +97,7 @@ export async function POST(request: Request) {
   };
 
   try {
-    const response = await createInvoice(formatedInvoice);
+    const response = await updateInvoice(invoice.id, formatedInvoice);
 
     return Response.json(response);
   } catch (error) {

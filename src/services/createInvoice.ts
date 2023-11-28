@@ -1,25 +1,21 @@
 import { InvoiceStatus, ResponseStatus } from "@/types";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Product } from "@prisma/client";
 
-export type CreateInvoicePayload = {
-  createdAt: Date;
+type CreateInvoicePayload = {
+  createdAt: string;
   paymentTerms: string;
   paymentDue: Date;
   status: InvoiceStatus;
   description: string;
   total: number;
   products: {
-    create: {
-      name: string;
-      quantity: number;
-      price: number;
-      total: number;
-    };
+    create: Product[];
   };
   client: {
     connectOrCreate: {
       where: {
         email: string;
+        AND: object[];
       };
       create: {
         name: string;
@@ -27,7 +23,12 @@ export type CreateInvoicePayload = {
         address: {
           connectOrCreate: {
             where: {
-              id: string;
+              street_city_postCode_country: {
+                street: string;
+                city: string;
+                postCode: string;
+                country: string;
+              };
             };
             create: {
               street: string;
@@ -44,6 +45,7 @@ export type CreateInvoicePayload = {
     connectOrCreate: {
       where: {
         email: string;
+        AND: object[];
       };
       create: {
         name: string;
@@ -51,7 +53,12 @@ export type CreateInvoicePayload = {
         address: {
           connectOrCreate: {
             where: {
-              id: string;
+              street_city_postCode_country: {
+                street: string;
+                city: string;
+                postCode: string;
+                country: string;
+              };
             };
             create: {
               street: string;
