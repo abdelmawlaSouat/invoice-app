@@ -107,20 +107,11 @@ export const InvoiceForm = ({
 
   const onModalClose = () => setModalState({ ...modalState, isOpened: false });
 
-  console.log(
-    "Errors",
-    formState.errors,
-    typeof invoice?.total,
-    invoice?.total
-  );
-
   const onInputBlur = async (
     event: React.FocusEvent<HTMLInputElement>,
     personType: "company" | "client",
     propertyName: "name" | "email"
   ) => {
-    console.log(event.target.name, event.target.value, personType);
-
     const res = await fetch(
       `/api/check-${personType}-existence?propertyName=${propertyName}&value=${event.target.value}`
     );

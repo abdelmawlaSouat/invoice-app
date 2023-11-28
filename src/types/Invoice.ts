@@ -12,5 +12,7 @@ export type Invoice = {
   total: number;
   products: Product[];
   client: Person;
+  clientId: string;
   company: Person;
+  companyId: string;
 };
