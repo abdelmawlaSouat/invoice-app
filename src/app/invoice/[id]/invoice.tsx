@@ -73,6 +73,25 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
   const toggleDeleteModal = () =>
     setIsDeleteInvoiceModalOpened(!isDeleteInvoiceModalOpened);
 
+  // TODO: Update the new invoice in the list + add a toaster
+  const handleOnSubmit = async (data: any) => {
+    try {
+      await fetch(`/api/update-invoice`, {
+        method: "POST",
+        body: JSON.stringify({
+          ...data,
+          id: invoice.id,
+          clientId: invoice.clientId,
+          clientAddressID: invoice.client.addressId,
+          companyId: invoice.companyId,
+          companyAddressID: invoice.company.addressId,
+        }),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <main className={styles.wrapper}>
       <div className={styles.content}>
@@ -128,13 +147,14 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
       <InvoiceFormModal
         title={
           <>
-            Edit <span className={styles.hashtag}>#</span>
+            Edit invoice<span className={styles.hashtag}> #</span>
             {invoice.id}
           </>
         }
         open={isEditInvoiceModalOpened}
         onClose={handleonEdit}
         invoice={invoice}
+        onSubmit={handleOnSubmit}
       />
     </main>
   );

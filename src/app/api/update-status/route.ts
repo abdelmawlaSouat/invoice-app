@@ -1,7 +1,7 @@
 import { updateStatus } from "@/services";
 import { InvoiceStatus } from "@/types";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
   const newStatus = searchParams.get("status");

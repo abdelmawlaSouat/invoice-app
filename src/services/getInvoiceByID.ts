@@ -1,4 +1,4 @@
-import { Invoice, ResponseStatus } from "@/types";
+import { ResponseStatus, Invoice } from "@/types";
 import { PrismaClient } from "@prisma/client";
 
 type GetInvoiceByIDResponse = {
@@ -9,12 +9,10 @@ type GetInvoiceByIDResponse = {
 export const getInvoiceByID = async (
   id: number
 ): Promise<GetInvoiceByIDResponse> => {
-  let invoice = null;
-
   try {
     const prisma = new PrismaClient();
 
-    invoice = await prisma.invoice.findUnique({
+    const invoice = await prisma.invoice.findUnique({
       where: { id },
       include: {
         products: true,
@@ -35,10 +33,10 @@ export const getInvoiceByID = async (
       throw new Error("Invoice not found");
     }
 
-    return { status: "OK", invoice };
+    return { status: "OK", invoice: invoice as Invoice };
   } catch (error) {
     console.error(error);
 
-    return { status: "KO", invoice };
+    return { status: "KO", invoice: null };
   }
 };

@@ -1,5 +1,5 @@
-import { Invoice, ResponseStatus } from "@/types";
-import { PrismaClient } from "@prisma/client";
+import { ResponseStatus } from "@/types";
+import { PrismaClient, Invoice } from "@prisma/client";
 
 type DeleteInvoiceResponse = {
   invoice: Invoice;
@@ -7,9 +7,9 @@ type DeleteInvoiceResponse = {
 };
 
 export const deleteInvoice = async (
-  id: number,
+  id: number
 ): Promise<DeleteInvoiceResponse> => {
-  let invoice: Invoice = {} as Invoice;
+  let invoice = {} as Invoice;
 
   try {
     const prisma = new PrismaClient();

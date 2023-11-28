@@ -1,4 +1,4 @@
-import { Invoice, ResponseStatus } from "@/types";
+import { ResponseStatus, Invoice } from "@/types";
 import { PrismaClient } from "@prisma/client";
 
 type GetInvoicesResponse = {
@@ -7,12 +7,10 @@ type GetInvoicesResponse = {
 };
 
 export const getInvoices = async (): Promise<GetInvoicesResponse> => {
-  let invoices: Invoice[] = [];
-
   try {
     const prisma = new PrismaClient();
 
-    invoices = await prisma.invoice.findMany({
+    const invoices = await prisma.invoice.findMany({
       include: {
         products: true,
         company: {
@@ -28,10 +26,10 @@ export const getInvoices = async (): Promise<GetInvoicesResponse> => {
       },
     });
 
-    return { status: "OK", invoices };
+    return { status: "OK", invoices: invoices as Invoice[] };
   } catch (error) {
     console.error(error);
 
-    return { status: "KO", invoices };
+    return { status: "KO", invoices: [] };
   }
 };

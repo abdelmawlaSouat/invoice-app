@@ -13,6 +13,7 @@ const data = {
     create: [
       {
         createdAt: new Date("2021-08-18"),
+        paymentTerms: "60",
         paymentDue: new Date("2021-08-19"),
         description: "Re-branding",
         status: "PAID",
@@ -40,11 +41,18 @@ const data = {
               price: 1800.9,
               total: 1800.9,
             },
+            {
+              name: "Website Redesign",
+              quantity: 555,
+              price: 45,
+              total: 24975,
+            },
           ],
         },
       },
       {
         createdAt: new Date("2021-08-21"),
+        paymentTerms: "30",
         paymentDue: new Date("2021-09-20"),
         description: "Graphic Design",
         status: "PENDING",
@@ -82,6 +90,7 @@ const data = {
       },
       {
         createdAt: new Date("2021-09-24"),
+        paymentTerms: "7",
         paymentDue: new Date("2021-10-01"),
         description: "Website Redesign",
         status: "PAID",
@@ -113,6 +122,7 @@ const data = {
       },
       {
         createdAt: new Date("2021-10-11"),
+        paymentTerms: "1",
         paymentDue: new Date("2021-10-12"),
         description: "Logo Concept",
         status: "PENDING",
@@ -144,6 +154,7 @@ const data = {
       },
       {
         createdAt: new Date("2021-10-7"),
+        paymentTerms: "30",
         paymentDue: new Date("2021-10-14"),
         description: "Re-branding",
         status: "PENDING",
@@ -181,6 +192,7 @@ const data = {
       },
       {
         createdAt: new Date("2021-10-01"),
+        paymentTerms: "30",
         paymentDue: new Date("2021-10-31"),
         description: "Landing Page Design",
         status: "PENDING",
@@ -203,6 +215,7 @@ const data = {
 
       {
         createdAt: new Date("2023-03-25"),
+        paymentTerms: "30",
         paymentDue: new Date("2023-04-25"),
         description: "Logo Design",
         status: "PENDING",
@@ -234,6 +247,7 @@ const data = {
       },
       {
         createdAt: new Date("2023-03-26"),
+        paymentTerms: "30",
         paymentDue: new Date("2023-04-26"),
         description: "Web Development",
         status: "PENDING",
@@ -265,6 +279,7 @@ const data = {
       },
       {
         createdAt: new Date("2023-03-27"),
+        paymentTerms: "30",
         paymentDue: new Date("2023-04-27"),
         description: "Marketing Campaign",
         status: "PENDING",
@@ -296,6 +311,7 @@ const data = {
       },
       {
         createdAt: new Date("2023-03-28"),
+        paymentTerms: "30",
         paymentDue: new Date("2023-04-28"),
         description: "App Development",
         status: "PENDING",
@@ -327,6 +343,7 @@ const data = {
       },
       {
         createdAt: new Date("2023-03-29"),
+        paymentTerms: "30",
         paymentDue: new Date("2023-04-29"),
         description: "Social Media Marketing",
         status: "PENDING",

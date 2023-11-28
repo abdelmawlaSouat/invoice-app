@@ -7,24 +7,43 @@ import { Typography } from "../typography";
 
 import "./ReactDatePicker.scss";
 import styles from "./DatePicker.module.scss";
+import { FieldError, useFormContext } from "react-hook-form";
 
 type DatePickerProps = {
   label: string;
-  value: Date | null;
+  value: Date;
+  name: string;
   onChange: (value: Date | null) => void;
 };
 
-export const DatePicker = ({ label, value, onChange }: DatePickerProps) => {
+export const DatePicker = ({
+  label,
+  value,
+  onChange,
+  name,
+}: DatePickerProps) => {
+  const {
+    formState: { errors },
+  } = useFormContext();
+
+  const error = errors[name!] as FieldError;
+
   return (
     <div className={styles.wrapper}>
-      <label className={styles.label}>{label}</label>
+      <div className={styles.headerWrapper}>
+        <label className={styles.label}>{label}</label>
+
+        <span className={styles.errorMessage}>
+          {error ? error.message : ""}
+        </span>
+      </div>
 
       <ReactDatePicker
         selected={value}
         onChange={(date) => onChange(date)}
         className={styles.datePicker}
         calendarClassName={styles.calendar}
-        icon={<CalendarIcon color="#7E88C3" />}
+        icon={<CalendarIcon className={styles.calendarIcon} color="#7E88C3" />}
         showIcon
         renderCustomHeader={({
           date,

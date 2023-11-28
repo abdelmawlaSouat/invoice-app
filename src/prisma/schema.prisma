@@ -8,17 +8,19 @@ datasource db {
 }
 
 model Address {
-  id       Int      @id @default(autoincrement())
-  street   String
-  city     String
-  postCode String
-  country  String
-  Client   Client?
-  Company  Company?
+  id       String    @id @default(uuid())
+  street   String?
+  city     String?
+  postCode String?
+  country  String?
+  Client   Client[]
+  Company  Company[]
+
+  @@unique([street, city, postCode, country])
 }
 
 model Product {
-  id        Int     @id @default(autoincrement())
+  id        String  @id @default(uuid())
   name      String
   quantity  Int
   price     Float
@@ -31,32 +33,37 @@ model Company {
   id        String    @id @default(uuid())
   email     String    @unique
   name      String
-  addressId Int       @unique
-  address   Address   @relation(fields: [addressId], references: [id])
+  addressId String
+  address   Address   @relation(fields: [addressId], references: [id], onDelete: Cascade)
   invoices  Invoice[]
+
+  @@unique([email, name, addressId])
 }
 
 model Client {
   id        String    @id @default(uuid())
   email     String    @unique
   name      String
-  addressId Int       @unique
-  address   Address   @relation(fields: [addressId], references: [id])
+  addressId String
+  address   Address   @relation(fields: [addressId], references: [id], onDelete: Cascade)
   invoices  Invoice[]
+
+  @@unique([email, name, addressId])
 }
 
 model Invoice {
-  id          Int       @id @default(autoincrement())
-  createdAt   DateTime
-  paymentDue  DateTime
-  status      InvoiceStatus
-  description String
-  total       Float
-  clientId    String
-  companyId   String
-  client      Client    @relation(fields: [clientId], references: [id])
-  company     Company   @relation(fields: [companyId], references: [id])
-  products    Product[]
+  id           Int           @id @default(autoincrement())
+  createdAt    DateTime
+  paymentDue   DateTime
+  paymentTerms String
+  status       InvoiceStatus
+  description  String?
+  total        Float
+  clientId     String
+  companyId    String
+  client       Client        @relation(fields: [clientId], references: [id])
+  company      Company       @relation(fields: [companyId], references: [id])
+  products     Product[]
 }
 
 enum InvoiceStatus {

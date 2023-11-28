@@ -1,5 +1,5 @@
-import { Invoice, InvoiceStatus, ResponseStatus } from "@/types";
-import { PrismaClient } from "@prisma/client";
+import { ResponseStatus } from "@/types";
+import { PrismaClient, Invoice, InvoiceStatus } from "@prisma/client";
 
 type UpdateStatusResponse = {
   invoice: Invoice;
@@ -8,9 +8,9 @@ type UpdateStatusResponse = {
 
 export const updateStatus = async (
   id: number,
-  newStatus: InvoiceStatus,
+  newStatus: InvoiceStatus
 ): Promise<UpdateStatusResponse> => {
-  let invoice: Invoice = {} as Invoice;
+  let invoice = {} as Invoice;
 
   try {
     const prisma = new PrismaClient();
