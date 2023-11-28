@@ -1,5 +1,5 @@
-import { Invoice, ResponseStatus } from "@/types";
-import { PrismaClient } from "@prisma/client";
+import { ResponseStatus } from "@/types";
+import { PrismaClient, Invoice } from "@prisma/client";
 
 type GetInvoiceByIDResponse = {
   invoice: Invoice | null;
