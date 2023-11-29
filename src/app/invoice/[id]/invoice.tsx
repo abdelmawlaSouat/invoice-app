@@ -103,10 +103,9 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
   const toggleDeleteModal = () =>
     setIsDeleteInvoiceModalOpened(!isDeleteInvoiceModalOpened);
 
-  // TODO: Update the new invoice in the list + add a toaster
   const handleOnSubmit = async (data: any) => {
     try {
-      await fetch(`/api/update-invoice`, {
+      const res = await fetch(`/api/update-invoice`, {
         method: "POST",
         body: JSON.stringify({
           ...data,
@@ -117,8 +116,23 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
           companyAddressID: invoice.company.addressId,
         }),
       });
+
+      const { status } = await res.json();
+
+      if (status === "OK") {
+        showToast("success", {
+          title: "Invoice Updated",
+          message: "The invoice was successfully updated.",
+        });
+
+        setIsEditInvoiceModalOpened(false);
+      }
     } catch (error) {
-      console.error(error);
+      showToast("error", {
+        title: "Error while updating the invoice",
+        message:
+          "Something went wrong while updating the invoice. Please try again.",
+      });
     }
   };
 

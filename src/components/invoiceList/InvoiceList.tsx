@@ -1,10 +1,10 @@
 "use client";
-import { useWindowSize } from "@/design-system/hooks";
+import { useToast, useWindowSize } from "@/design-system/hooks";
 import { useState } from "react";
 import { Invoice, InvoiceStatus } from "@/types";
 import Link from "next/link";
 import styles from "./InvoiceList.module.scss";
-import { Button, Typography } from "@/design-system/components";
+import { Button, Toast, Typography } from "@/design-system/components";
 import { Add } from "@/design-system/icons";
 import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 import { FilterByStatus } from "../filterByStatus";
@@ -24,6 +24,7 @@ type InvoiceListProps = {
 
 export const InvoiceList = ({ invoices }: InvoiceListProps) => {
   const [activeFilters, setActiveFilters] = useState(defaultFilters);
+  const { toast, showToast, hideToast } = useToast();
   const { width } = useWindowSize();
   const [isCreateInvoiceModalOpened, setIsCreateInvoiceModalOpened] =
     useState(false);
@@ -58,20 +59,42 @@ export const InvoiceList = ({ invoices }: InvoiceListProps) => {
     setIsCreateInvoiceModalOpened(!isCreateInvoiceModalOpened);
   };
 
-  // TODO: Add the new invoice in the list + add a toaster
   const handleOnSubmit = async (data: any) => {
     try {
-      await fetch(`/api/create-invoice`, {
+      const res = await fetch(`/api/create-invoice`, {
         method: "POST",
         body: JSON.stringify(data),
       });
+
+      const { status } = await res.json();
+
+      if (status === "OK") {
+        showToast("success", {
+          title: "Invoice Created",
+          message: "The invoice was successfully created.",
+        });
+
+        setIsCreateInvoiceModalOpened(false);
+      }
     } catch (error) {
-      console.error(error);
+      showToast("error", {
+        title: "Error while creating the invoice",
+        message:
+          "Something went wrong while creating the invoice. Please try again.",
+      });
     }
   };
 
   return (
     <div className={styles.wrapper}>
+      <Toast
+        open={!!toast}
+        title={toast.title}
+        message={toast.message}
+        type={toast.type}
+        onClose={hideToast}
+      />
+
       <div className={styles.header}>
         <div>
           <Typography variant="headingL" tag="h1" className={styles.title}>
