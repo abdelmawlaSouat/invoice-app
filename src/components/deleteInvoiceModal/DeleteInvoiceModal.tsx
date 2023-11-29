@@ -23,7 +23,7 @@ export const DeleteInvoiceModal = ({
 
         <Typography variant="body" className={styles.description}>
           Are you sure you want to delete invoice <strong>#{invoiceID}</strong>?
-          This action cannot be undone
+          This action cannot be undone.
         </Typography>
 
         <div className={styles.footer}>
