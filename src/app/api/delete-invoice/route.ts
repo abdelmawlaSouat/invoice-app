@@ -1,8 +1,7 @@
 import { deleteInvoice } from "@/services";
 
 export async function POST(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
+  const { id } = await request.json();
 
   if (!id) {
     return new Response("Missing id", { status: 400 });

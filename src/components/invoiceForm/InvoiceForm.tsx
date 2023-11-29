@@ -109,11 +109,10 @@ export const InvoiceForm = ({
 
   const onInputBlur = async (
     event: React.FocusEvent<HTMLInputElement>,
-    personType: "company" | "client",
-    propertyName: "name" | "email"
+    personType: "company" | "client"
   ) => {
     const res = await fetch(
-      `/api/check-${personType}-existence?propertyName=${propertyName}&value=${event.target.value}`
+      `/api/check-person-existence?type=${personType}&value=${event.target.value}`
     );
 
     const { data } = await res.json();
@@ -126,16 +125,6 @@ export const InvoiceForm = ({
       });
     }
   };
-
-  const onClientInputBlur = async (
-    event: React.FocusEvent<HTMLInputElement>,
-    propertyName: "name" | "email"
-  ) => onInputBlur(event, "client", propertyName);
-
-  const onCompanyInputBlur = async (
-    event: React.FocusEvent<HTMLInputElement>,
-    propertyName: "name" | "email"
-  ) => onInputBlur(event, "company", propertyName);
 
   return (
     <FormProvider
@@ -190,19 +179,14 @@ export const InvoiceForm = ({
           </Typography>
 
           <TextField
-            label="Company's Name"
-            {...register("companyName", {
-              onBlur: (event) => onCompanyInputBlur(event, "name"),
-            })}
-          />
-
-          <TextField
             label="Company's Email"
             type="email"
             {...register("companyEmail", {
-              onBlur: (event) => onCompanyInputBlur(event, "email"),
+              onBlur: (event) => onInputBlur(event, "company"),
             })}
           />
+
+          <TextField label="Company's Name" {...register("companyName")} />
 
           <TextField label="Street Address" {...register("companyStreet")} />
 
@@ -221,19 +205,14 @@ export const InvoiceForm = ({
           </Typography>
 
           <TextField
-            label="Client's Name"
-            {...register("clientName", {
-              onBlur: (event) => onClientInputBlur(event, "name"),
-            })}
-          />
-
-          <TextField
             label="Client's Email"
             type="email"
             {...register("clientEmail", {
-              onBlur: (event) => onClientInputBlur(event, "email"),
+              onBlur: (event) => onInputBlur(event, "client"),
             })}
           />
+
+          <TextField label="Client's Name" {...register("clientName")} />
 
           <TextField label="Street Address" {...register("clientStreet")} />
 

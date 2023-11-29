@@ -3,29 +3,30 @@ import { PrismaClient } from "@prisma/client";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  const propertyName = searchParams.get("propertyName");
+  const personType = searchParams.get("type");
+
   const value = searchParams.get("value");
 
-  if (!propertyName || !value) {
+  if (!personType || !value) {
     // Should not send an error message
     // because it can be null if the form is still not filled
     return Response.json({
       status: "OK",
-      error: "Missing property name or value",
+      error: "Missing person type or value",
     });
   }
 
   try {
     const prisma = new PrismaClient();
 
-    const client = await prisma.client.findUnique({
-      where: { [propertyName]: value } as { id: string },
+    const data = await prisma[personType as "client"].findUnique({
+      where: { email: value },
       include: {
         address: true,
       },
     });
 
-    return Response.json({ status: "OK", data: client });
+    return Response.json({ status: "OK", data });
   } catch (error) {
     return Response.json({
       status: 500,

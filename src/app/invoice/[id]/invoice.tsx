@@ -7,11 +7,11 @@ import {
   InvoiceDetailCard,
   StatusTag,
 } from "@/components";
-import { Card, Typography } from "@/design-system/components";
+import { Card, Toast, Typography } from "@/design-system/components";
 import { Invoice, InvoiceStatus } from "@/types";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useWindowSize } from "@/design-system/hooks";
+import { useToast, useWindowSize } from "@/design-system/hooks";
 import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 import dynamic from "next/dynamic";
 
@@ -35,34 +35,64 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
 
   const [status, setStatus] = useState(invoice.status);
   const { push } = useRouter();
+  const { toast, showToast, hideToast } = useToast();
   const { width } = useWindowSize();
 
   const handleonMarkAsPaid = async () => {
     try {
-      const res = await fetch(
-        `/api/update-status?id=${invoice.id}&status=PAID`
-      );
+      const res = await fetch(`/api/update-status`, {
+        method: "POST",
+        body: JSON.stringify({
+          id: invoice.id,
+          status: "PAID",
+        }),
+      });
 
-      const { invoice: updatedInvoice } = await res.json();
+      const { status, invoice: updatedInvoice } = await res.json();
 
-      setStatus(updatedInvoice.status || invoice.status);
+      if (status === "OK") {
+        showToast("success", {
+          title: "Invoice Paid",
+          message: "The invoice was successfully marked as paid.",
+        });
+
+        setStatus(updatedInvoice.status || invoice.status);
+      }
     } catch (error) {
-      console.error(error);
+      showToast("error", {
+        title: "Error while updating the invoice",
+        message:
+          "Something went wrong while updating the invoice. Please try again.",
+      });
     }
   };
 
   const handleOnDelete = async () => {
     try {
-      const res = await fetch(`/api/delete-invoice?id=${invoice.id}`);
-      const deletedInvoice = await res.json();
+      const res = await fetch(`/api/delete-invoice`, {
+        method: "POST",
+        body: JSON.stringify({ id: invoice.id }),
+      });
+      const { status } = await res.json();
 
-      if (deletedInvoice) {
+      if (status === "OK") {
         setIsDeleteInvoiceModalOpened(false);
+        showToast("success", {
+          title: "Invoice Removed",
+          message:
+            "The invoice was successfully removed. You will now be redirected to the invoice list page in a few seconds...",
+        });
 
-        push("/");
+        setTimeout(() => {
+          push("/");
+        }, 4000);
       }
     } catch (error) {
-      console.error(error);
+      showToast("error", {
+        title: "Error while deleting the invoice",
+        message:
+          "Something went wrong while deleting the invoice. Please try again.",
+      });
     }
   };
 
@@ -73,10 +103,9 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
   const toggleDeleteModal = () =>
     setIsDeleteInvoiceModalOpened(!isDeleteInvoiceModalOpened);
 
-  // TODO: Update the new invoice in the list + add a toaster
   const handleOnSubmit = async (data: any) => {
     try {
-      await fetch(`/api/update-invoice`, {
+      const res = await fetch(`/api/update-invoice`, {
         method: "POST",
         body: JSON.stringify({
           ...data,
@@ -87,8 +116,23 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
           companyAddressID: invoice.company.addressId,
         }),
       });
+
+      const { status } = await res.json();
+
+      if (status === "OK") {
+        showToast("success", {
+          title: "Invoice Updated",
+          message: "The invoice was successfully updated.",
+        });
+
+        setIsEditInvoiceModalOpened(false);
+      }
     } catch (error) {
-      console.error(error);
+      showToast("error", {
+        title: "Error while updating the invoice",
+        message:
+          "Something went wrong while updating the invoice. Please try again.",
+      });
     }
   };
 
@@ -96,6 +140,14 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
     <main className={styles.wrapper}>
       <div className={styles.content}>
         <GoBackLink />
+
+        <Toast
+          open={!!toast}
+          title={toast.title}
+          message={toast.message}
+          type={toast.type}
+          onClose={hideToast}
+        />
 
         <Card className={styles.statusAndCtasWrapper}>
           <div className={styles.statusWrapper}>
@@ -127,7 +179,7 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
       {width < BREAKPOINTS.md && (
         <Card>
           <CallToActionGroup
-            status={invoice.status as InvoiceStatus}
+            status={status as InvoiceStatus}
             onEdit={handleonEdit}
             onDelete={toggleDeleteModal}
             onMarkAsPaid={handleonMarkAsPaid}

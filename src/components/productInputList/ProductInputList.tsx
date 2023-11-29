@@ -47,7 +47,7 @@ export const ProductInputList = ({ className }: ProductInputListProps) => {
         </div>
       ))}
 
-      <button className={styles.addItemBtn} onClick={addNewItem}>
+      <button type="button" className={styles.addItemBtn} onClick={addNewItem}>
         <IoMdAdd />
 
         <Typography variant="body" tag="span">

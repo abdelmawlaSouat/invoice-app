@@ -11,6 +11,11 @@ export const getInvoices = async (): Promise<GetInvoicesResponse> => {
     const prisma = new PrismaClient();
 
     const invoices = await prisma.invoice.findMany({
+      where: {
+        status: {
+          not: "DELETED",
+        },
+      },
       include: {
         products: true,
         company: {

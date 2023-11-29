@@ -1,20 +1,14 @@
 import { updateStatus } from "@/services";
-import { InvoiceStatus } from "@/types";
 
 export async function POST(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
-  const newStatus = searchParams.get("status");
+  const { id, status } = await request.json();
 
-  if (!id || !newStatus) {
+  if (!id || !status) {
     return new Response("Missing id or status", { status: 400 });
   }
 
   try {
-    const response = await updateStatus(
-      parseInt(id),
-      newStatus as InvoiceStatus
-    );
+    const response = await updateStatus(parseInt(id), status);
 
     return Response.json(response);
   } catch (error) {
