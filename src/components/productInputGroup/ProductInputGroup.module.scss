@@ -5,22 +5,14 @@
 }
 
 .rowTwo {
-    display: flex;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: repeat(3, 25%) 2rem;
+    justify-content: space-between;
     gap: 1rem;
+    align-items: flex-end;
 }
-
-.quantityInput {
-max-width: 4rem;
-}
-
-.priceInput {
-max-width: 6rem;
-
-}          
 
 .totalInput {
-    width: 5rem;
     border: 0;
     background-color: transparent;
     padding: 0;

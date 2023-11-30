@@ -53,7 +53,8 @@
         font-size: 1rem;
     }
 
-    &:focus {
+    &:focus,
+    &:hover {
         outline: none;
         border: 1px solid map.get($colors, "purple");
     }

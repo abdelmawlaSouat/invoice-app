@@ -64,7 +64,14 @@ export const InvoiceForm = ({
         quantity,
         price,
         total,
-      })),
+      })) || [
+        {
+          name: "",
+          quantity: 0,
+          price: 0,
+          total: 0,
+        },
+      ],
       total: invoice?.total || 0,
     },
   });

@@ -10,3 +10,13 @@
 :root.theme-dark {
     @include spread-map($dark);
 }
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}

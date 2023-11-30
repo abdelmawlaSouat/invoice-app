@@ -25,9 +25,9 @@
     padding: 1rem 1.125rem;
     color: map.get($colors, "purple");
     display: flex;
-    flex-direction: row;
     align-items: center;
-    align-self: center;
+    justify-content: center;
+    cursor: pointer;
 
     span {
         font-weight: 600;
