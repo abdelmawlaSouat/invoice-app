@@ -1,5 +1,12 @@
 @use "sass:map";
 @import "variables";
+@import "mixins";
+
+%display-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
 
 .label {
     color: map.get($colors, "purple");
@@ -8,25 +15,39 @@
     font-size: 1rem;
 }
 
-.section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.generalInfosection,
+.contactDataSection {
+    @extend %display-grid;
+
     padding: 2.5rem 1.5rem;
     border-bottom: 1px solid #efefef;
 }
 
-.row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    box-sizing: border-box;
+.inputsGroup {
+    @extend %display-grid;
+}
 
-    > div {
-        max-width: 8.5rem;
+.addressGroup {
+    @extend %display-grid;
+}
+
+.addressSubGroup {
+    @extend %display-grid;
+
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        justify-content: space-between;
+        grid-template-columns: repeat(3, 17vw);
     }
+
+    @include breakpoint-min(map.get($breakpoints, "lg")) {
+        justify-content: space-between;
+        grid-template-columns: repeat(3, 12vw);
+    }
+}
+
+.productListSection {
+    padding: 2.5rem 1.5rem;
+    border-bottom: 1px solid #efefef;
 }
 
 .submitBtn {
@@ -37,6 +58,7 @@
 .ctasWrapper {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-end;
+    gap: 1rem;
     padding: 2rem 1.5rem;
 }

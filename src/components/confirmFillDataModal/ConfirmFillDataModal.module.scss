@@ -6,6 +6,17 @@
     z-index: 9;
 }
 
+.modalContent {
+    max-width: 42rem;
+    max-height: 85vh;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .description {
     font-size: 1rem;
 }
@@ -30,7 +41,7 @@
     gap: 0.5rem;
     background-color: #fef9ec;
     padding: 0.5rem 1rem;
-    border-radius: 8px;
+    border-radius: 0.5rem;
 }
 
 .warningMessage {

@@ -15,8 +15,8 @@ export const DeleteInvoiceModal = ({
   onClose,
 }: DeleteInvoiceModalProps) => {
   return (
-    <Modal open={isOpen}>
-      <Card className={styles.content}>
+    <Modal open={isOpen} contentClassName={styles.content}>
+      <Card className={styles.card}>
         <Typography className={styles.title} variant="headingM">
           Confirm Deletion
         </Typography>

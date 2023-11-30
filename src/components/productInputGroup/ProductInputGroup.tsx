@@ -59,6 +59,7 @@ export const ProductInputGroup = ({
           disabled
           {...register(`${fieldName}.total`, {
             valueAsNumber: true,
+            deps: [`${fieldName}.quantity`, `${fieldName}.price`],
           })}
         />
 

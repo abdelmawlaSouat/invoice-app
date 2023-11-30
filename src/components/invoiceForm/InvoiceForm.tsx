@@ -64,7 +64,14 @@ export const InvoiceForm = ({
         quantity,
         price,
         total,
-      })),
+      })) || [
+        {
+          name: "",
+          quantity: 0,
+          price: 0,
+          total: 0,
+        },
+      ],
       total: invoice?.total || 0,
     },
   });
@@ -137,7 +144,7 @@ export const InvoiceForm = ({
       {...reactHookFormMethods}
     >
       <form onSubmit={handleSubmit(onSubmit)} tabIndex={0}>
-        <div className={styles.section}>
+        <div className={styles.generalInfosection}>
           <Controller
             control={control}
             name="creationDate"
@@ -173,59 +180,70 @@ export const InvoiceForm = ({
           />
         </div>
 
-        <div className={styles.section}>
+        <div className={styles.contactDataSection}>
           <Typography variant="body" className={styles.label}>
             Bill From
           </Typography>
 
-          <TextField
-            label="Company's Email"
-            type="email"
-            {...register("companyEmail", {
-              onBlur: (event) => onInputBlur(event, "company"),
-            })}
-          />
+          <div className={styles.inputsGroup}>
+            <TextField
+              label="Company's Email"
+              type="email"
+              {...register("companyEmail", {
+                onBlur: (event) => onInputBlur(event, "company"),
+              })}
+            />
 
-          <TextField label="Company's Name" {...register("companyName")} />
+            <TextField label="Company's Name" {...register("companyName")} />
 
-          <TextField label="Street Address" {...register("companyStreet")} />
+            <div className={styles.addressGroup}>
+              <TextField
+                label="Street Address"
+                {...register("companyStreet")}
+              />
 
-          <div className={styles.row}>
-            <TextField label="City" {...register("companyCity")} />
+              <div className={styles.addressSubGroup}>
+                <TextField label="City" {...register("companyCity")} />
 
-            <TextField label="Post Code" {...register("companyPostCode")} />
+                <TextField label="Post Code" {...register("companyPostCode")} />
+
+                <TextField label="Country" {...register("companyCountry")} />
+              </div>
+            </div>
           </div>
-
-          <TextField label="Country" {...register("companyCountry")} />
         </div>
 
-        <div className={styles.section}>
+        <div className={styles.contactDataSection}>
           <Typography variant="body" className={styles.label}>
             Bill To
           </Typography>
 
-          <TextField
-            label="Client's Email"
-            type="email"
-            {...register("clientEmail", {
-              onBlur: (event) => onInputBlur(event, "client"),
-            })}
-          />
+          <div className={styles.inputsGroup}>
+            <TextField
+              label="Client's Email"
+              type="email"
+              {...register("clientEmail", {
+                onBlur: (event) => onInputBlur(event, "client"),
+              })}
+            />
 
-          <TextField label="Client's Name" {...register("clientName")} />
+            <TextField label="Client's Name" {...register("clientName")} />
 
-          <TextField label="Street Address" {...register("clientStreet")} />
+            <div className={styles.addressGroup}>
+              <TextField label="Street Address" {...register("clientStreet")} />
 
-          <div className={styles.row}>
-            <TextField label="City" {...register("clientCity")} />
+              <div className={styles.addressSubGroup}>
+                <TextField label="City" {...register("clientCity")} />
 
-            <TextField label="Post Code" {...register("clientPostCode")} />
+                <TextField label="Post Code" {...register("clientPostCode")} />
+
+                <TextField label="Country" {...register("clientCountry")} />
+              </div>
+            </div>
           </div>
-
-          <TextField label="Country" {...register("clientCountry")} />
         </div>
 
-        <ProductInputList className={styles.section} />
+        <ProductInputList className={styles.productListSection} />
 
         <input type="hidden" {...register("total", { valueAsNumber: true })} />
 

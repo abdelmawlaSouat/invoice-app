@@ -7,22 +7,21 @@
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
     animation: overlayShow 150ms ease-in-out;
-    z-index: z("overlay");
 }
 
 .content {
-    box-shadow: 8px;
-    position: fixed;
-    z-index: z("modal");
-    border-radius: 8px;
-    top: 30vh;
-    left: 1rem;
-    right: 1rem;
+    box-shadow:
+        hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+        hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+    border-radius: 0.5rem;
+    transform: translate(-50%, -50%);
     animation: contentShow 0.2s;
-
-    @include breakpoint-min(map.get($breakpoints, "sm")) {
-        width: fit-content;
-    }
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 90vw;
+    max-width: 44rem;
+    max-height: 85vh;
 
     &:focus {
         outline: none;
@@ -41,10 +40,10 @@
 @keyframes contentShow {
     from {
         opacity: 0;
-        transform: translate(0, -50%) scale(0.98);
+        transform: translate(-50%, -48%) scale(0.96);
     }
     to {
         opacity: 1;
-        transform: translate(0%, 0%) scale(1);
+        transform: translate(-50%, -50%) scale(1);
     }
 }

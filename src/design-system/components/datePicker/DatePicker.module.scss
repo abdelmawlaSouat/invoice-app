@@ -42,7 +42,8 @@ input.datePicker {
         font-size: 1rem;
     }
 
-    &:focus {
+    &:focus,
+    &:hover {
         outline: none;
         border-color: map.get($colors, "purple");
     }

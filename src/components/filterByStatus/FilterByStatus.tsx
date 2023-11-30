@@ -52,6 +52,7 @@ export const FilterByStatus: FC<FilterByStatusProps> = ({
             <Card className={styles.card}>
               {checkBoxes.map((checkBox) => (
                 <Checkbox
+                  className={styles.checkbox}
                   key={checkBox.id}
                   label={checkBox.label}
                   onChange={(value) => {

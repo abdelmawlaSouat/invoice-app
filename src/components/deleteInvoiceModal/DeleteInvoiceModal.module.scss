@@ -8,6 +8,11 @@
 }
 
 .content {
+    max-width: 28rem;
+    max-height: 85vh;
+}
+
+.card {
     display: flex;
     flex-direction: column;
     gap: 1rem;

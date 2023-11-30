@@ -21,7 +21,7 @@ export const ConfirmFillDataModal = ({
       contentClassName={styles.modalContent}
       overlayClassName={styles.modalOverlay}
     >
-      <Card>
+      <Card className={styles.card}>
         <Typography className={styles.title} variant="headingL">
           Fill the {personType} info
         </Typography>
