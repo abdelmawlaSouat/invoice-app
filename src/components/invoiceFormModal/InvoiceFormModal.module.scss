@@ -11,27 +11,41 @@
 }
 
 .title {
+    margin: 0;
     padding: 2rem 1.5rem;
     border-bottom: 1px solid #efefef;
 }
 
 .content {
-    box-shadow: 8px;
-    position: fixed;
-    z-index: z("modal");
-    background: white;
-    border-radius: 8px;
-    top: 0;
-    left: 0;
-    right: 1rem;
-    bottom: 0;
-    animation: contentShow 0.2s;
-    overflow: scroll;
     display: flex;
     flex-direction: column;
+    z-index: z("modal");
+    background: white;
+    overflow: scroll;
+    box-shadow: 8px;
+    border-radius: 0.5rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+
+    @include breakpoint-max(map.get($breakpoints, "sm")) {
+        left: 0;
+        right: 1rem;
+        animation: contentShowOnMobile 0.2s;
+    }
 
     @include breakpoint-min(map.get($breakpoints, "sm")) {
-        width: fit-content;
+        right: 0;
+        width: 75vw;
+        animation: contentShowOnDesktop 0.2s;
+    }
+
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        width: 60vw;
+    }
+
+    @include breakpoint-min(map.get($breakpoints, "lg")) {
+        width: 45vw;
     }
 
     &:focus {
@@ -65,9 +79,19 @@
     }
 }
 
-@keyframes contentShow {
+@keyframes contentShowOnMobile {
     from {
         transform: translateX(-100vw);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes contentShowOnDesktop {
+    from {
+        transform: translateX(100vw);
     }
 
     to {
