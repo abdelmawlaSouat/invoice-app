@@ -21,7 +21,7 @@
 .addItemBtn {
     background-color: transparent;
     border: 1px solid map.get($colors, "purple");
-    border-radius: 8px;
+    border-radius: 0.5rem;
     padding: 1rem 1.125rem;
     color: map.get($colors, "purple");
     display: flex;
