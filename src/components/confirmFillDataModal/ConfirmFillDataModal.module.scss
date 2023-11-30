@@ -6,6 +6,17 @@
     z-index: 9;
 }
 
+.modalContent {
+    max-width: 42rem;
+    max-height: 85vh;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .description {
     font-size: 1rem;
 }

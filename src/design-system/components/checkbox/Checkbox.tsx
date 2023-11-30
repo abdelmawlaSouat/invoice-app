@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC } from "react";
+import { FC } from "react";
 import * as RadixCheckbox from "@radix-ui/react-checkbox";
 import styles from "./Checkbox.module.scss";
 import { Typography } from "../typography";
@@ -12,6 +12,7 @@ export type CheckboxProps = {
   onChange: (value: boolean) => void;
   checked: boolean;
   id?: string;
+  className?: string;
 };
 
 export const Checkbox: FC<CheckboxProps> = ({
@@ -19,8 +20,9 @@ export const Checkbox: FC<CheckboxProps> = ({
   label,
   onChange,
   checked,
+  className,
 }) => (
-  <div className={styles.wrapper}>
+  <div className={classNames(styles.wrapper, className)}>
     <RadixCheckbox.Root
       className={classNames(styles.root, { [styles.isChecked]: checked })}
       id={id}
