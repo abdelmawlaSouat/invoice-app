@@ -18,39 +18,37 @@ export const DesktopItemsCard = ({
   return (
     <Card className={styles.itemsCard}>
       <div className={styles.itemWrapper}>
-        <Typography className={styles.label} variant="headingS">
-          Name
+        <Typography className={styles.label} variant="label">
+          Description
         </Typography>
 
-        <Typography className={styles.label} variant="headingS">
+        <Typography className={styles.label} variant="label">
           QTY.
         </Typography>
 
-        <Typography className={styles.label} variant="headingS">
+        <Typography className={styles.label} variant="label">
           Price
         </Typography>
 
-        <Typography className={styles.label} variant="headingS">
+        <Typography className={styles.label} variant="label">
           Total
         </Typography>
       </div>
 
       {items.map((item) => (
         <div className={styles.itemWrapper} key={item.name}>
-          <Typography variant="headingS">{item.name}</Typography>
+          <Typography variant="body">{item.name}</Typography>
 
-          <Typography className={styles.quantity} variant="headingS">
-            {item.quantity}
-          </Typography>
+          <Typography variant="body">{item.quantity}</Typography>
 
-          <Typography className={styles.pricePerItem} variant="headingS">
+          <Typography variant="body">
             {item.price.toLocaleString("en-BE", {
               style: "currency",
               currency: "EUR",
             })}
           </Typography>
 
-          <Typography variant="headingS">
+          <Typography variant="body">
             {item.total.toLocaleString("en-BE", {
               style: "currency",
               currency: "EUR",

@@ -3,12 +3,11 @@
 @import "mixins";
 
 .itemsCard {
-    background-color: var(--itemsCardBackgroundColor);
     padding: 1.5rem 0 0 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .itemWrapper {
@@ -24,15 +23,6 @@
 
 .label {
     color: var(--textColorSecondary);
-    margin: 0.5rem 0;
-    font-size: 1.125rem;
-}
-
-.pricePerItem,
-.quantity {
-    color: var(--textColorSecondary);
-    margin: 0.5rem 0;
-    font-weight: bold;
 }
 
 .itemsFooter {

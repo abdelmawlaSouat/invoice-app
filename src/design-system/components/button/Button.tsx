@@ -11,7 +11,7 @@ type ButtonProps = {
 export const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
   return (
     <button className={classNames(styles.wrapper, className)} {...props}>
-      <Typography variant="headingS" tag="span">
+      <Typography variant="button" tag="span">
         {children}
       </Typography>
     </button>

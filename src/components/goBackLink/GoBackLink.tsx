@@ -8,7 +8,7 @@ export const GoBackLink = () => {
     <Link href="/" className={styles.wrapper}>
       <LeftArrow />
 
-      <Typography variant="headingS">Go back</Typography>
+      <Typography variant="headingS">Back to invoices</Typography>
     </Link>
   );
 };

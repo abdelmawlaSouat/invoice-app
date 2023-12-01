@@ -20,7 +20,7 @@ export const MobileItemsCard = ({
       {items.map((item) => (
         <div className={styles.itemWrapper} key={item.name}>
           <div>
-            <Typography variant="headingS">{item.name}</Typography>
+            <Typography variant="label">{item.name}</Typography>
 
             <Typography className={styles.quantity} variant="body">
               {`${item.quantity} x ${item.price.toLocaleString("en-BE", {
@@ -30,7 +30,7 @@ export const MobileItemsCard = ({
             </Typography>
           </div>
 
-          <Typography variant="headingS">
+          <Typography variant="label">
             {item.total.toLocaleString("en-BE", {
               style: "currency",
               currency: "EUR",
@@ -40,7 +40,7 @@ export const MobileItemsCard = ({
       ))}
 
       <div className={styles.itemsFooter}>
-        <Typography variant="headingS"> Total</Typography>
+        <Typography variant="headingM"> Total</Typography>
 
         <Typography variant="headingM">
           {total.toLocaleString("en-BE", {

@@ -4,21 +4,37 @@
 
 .ctasWrapper {
     display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    gap: 0.5rem;
+
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 1.5rem;
+    }
 }
 
-.editBtn {
-    background-color: var(--itemsCardBackgroundColor);
-    color: var(--textColorSecondary);
+.editBtn,
+.deleteBtn,
+.markAsPaidBtn {
+    span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
 }
 
+.editBtn,
 .deleteBtn {
-    background-color: map.get($colors, "red");
-    color: map.get($colors, "white");
+    border: 1px solid map.get($colors, "purple");
+    background-color: transparent;
+    color: map.get($colors, "purple");
 }
 
 .markAsPaidBtn {
+    border: 0;
     background-color: map.get($colors, "purple");
     color: map.get($colors, "white");
 }

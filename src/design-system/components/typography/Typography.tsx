@@ -4,7 +4,7 @@ import { ElementType, FC, HTMLAttributes } from "react";
 import styles from "./Typography.module.scss";
 
 export interface TypographyProps extends HTMLAttributes<HTMLElement> {
-  variant: "headingL" | "headingM" | "headingS" | "body";
+  variant: "headingL" | "headingM" | "headingS" | "body" | "button" | "label";
   tag?: ElementType;
   htmlFor?: string;
 }
