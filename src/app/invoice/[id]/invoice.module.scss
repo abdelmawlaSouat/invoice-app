@@ -8,7 +8,7 @@
     transition: background-color 0.2s;
     color: var(--textColor);
 
-    @include breakpoint-min(map.get($breakpoints, "lg")) {
+    @include breakpoint-min(map.get($breakpoints, "md")) {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -21,50 +21,103 @@
     gap: 2rem;
     padding: 2rem 1.5rem;
 
-    @include breakpoint-min(map.get($breakpoints, "lg")) {
+    @include breakpoint-min(map.get($breakpoints, "md")) {
         width: 45.625rem;
         margin-left: 6.25rem;
     }
 }
 
-.ctaGroupOnDesktop {
-    @include breakpoint-max(map.get($breakpoints, "md")) {
-        display: none;
-    }
-}
+.ctaGroup {
+    display: flex;
+    flex-direction: column;
 
-.statusAndCtasWrapper {
     @include breakpoint-min(map.get($breakpoints, "md")) {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: row;
     }
 }
 
-.statusWrapper {
+.generalDetail {
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint-min(map.get($breakpoints, "md")) {
+        gap: 1.5rem;
+    }
+}
+
+.invoiceID {
+    color: map.get($colors, "purple");
+}
+
+.header {
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
 
-    @include breakpoint-min(map.get($breakpoints, "md")) {
-        justify-content: initial;
-        gap: 1.25rem;
+.generalDetailItemsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.generalDetailItemWrapper {
+    .icon {
+        width: 1.5rem;
+        height: 1.5rem;
     }
 }
 
-.hashtag {
-    color: var(--textColorSecondary);
-}
+.propertyLabel {
+    font-weight: 600;
+    display: flex;
+    gap: 0.5rem;
 
-.CtaGroup {
-    @include breakpoint-min(map.get($breakpoints, "md")) {
-        display: flex;
-        gap: 0.5rem;
+    > span {
+        margin-top: 3px;
     }
 }
 
-.secondaryText {
-    color: var(--textColorSecondary);
-    margin: 0;
-    line-height: 1.125rem;
+.companyAndClientWrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @include breakpoint-min(map.get($breakpoints, "sm")) {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+}
+
+.personCard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.personCardContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.personDetailItemWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.addressWrapper {
+    display: flex;
+    gap: 1rem;
+
+    > div {
+        margin-top: -0.2rem;
+    }
 }

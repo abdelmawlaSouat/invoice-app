@@ -4,7 +4,7 @@ import styles from "./invoice.module.scss";
 import {
   CallToActionGroup,
   GoBackLink,
-  InvoiceDetailCard,
+  ItemsListCard,
   StatusTag,
 } from "@/components";
 import { Card, Toast, Typography } from "@/design-system/components";
@@ -14,6 +14,15 @@ import { useRouter } from "next/navigation";
 import { useToast, useWindowSize } from "@/design-system/hooks";
 import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 import dynamic from "next/dynamic";
+import classNames from "classnames";
+import {
+  CalendarIcon,
+  FileIcon,
+  BackpackIcon,
+  EnvelopeClosedIcon,
+  HomeIcon,
+  PersonIcon,
+} from "@radix-ui/react-icons";
 
 const InvoiceFormModal = dynamic(() =>
   import("@/components").then((mod) => mod.InvoiceFormModal)
@@ -136,6 +145,20 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
     }
   };
 
+  const dueDate = invoice.paymentDue
+    ? new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    : null;
+
+  const totalPrice = Intl.NumberFormat("en-BE", {
+    style: "currency",
+    currency: "EUR",
+  }).format(invoice.total);
+
   return (
     <main className={styles.wrapper}>
       <div className={styles.content}>
@@ -149,31 +172,132 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
           onClose={hideToast}
         />
 
-        <Card className={styles.statusAndCtasWrapper}>
-          <div className={styles.statusWrapper}>
-            <Typography
-              className={styles.secondaryText}
-              variant="body"
-              tag="span"
-            >
-              Status
-            </Typography>
+        <Card className={styles.generalDetail}>
+          <div className={styles.header}>
+            <div>
+              <Typography variant="headingM" tag="span">
+                Invoice
+                <span className={styles.invoiceID}>{` #${invoice.id} `}</span>
+              </Typography>
+              for
+              <Typography variant="headingM" tag="span">
+                {` ${totalPrice}`}
+              </Typography>
+            </div>
 
             <StatusTag status={status as InvoiceStatus} />
           </div>
 
-          <div className={styles.ctaGroupOnDesktop}>
+          <div className={styles.generalDetailItemsWrapper}>
+            {invoice.description && (
+              <div className={styles.generalDetailItemWrapper}>
+                <div className={classNames(styles.propertyLabel)}>
+                  <FileIcon className={styles.icon} />
+
+                  <Typography variant="body" tag="span">
+                    {invoice.description}
+                  </Typography>
+                </div>
+              </div>
+            )}
+
+            <div className={styles.generalDetailItemWrapper}>
+              <div className={classNames(styles.propertyLabel)}>
+                <CalendarIcon className={styles.icon} />
+
+                <Typography variant="body" tag="span">
+                  {dueDate}
+                </Typography>
+              </div>
+            </div>
+          </div>
+
+          {width >= BREAKPOINTS.md && (
             <CallToActionGroup
               status={invoice.status as InvoiceStatus}
-              className={styles.CtaGroup}
+              className={styles.ctaGroup}
               onEdit={handleonEdit}
               onDelete={toggleDeleteModal}
               onMarkAsPaid={handleonMarkAsPaid}
             />
-          </div>
+          )}
         </Card>
 
-        <InvoiceDetailCard invoice={invoice} />
+        <div className={styles.companyAndClientWrapper}>
+          <Card className={styles.personCard}>
+            <Typography variant="headingS">Company Details</Typography>
+
+            <div className={styles.personCardContent}>
+              <div className={styles.personDetailItemWrapper}>
+                <BackpackIcon className={styles.icon} />
+
+                <Typography variant="body" tag="span">
+                  {invoice.company.name}
+                </Typography>
+              </div>
+
+              <div className={styles.personDetailItemWrapper}>
+                <EnvelopeClosedIcon className={styles.icon} />
+
+                <Typography variant="body" tag="span">
+                  {invoice.company.email}
+                </Typography>
+              </div>
+
+              <div className={styles.addressWrapper}>
+                <HomeIcon className={styles.icon} />
+
+                <div>
+                  <Typography variant="body">
+                    {invoice.company.address.street}
+                  </Typography>
+
+                  <Typography variant="body">
+                    {`${invoice.company.address.postCode} ${invoice.company.address.city}, ${invoice.company.address.country}`}
+                  </Typography>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <Card className={styles.personCard}>
+            <Typography variant="headingS">Customer Details</Typography>
+
+            <div className={styles.personCardContent}>
+              <div className={styles.personDetailItemWrapper}>
+                <PersonIcon className={styles.icon} />
+
+                <Typography variant="body" tag="span">
+                  {invoice.client.name}
+                </Typography>
+              </div>
+
+              <div className={styles.personDetailItemWrapper}>
+                <EnvelopeClosedIcon className={styles.icon} />
+
+                <Typography variant="body" tag="span">
+                  {invoice.client.email}
+                </Typography>
+              </div>
+
+              <div className={styles.addressWrapper}>
+                <HomeIcon className={styles.icon} />
+
+                <div>
+                  <Typography variant="body">
+                    {invoice.client.address.street}
+                  </Typography>
+
+                  <Typography variant="body">
+                    {`${invoice.client.address.postCode} ${invoice.client.address.city}, ${invoice.company.address.country}`}
+                  </Typography>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        <ItemsListCard invoice={invoice} />
       </div>
 
       {width < BREAKPOINTS.md && (
@@ -199,8 +323,8 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
       <InvoiceFormModal
         title={
           <>
-            Edit invoice<span className={styles.hashtag}> #</span>
-            {invoice.id}
+            Edit Invoice
+            <span className={styles.invoiceID}>{` #${invoice.id} `}</span>
           </>
         }
         open={isEditInvoiceModalOpened}

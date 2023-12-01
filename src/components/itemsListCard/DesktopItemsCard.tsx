@@ -18,39 +18,39 @@ export const DesktopItemsCard = ({
   return (
     <Card className={styles.itemsCard}>
       <div className={styles.itemWrapper}>
-        <Typography className={styles.label} variant="headingS">
+        <Typography className={styles.label} variant="label">
           Name
         </Typography>
 
-        <Typography className={styles.label} variant="headingS">
+        <Typography className={styles.label} variant="label">
           QTY.
         </Typography>
 
-        <Typography className={styles.label} variant="headingS">
+        <Typography className={styles.label} variant="label">
           Price
         </Typography>
 
-        <Typography className={styles.label} variant="headingS">
+        <Typography className={styles.label} variant="label">
           Total
         </Typography>
       </div>
 
       {items.map((item) => (
         <div className={styles.itemWrapper} key={item.name}>
-          <Typography variant="headingS">{item.name}</Typography>
+          <Typography variant="label">{item.name}</Typography>
 
-          <Typography className={styles.quantity} variant="headingS">
+          <Typography className={styles.quantity} variant="label">
             {item.quantity}
           </Typography>
 
-          <Typography className={styles.pricePerItem} variant="headingS">
+          <Typography className={styles.pricePerItem} variant="label">
             {item.price.toLocaleString("en-BE", {
               style: "currency",
               currency: "EUR",
             })}
           </Typography>
 
-          <Typography variant="headingS">
+          <Typography variant="label">
             {item.total.toLocaleString("en-BE", {
               style: "currency",
               currency: "EUR",
@@ -60,7 +60,7 @@ export const DesktopItemsCard = ({
       ))}
 
       <div className={styles.itemsFooter}>
-        <Typography variant="headingS"> Amount Due</Typography>
+        <Typography variant="label"> Amount Due</Typography>
 
         <Typography variant="headingM">
           {total.toLocaleString("en-BE", {

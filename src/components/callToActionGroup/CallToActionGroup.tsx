@@ -2,6 +2,9 @@ import { Button } from "@/design-system/components";
 import { InvoiceStatus } from "@/types";
 import classNames from "classnames";
 import styles from "./CallToActionGroup.module.scss";
+import { TrashIcon, CheckIcon, Pencil1Icon } from "@radix-ui/react-icons";
+import { useWindowSize } from "@/design-system/hooks";
+import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 
 export type CallToActionGroupProps = {
   className?: string;
@@ -17,20 +20,45 @@ export const CallToActionGroup = ({
   onEdit,
   onDelete,
   onMarkAsPaid,
-}: CallToActionGroupProps) => (
-  <div className={classNames(styles.ctasWrapper, className)}>
-    <Button className={styles.editBtn} onClick={onEdit}>
-      Edit
-    </Button>
+}: CallToActionGroupProps) => {
+  const { width } = useWindowSize();
 
-    <Button className={styles.deleteBtn} onClick={onDelete}>
-      Delete
-    </Button>
+  return (
+    <div className={classNames(styles.ctasWrapper, className)}>
+      {status === "PENDING" && (
+        <Button className={styles.markAsPaidBtn} onClick={onMarkAsPaid}>
+          {width >= BREAKPOINTS.md ? (
+            <>
+              <CheckIcon />
+              Mark invoice as Paid
+            </>
+          ) : (
+            "Mark as Paid"
+          )}
+        </Button>
+      )}
 
-    {status === "PENDING" && (
-      <Button className={styles.markAsPaidBtn} onClick={onMarkAsPaid}>
-        Mark as Paid
+      <Button className={styles.editBtn} onClick={onEdit}>
+        {width >= BREAKPOINTS.md ? (
+          <>
+            <Pencil1Icon />
+            Edit
+          </>
+        ) : (
+          "Edit"
+        )}
       </Button>
-    )}
-  </div>
-);
+
+      <Button className={styles.deleteBtn} onClick={onDelete}>
+        {width >= BREAKPOINTS.md ? (
+          <>
+            <TrashIcon />
+            Delete
+          </>
+        ) : (
+          "Delete"
+        )}
+      </Button>
+    </div>
+  );
+};

@@ -22,7 +22,7 @@ export const StatusTag: FC<StatusTagProps> = ({ status }) => {
     >
       <Oval color={statusColors[status]} />
 
-      <Typography variant="headingS" tag="span">
+      <Typography variant="label" tag="span">
         {status}
       </Typography>
     </div>
