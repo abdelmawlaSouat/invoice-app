@@ -50,10 +50,19 @@
 }
 
 .header {
-    font-size: 20px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+
+    @include breakpoint-max(map.get($breakpoints, "sm")) {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    @include breakpoint-min(map.get($breakpoints, "sm")) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 .generalDetailItemsWrapper {
@@ -64,13 +73,12 @@
 
 .generalDetailItemWrapper {
     .icon {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1.25rem;
+        height: 1.25rem;
     }
 }
 
 .propertyLabel {
-    font-weight: 600;
     display: flex;
     gap: 0.5rem;
 

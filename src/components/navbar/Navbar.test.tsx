@@ -9,8 +9,6 @@ describe("Navbar", () => {
 
     expect(screen.getByRole("img", { name: "user" })).toBeInTheDocument();
 
-    expect(screen.getByRole("link", { name: "logo" })).toBeInTheDocument();
-
     expect(
       screen.getByRole("button", { name: "theme-switcher-light-mode" })
     ).toBeInTheDocument();

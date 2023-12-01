@@ -17,7 +17,7 @@ import dynamic from "next/dynamic";
 import classNames from "classnames";
 import {
   CalendarIcon,
-  FileIcon,
+  RocketIcon,
   BackpackIcon,
   EnvelopeClosedIcon,
   HomeIcon,
@@ -147,7 +147,6 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
 
   const dueDate = invoice.paymentDue
     ? new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
-        weekday: "long",
         year: "numeric",
         month: "short",
         day: "numeric",
@@ -192,7 +191,7 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
             {invoice.description && (
               <div className={styles.generalDetailItemWrapper}>
                 <div className={classNames(styles.propertyLabel)}>
-                  <FileIcon className={styles.icon} />
+                  <RocketIcon className={styles.icon} />
 
                   <Typography variant="body" tag="span">
                     {invoice.description}
@@ -206,7 +205,7 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
                 <CalendarIcon className={styles.icon} />
 
                 <Typography variant="body" tag="span">
-                  {dueDate}
+                  {`Due date: ${dueDate}`}
                 </Typography>
               </div>
             </div>
