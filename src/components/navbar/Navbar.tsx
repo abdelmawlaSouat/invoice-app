@@ -1,9 +1,7 @@
-import { Logo } from "@/design-system/icons";
 import userIcon from "./user.png";
 import Image from "next/image";
 import styles from "./Navbar.module.scss";
 import { ThemeSwitcher } from "../themeSwitcher";
-import Link from "next/link";
 import classNames from "classnames";
 import { FC } from "react";
 
@@ -14,10 +12,6 @@ type NavbarProps = {
 export const Navbar: FC<NavbarProps> = ({ className }) => {
   return (
     <nav className={classNames(styles.wrapper, className)}>
-      <Link href="/">
-        <Logo className={styles.logo} />
-      </Link>
-
       <div className={styles.contentWrapper}>
         <ThemeSwitcher />
 

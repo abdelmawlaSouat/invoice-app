@@ -12,7 +12,7 @@ export const ItemsListCard = ({ invoice }: ItemsListCardProps) => {
   const { width } = useWindowSize();
 
   const ItemsCard =
-    width >= BREAKPOINTS.md ? DesktopItemsCard : MobileItemsCard;
+    width >= BREAKPOINTS.sm ? DesktopItemsCard : MobileItemsCard;
 
   return <ItemsCard items={invoice.products} total={invoice.total} />;
 };

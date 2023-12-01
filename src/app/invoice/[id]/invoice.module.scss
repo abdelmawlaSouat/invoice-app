@@ -21,7 +21,7 @@
     gap: 2rem;
     padding: 2rem 1.5rem;
 
-    @include breakpoint-min(map.get($breakpoints, "md")) {
+    @include breakpoint-min(map.get($breakpoints, "xl")) {
         width: 45.625rem;
         margin-left: 6.25rem;
     }

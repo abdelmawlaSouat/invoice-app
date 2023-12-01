@@ -19,7 +19,7 @@ export const DesktopItemsCard = ({
     <Card className={styles.itemsCard}>
       <div className={styles.itemWrapper}>
         <Typography className={styles.label} variant="label">
-          Name
+          Description
         </Typography>
 
         <Typography className={styles.label} variant="label">
@@ -37,20 +37,18 @@ export const DesktopItemsCard = ({
 
       {items.map((item) => (
         <div className={styles.itemWrapper} key={item.name}>
-          <Typography variant="label">{item.name}</Typography>
+          <Typography variant="body">{item.name}</Typography>
 
-          <Typography className={styles.quantity} variant="label">
-            {item.quantity}
-          </Typography>
+          <Typography variant="body">{item.quantity}</Typography>
 
-          <Typography className={styles.pricePerItem} variant="label">
+          <Typography variant="body">
             {item.price.toLocaleString("en-BE", {
               style: "currency",
               currency: "EUR",
             })}
           </Typography>
 
-          <Typography variant="label">
+          <Typography variant="body">
             {item.total.toLocaleString("en-BE", {
               style: "currency",
               currency: "EUR",
@@ -60,7 +58,7 @@ export const DesktopItemsCard = ({
       ))}
 
       <div className={styles.itemsFooter}>
-        <Typography variant="label"> Amount Due</Typography>
+        <Typography variant="headingS"> Amount Due</Typography>
 
         <Typography variant="headingM">
           {total.toLocaleString("en-BE", {
