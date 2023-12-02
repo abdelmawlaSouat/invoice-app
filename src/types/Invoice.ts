@@ -7,11 +7,9 @@ export type Invoice = {
   paymentTerms: string;
   paymentDue: Date;
   status: string;
-  description: string;
+  description: string | null;
   total: number;
   products: Product[];
   client: Person;
-  clientId: string;
   company: Person;
-  companyId: string;
 };

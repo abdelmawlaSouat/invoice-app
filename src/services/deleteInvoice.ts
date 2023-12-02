@@ -1,5 +1,6 @@
-import { ResponseStatus } from "@/types";
-import { PrismaClient, Invoice } from "@prisma/client";
+import { invoiceDataToSelectFromPrisma } from "@/constants/invoiceDataToSelectFromPrisma";
+import { ResponseStatus, Invoice } from "@/types";
+import { PrismaClient } from "@prisma/client";
 
 type DeleteInvoiceResponse = {
   invoice: Invoice;
@@ -15,25 +16,9 @@ export const deleteInvoice = async (
     const prisma = new PrismaClient();
 
     invoice = await prisma.invoice.update({
-      where: {
-        id,
-      },
-      data: {
-        status: "DELETED",
-      },
-      include: {
-        products: true,
-        company: {
-          include: {
-            address: true,
-          },
-        },
-        client: {
-          include: {
-            address: true,
-          },
-        },
-      },
+      where: { id },
+      data: { status: "DELETED" },
+      select: invoiceDataToSelectFromPrisma,
     });
 
     return { status: "OK", invoice };

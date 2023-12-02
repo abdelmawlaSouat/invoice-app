@@ -1,5 +1,6 @@
-import { ResponseStatus } from "@/types";
-import { PrismaClient, Invoice, InvoiceStatus } from "@prisma/client";
+import { invoiceDataToSelectFromPrisma } from "@/constants/invoiceDataToSelectFromPrisma";
+import { ResponseStatus, Invoice, InvoiceStatus } from "@/types";
+import { PrismaClient } from "@prisma/client";
 
 type UpdateStatusResponse = {
   invoice: Invoice;
@@ -16,25 +17,9 @@ export const updateStatus = async (
     const prisma = new PrismaClient();
 
     invoice = await prisma.invoice.update({
-      where: {
-        id,
-      },
-      data: {
-        status: newStatus,
-      },
-      include: {
-        products: true,
-        company: {
-          include: {
-            address: true,
-          },
-        },
-        client: {
-          include: {
-            address: true,
-          },
-        },
-      },
+      where: { id },
+      data: { status: newStatus },
+      select: invoiceDataToSelectFromPrisma,
     });
 
     return { status: "OK", invoice };

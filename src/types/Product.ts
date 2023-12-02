@@ -4,5 +4,4 @@ export type Product = {
   quantity: number;
   price: number;
   total: number;
-  invoiceId: number;
 };

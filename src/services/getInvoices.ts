@@ -11,6 +11,9 @@ export const getInvoices = async (): Promise<GetInvoicesResponse> => {
     const prisma = new PrismaClient();
 
     const invoices = await prisma.invoice.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
       where: {
         status: {
           not: "DELETED",

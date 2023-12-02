@@ -5,5 +5,4 @@ export type Person = {
   name: string;
   email: string;
   address: Address;
-  addressId: string;
 };
