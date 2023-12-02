@@ -39,16 +39,21 @@ type InvoiceDetailProps = {
 export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
   const [isDeleteInvoiceModalOpened, setIsDeleteInvoiceModalOpened] =
     useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isEditInvoiceModalOpened, setIsEditInvoiceModalOpened] =
     useState(false);
 
   const [status, setStatus] = useState(invoice.status);
+  const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
+
   const { push } = useRouter();
   const { toast, showToast, hideToast } = useToast();
   const { width } = useWindowSize();
 
   const handleonMarkAsPaid = async () => {
     try {
+      setIsUpdatingStatus(true);
+
       const res = await fetch(`/api/update-status`, {
         method: "POST",
         body: JSON.stringify({
@@ -73,11 +78,15 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
         message:
           "Something went wrong while updating the invoice. Please try again.",
       });
+    } finally {
+      setIsUpdatingStatus(false);
     }
   };
 
   const handleOnDelete = async () => {
     try {
+      setIsDeleting(true);
+
       const res = await fetch(`/api/delete-invoice`, {
         method: "POST",
         body: JSON.stringify({ id: invoice.id }),
@@ -102,6 +111,8 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
         message:
           "Something went wrong while deleting the invoice. Please try again.",
       });
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -218,6 +229,7 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
               onEdit={handleonEdit}
               onDelete={toggleDeleteModal}
               onMarkAsPaid={handleonMarkAsPaid}
+              isUpdatingStatus={isUpdatingStatus}
             />
           )}
         </Card>
@@ -306,6 +318,7 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
             onEdit={handleonEdit}
             onDelete={toggleDeleteModal}
             onMarkAsPaid={handleonMarkAsPaid}
+            isUpdatingStatus={isUpdatingStatus}
           />
         </Card>
       )}
@@ -314,6 +327,7 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
 
       <DeleteInvoiceModal
         onDelete={handleOnDelete}
+        isDeleting={isDeleting}
         onClose={toggleDeleteModal}
         isOpen={isDeleteInvoiceModalOpened}
         invoiceID={invoice.id}
