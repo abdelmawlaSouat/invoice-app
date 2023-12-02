@@ -6,12 +6,14 @@ type DeleteInvoiceModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onDelete: () => void;
+  isDeleting: boolean;
 };
 
 export const DeleteInvoiceModal = ({
   invoiceID,
   isOpen,
   onDelete,
+  isDeleting,
   onClose,
 }: DeleteInvoiceModalProps) => {
   return (
@@ -29,7 +31,11 @@ export const DeleteInvoiceModal = ({
         <div className={styles.footer}>
           <Button onClick={onClose}>Cancel</Button>
 
-          <Button className={styles.deleteBtn} onClick={onDelete}>
+          <Button
+            className={styles.deleteBtn}
+            isLoading={isDeleting}
+            onClick={onDelete}
+          >
             Delete
           </Button>
         </div>

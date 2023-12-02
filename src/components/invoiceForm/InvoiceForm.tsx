@@ -250,7 +250,11 @@ export const InvoiceForm = ({
         <div className={styles.ctasWrapper}>
           <Button onClick={onClose}>Cancel</Button>
 
-          <Button className={styles.submitBtn} type="submit">
+          <Button
+            isLoading={formState.isSubmitting}
+            className={styles.submitBtn}
+            type="submit"
+          >
             Save changes
           </Button>
         </div>

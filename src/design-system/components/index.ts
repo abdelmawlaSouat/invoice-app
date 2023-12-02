@@ -6,3 +6,4 @@ export * from "./modal";
 export * from "./textField";
 export * from "./datePicker";
 export * from "./toast";
+export * from "./spinner";

@@ -12,6 +12,7 @@ export type CallToActionGroupProps = {
   onEdit: () => void;
   onDelete: () => void;
   onMarkAsPaid: () => void;
+  isUpdatingStatus: boolean;
 };
 
 export const CallToActionGroup = ({
@@ -20,13 +21,18 @@ export const CallToActionGroup = ({
   onEdit,
   onDelete,
   onMarkAsPaid,
+  isUpdatingStatus,
 }: CallToActionGroupProps) => {
   const { width } = useWindowSize();
 
   return (
     <div className={classNames(styles.ctasWrapper, className)}>
       {status === "PENDING" && (
-        <Button className={styles.markAsPaidBtn} onClick={onMarkAsPaid}>
+        <Button
+          className={styles.markAsPaidBtn}
+          isLoading={isUpdatingStatus}
+          onClick={onMarkAsPaid}
+        >
           {width >= BREAKPOINTS.md ? (
             <>
               <CheckIcon />
