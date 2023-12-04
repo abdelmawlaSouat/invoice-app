@@ -15,14 +15,19 @@ export const ProductInputGroup = ({
   const { register, getValues, setValue } = useFormContext();
 
   const updateTotal = () => {
-    const { quantity, price } = getValues(fieldName);
+    const {
+      quantity,
+      price,
+      total: oldTotalProductPrice,
+    } = getValues(fieldName);
     const { total } = getValues();
 
-    const totalProductPrice = price * quantity;
-    const totalInvoicePrice = total + totalProductPrice;
+    const newTotalProductPrice = price * quantity;
+    const totalInvoicePrice =
+      total - oldTotalProductPrice + newTotalProductPrice;
 
-    setValue(`${fieldName}.total`, parseFloat(totalProductPrice.toFixed(2)));
-    setValue("total", parseFloat(totalInvoicePrice.toFixed(2)));
+    setValue(`${fieldName}.total`, Number(newTotalProductPrice.toFixed(2)));
+    setValue("total", Number(totalInvoicePrice.toFixed(2)));
   };
 
   return (
@@ -34,6 +39,7 @@ export const ProductInputGroup = ({
           type="number"
           className={styles.quantityInput}
           label="Qty."
+          min={0}
           {...register(`${fieldName}.quantity`, {
             onChange: updateTotal,
             valueAsNumber: true,
@@ -44,6 +50,7 @@ export const ProductInputGroup = ({
           type="number"
           className={styles.priceInput}
           step="0.01"
+          min={0}
           label="Price"
           {...register(`${fieldName}.price`, {
             onChange: updateTotal,
@@ -55,6 +62,7 @@ export const ProductInputGroup = ({
           type="number"
           className={styles.totalInput}
           step="0.01"
+          min={0}
           label="Total"
           disabled
           {...register(`${fieldName}.total`, {
