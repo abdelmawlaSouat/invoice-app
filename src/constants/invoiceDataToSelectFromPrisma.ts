@@ -20,6 +20,7 @@ export const invoiceDataToSelectFromPrisma = {
       id: true,
       name: true,
       email: true,
+      addressId: true,
       address: {
         select: {
           id: true,
@@ -36,6 +37,7 @@ export const invoiceDataToSelectFromPrisma = {
       id: true,
       name: true,
       email: true,
+      addressId: true,
       address: {
         select: {
           id: true,
@@ -47,4 +49,6 @@ export const invoiceDataToSelectFromPrisma = {
       },
     },
   },
+  clientId: true,
+  companyId: true,
 };

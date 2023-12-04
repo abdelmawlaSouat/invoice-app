@@ -22,7 +22,10 @@ export const ProductInputGroup = ({
     } = getValues(fieldName);
     const { total } = getValues();
 
-    const newTotalProductPrice = price * quantity;
+    const productCount = quantity || 0; // if quantity is NaN, set it to 0
+    const priceperItem = price || 0; // if price is NaN, set it to 0
+
+    const newTotalProductPrice = productCount * priceperItem;
     const totalInvoicePrice =
       total - oldTotalProductPrice + newTotalProductPrice;
 

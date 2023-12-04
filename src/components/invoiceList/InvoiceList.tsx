@@ -22,7 +22,9 @@ type InvoiceListProps = {
   invoices: Invoice[];
 };
 
-export const InvoiceList = ({ invoices }: InvoiceListProps) => {
+export const InvoiceList = ({ invoices: data }: InvoiceListProps) => {
+  const [invoices, setInvoices] = useState(data);
+
   const [activeFilters, setActiveFilters] = useState(defaultFilters);
   const { toast, showToast, hideToast } = useToast();
   const { width } = useWindowSize();
@@ -66,7 +68,7 @@ export const InvoiceList = ({ invoices }: InvoiceListProps) => {
         body: JSON.stringify(data),
       });
 
-      const { status } = await res.json();
+      const { status, invoice } = await res.json();
 
       if (status === "OK") {
         showToast("success", {
@@ -74,6 +76,7 @@ export const InvoiceList = ({ invoices }: InvoiceListProps) => {
           message: "The invoice was successfully created.",
         });
 
+        setInvoices([invoice, ...invoices]);
         setIsCreateInvoiceModalOpened(false);
       }
     } catch (error) {

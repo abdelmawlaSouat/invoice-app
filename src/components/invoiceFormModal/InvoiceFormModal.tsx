@@ -14,6 +14,7 @@ export type ModalProps = {
   open: boolean;
   onClose: () => void;
   invoice?: Invoice;
+  handleInvoice?: (invoice: Invoice) => void;
   onSubmit: SubmitHandler<FieldValues>;
 };
 
@@ -22,6 +23,7 @@ export const InvoiceFormModal = ({
   onClose,
   title,
   invoice,
+  handleInvoice,
   onSubmit,
 }: ModalProps) => {
   return (
@@ -33,6 +35,7 @@ export const InvoiceFormModal = ({
 
           <InvoiceForm
             invoice={invoice}
+            handleInvoice={handleInvoice}
             onClose={onClose}
             onSubmit={onSubmit}
           />

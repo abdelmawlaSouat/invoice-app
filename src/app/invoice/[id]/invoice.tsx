@@ -36,19 +36,19 @@ type InvoiceDetailProps = {
   invoice: Invoice;
 };
 
-export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
+export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
+  const [invoice, setInvoice] = useState(data);
   const [isDeleteInvoiceModalOpened, setIsDeleteInvoiceModalOpened] =
     useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditInvoiceModalOpened, setIsEditInvoiceModalOpened] =
     useState(false);
 
-  const [status, setStatus] = useState(invoice.status);
   const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
 
-  const { push } = useRouter();
   const { toast, showToast, hideToast } = useToast();
   const { width } = useWindowSize();
+  const router = useRouter();
 
   const handleonMarkAsPaid = async () => {
     try {
@@ -70,7 +70,9 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
           message: "The invoice was successfully marked as paid.",
         });
 
-        setStatus(updatedInvoice.status || invoice.status);
+        setInvoice(updatedInvoice);
+        router.refresh();
+        router.prefetch("/");
       }
     } catch (error) {
       showToast("error", {
@@ -101,8 +103,11 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
             "The invoice was successfully removed. You will now be redirected to the invoice list page in a few seconds...",
         });
 
+        router.prefetch("/");
+        router.refresh();
+
         setTimeout(() => {
-          push("/");
+          router.push("/");
         }, 4000);
       }
     } catch (error) {
@@ -123,12 +128,12 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
   const toggleDeleteModal = () =>
     setIsDeleteInvoiceModalOpened(!isDeleteInvoiceModalOpened);
 
-  const handleOnSubmit = async (data: any) => {
+  const handleOnSubmit = async (fields: any) => {
     try {
       const res = await fetch(`/api/update-invoice`, {
         method: "POST",
         body: JSON.stringify({
-          ...data,
+          ...fields,
           id: invoice.id,
           clientId: invoice.clientId,
           clientAddressID: invoice.client.addressId,
@@ -137,7 +142,7 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
         }),
       });
 
-      const { status } = await res.json();
+      const { status, invoice: data } = await res.json();
 
       if (status === "OK") {
         showToast("success", {
@@ -145,6 +150,9 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
           message: "The invoice was successfully updated.",
         });
 
+        router.prefetch("/");
+        router.refresh();
+        setInvoice(data);
         setIsEditInvoiceModalOpened(false);
       }
     } catch (error) {
@@ -195,7 +203,7 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
               </Typography>
             </div>
 
-            <StatusTag status={status as InvoiceStatus} />
+            <StatusTag status={invoice.status as InvoiceStatus} />
           </div>
 
           <div className={styles.generalDetailItemsWrapper}>
@@ -314,7 +322,7 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
       {width < BREAKPOINTS.md && (
         <Card>
           <CallToActionGroup
-            status={status as InvoiceStatus}
+            status={invoice.status as InvoiceStatus}
             onEdit={handleonEdit}
             onDelete={toggleDeleteModal}
             onMarkAsPaid={handleonMarkAsPaid}
@@ -341,6 +349,7 @@ export default function InvoiceDetail({ invoice }: InvoiceDetailProps) {
           </>
         }
         open={isEditInvoiceModalOpened}
+        handleInvoice={setInvoice}
         onClose={handleonEdit}
         invoice={invoice}
         onSubmit={handleOnSubmit}

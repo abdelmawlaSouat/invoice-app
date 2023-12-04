@@ -3,7 +3,7 @@ import { Product } from "./Product";
 
 export type Invoice = {
   id: number;
-  createdAt: Date;
+  createdAt: Date | string;
   paymentTerms: string;
   paymentDue: Date;
   status: string;
@@ -11,5 +11,7 @@ export type Invoice = {
   total: number;
   products: Product[];
   client: Person;
+  clientId?: string;
   company: Person;
+  companyId?: string;
 };
