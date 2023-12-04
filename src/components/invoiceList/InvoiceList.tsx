@@ -11,6 +11,7 @@ import { FilterByStatus } from "../filterByStatus";
 import { InvoiceOverviewCard } from "../invoiceOverviewCard";
 import { EmptyListMessage } from "../emptyListMessage";
 import { InvoiceFormModal } from "../invoiceFormModal";
+import { FieldValues } from "react-hook-form";
 
 const defaultFilters = {
   PAID: false,
@@ -61,7 +62,7 @@ export const InvoiceList = ({ invoices: data }: InvoiceListProps) => {
     setIsCreateInvoiceModalOpened(!isCreateInvoiceModalOpened);
   };
 
-  const handleOnSubmit = async (data: any) => {
+  const handleOnSubmit = async (data: FieldValues) => {
     try {
       const res = await fetch(`/api/create-invoice`, {
         method: "POST",

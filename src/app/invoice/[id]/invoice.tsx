@@ -23,6 +23,7 @@ import {
   HomeIcon,
   PersonIcon,
 } from "@radix-ui/react-icons";
+import { FieldValues } from "react-hook-form";
 
 const InvoiceFormModal = dynamic(() =>
   import("@/components").then((mod) => mod.InvoiceFormModal)
@@ -128,7 +129,7 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
   const toggleDeleteModal = () =>
     setIsDeleteInvoiceModalOpened(!isDeleteInvoiceModalOpened);
 
-  const handleOnSubmit = async (fields: any) => {
+  const handleOnSubmit = async (fields: FieldValues) => {
     try {
       const res = await fetch(`/api/update-invoice`, {
         method: "POST",
