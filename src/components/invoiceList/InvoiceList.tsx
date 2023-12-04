@@ -11,6 +11,7 @@ import { FilterByStatus } from "../filterByStatus";
 import { InvoiceOverviewCard } from "../invoiceOverviewCard";
 import { EmptyListMessage } from "../emptyListMessage";
 import { InvoiceFormModal } from "../invoiceFormModal";
+import { FieldValues } from "react-hook-form";
 
 const defaultFilters = {
   PAID: false,
@@ -22,7 +23,9 @@ type InvoiceListProps = {
   invoices: Invoice[];
 };
 
-export const InvoiceList = ({ invoices }: InvoiceListProps) => {
+export const InvoiceList = ({ invoices: data }: InvoiceListProps) => {
+  const [invoices, setInvoices] = useState(data);
+
   const [activeFilters, setActiveFilters] = useState(defaultFilters);
   const { toast, showToast, hideToast } = useToast();
   const { width } = useWindowSize();
@@ -59,14 +62,14 @@ export const InvoiceList = ({ invoices }: InvoiceListProps) => {
     setIsCreateInvoiceModalOpened(!isCreateInvoiceModalOpened);
   };
 
-  const handleOnSubmit = async (data: any) => {
+  const handleOnSubmit = async (data: FieldValues) => {
     try {
       const res = await fetch(`/api/create-invoice`, {
         method: "POST",
         body: JSON.stringify(data),
       });
 
-      const { status } = await res.json();
+      const { status, invoice } = await res.json();
 
       if (status === "OK") {
         showToast("success", {
@@ -74,6 +77,7 @@ export const InvoiceList = ({ invoices }: InvoiceListProps) => {
           message: "The invoice was successfully created.",
         });
 
+        setInvoices([invoice, ...invoices]);
         setIsCreateInvoiceModalOpened(false);
       }
     } catch (error) {

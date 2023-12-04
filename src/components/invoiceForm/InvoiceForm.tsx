@@ -23,12 +23,14 @@ import { ConfirmFillDataModal } from "../confirmFillDataModal";
 
 export type InvoiceFormProps = {
   invoice?: Invoice;
+  handleInvoice?: (invoice: Invoice) => void;
   onClose: () => void;
   onSubmit: SubmitHandler<FieldValues>;
 };
 
 export const InvoiceForm = ({
   invoice,
+  handleInvoice,
   onClose,
   onSubmit,
 }: InvoiceFormProps) => {
@@ -43,7 +45,7 @@ export const InvoiceForm = ({
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      creationDate: invoice?.createdAt || new Date(),
+      creationDate: new Date(invoice?.createdAt || new Date()),
       companyName: invoice?.company.name,
       companyEmail: invoice?.company.email,
       companyStreet: invoice?.company.address.street,
@@ -124,13 +126,24 @@ export const InvoiceForm = ({
 
     const { data } = await res.json();
 
-    if (data) {
-      setModalState({
-        isOpened: true,
-        personType,
-        data,
+    if (!data) {
+      return;
+    }
+
+    if (invoice) {
+      handleInvoice?.({
+        ...invoice,
+        [`${personType}Id`]: data.id,
+        [`${personType}AddressID`]: data.addressId,
+        [personType]: data,
       });
     }
+
+    setModalState({
+      isOpened: true,
+      personType,
+      data,
+    });
   };
 
   return (

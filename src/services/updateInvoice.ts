@@ -1,5 +1,6 @@
-import { InvoiceStatus, ResponseStatus } from "@/types";
-import { PrismaClient, Product, Invoice } from "@prisma/client";
+import { invoiceDataToSelectFromPrisma } from "@/constants/invoiceDataToSelectFromPrisma";
+import { InvoiceStatus, ResponseStatus, Invoice, Product } from "@/types";
+import { PrismaClient } from "@prisma/client";
 
 export type UpdateInvoicePayload = {
   createdAt: string;
@@ -96,6 +97,7 @@ export const updateInvoice = async (
     invoice = await prisma.invoice.update({
       where: { id: invoiceId },
       data,
+      select: invoiceDataToSelectFromPrisma,
     });
 
     return { status: "OK", invoice };

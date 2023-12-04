@@ -1,3 +1,4 @@
+import { invoiceDataToSelectFromPrisma } from "@/constants/invoiceDataToSelectFromPrisma";
 import { InvoiceStatus, ResponseStatus } from "@/types";
 import { PrismaClient, Product } from "@prisma/client";
 
@@ -88,6 +89,7 @@ export const createInvoice = async (
 
     invoice = await prisma.invoice.create({
       data,
+      select: invoiceDataToSelectFromPrisma,
     });
 
     return { status: "OK", invoice };
