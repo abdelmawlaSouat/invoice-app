@@ -132,8 +132,9 @@ export async function POST(request: Request) {
       );
     }
 
-    return new Response(`${error}`, {
-      status: ErrorMessages.unknown_error.status,
-    });
+    return Response.json(
+      { error: ErrorMessages.unknown_error },
+      { status: ErrorMessages.unknown_error.status }
+    );
   }
 }

@@ -92,28 +92,30 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
         method: "POST",
         body: JSON.stringify({ id: invoice.id }),
       });
-      const { status } = await res.json();
+      const { error } = await res.json();
 
-      if (status === "OK") {
-        setIsDeleteInvoiceModalOpened(false);
-        showToast("success", {
-          title: "Invoice Removed",
-          message:
-            "The invoice was successfully removed. You will now be redirected to the invoice list page in a few seconds...",
-        });
-
-        router.prefetch("/");
-        router.refresh();
-
-        setTimeout(() => {
-          router.push("/");
-        }, 4000);
+      if (error) {
+        throw new Error(error.message);
       }
-    } catch (error) {
+
+      setIsDeleteInvoiceModalOpened(false);
+      showToast("success", {
+        title: "Invoice Removed",
+        message:
+          "The invoice was successfully removed. You will now be redirected to the invoice list page in a few seconds...",
+      });
+
+      router.prefetch("/");
+      router.refresh();
+
+      setTimeout(() => {
+        router.push("/");
+      }, 4000);
+    } catch (error: any) {
       showToast("error", {
         title: "Error while deleting the invoice",
         message:
-          "Something went wrong while deleting the invoice. Please try again.",
+          error.message || "Something went wrong while deleting the invoice.",
       });
     } finally {
       setIsDeleting(false);
