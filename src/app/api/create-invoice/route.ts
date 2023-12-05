@@ -123,7 +123,7 @@ export async function POST(request: Request) {
       throw new Error(response.error);
     }
 
-    return Response.json(response.invoice, { status: 200 });
+    return Response.json(response);
   } catch (error: any) {
     if (error.message === PrismaErrorType.EMAIL_ALREADY_EXISTS) {
       return Response.json(

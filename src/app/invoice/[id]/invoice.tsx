@@ -63,7 +63,11 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
         }),
       });
 
-      const { status, invoice: updatedInvoice } = await res.json();
+      const { invoice: updatedInvoice, error } = await res.json();
+
+      if (error) {
+        throw new Error(error.message);
+      }
 
       showToast("success", {
         title: "Invoice Paid",
@@ -73,11 +77,12 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
       setInvoice(updatedInvoice);
       router.refresh();
       router.prefetch("/");
-    } catch (error) {
+    } catch (error: any) {
       showToast("error", {
         title: "Error while updating the invoice",
         message:
-          "Something went wrong while updating the invoice. Please try again.",
+          error.message ||
+          "Something went wrong while updating the invoice status. Please try again.",
       });
     } finally {
       setIsUpdatingStatus(false);
@@ -167,13 +172,11 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
     }
   };
 
-  const dueDate = invoice.paymentDue
-    ? new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })
-    : null;
+  const dueDate = new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
   const totalPrice = Intl.NumberFormat("en-BE", {
     style: "currency",
