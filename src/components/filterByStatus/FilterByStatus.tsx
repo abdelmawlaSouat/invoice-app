@@ -1,7 +1,7 @@
 "use client";
 
 import { Checkbox, Typography, Card } from "@/design-system/components";
-import { DownArrow } from "@/design-system/icons";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
 import * as Popover from "@radix-ui/react-popover";
 import { FC } from "react";
 import styles from "./FilterByStatus.module.scss";
@@ -43,7 +43,7 @@ export const FilterByStatus: FC<FilterByStatusProps> = ({
             <Typography variant="headingS">
               {width >= BREAKPOINTS.md ? "Filter by status" : "Filter"}
             </Typography>
-            <DownArrow />
+            <ChevronDownIcon />
           </button>
         </Popover.Trigger>
 

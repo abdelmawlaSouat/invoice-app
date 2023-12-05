@@ -5,7 +5,7 @@ import { Invoice, InvoiceStatus } from "@/types";
 import Link from "next/link";
 import styles from "./InvoiceList.module.scss";
 import { Button, Toast, Typography } from "@/design-system/components";
-import { Add } from "@/design-system/icons";
+import { PlusIcon } from "@radix-ui/react-icons";
 import { BREAKPOINTS } from "@/design-system/styles/breakpoints";
 import { FilterByStatus } from "../filterByStatus";
 import { InvoiceOverviewCard } from "../invoiceOverviewCard";
@@ -121,7 +121,7 @@ export const InvoiceList = ({ invoices: data }: InvoiceListProps) => {
             className={styles.addInvoiceBtn}
             onClick={handleonCreateInvoice}
           >
-            <Add />
+            <PlusIcon />
             <span>{width >= BREAKPOINTS.md ? "New Invoice" : "New"}</span>
           </Button>
         </div>

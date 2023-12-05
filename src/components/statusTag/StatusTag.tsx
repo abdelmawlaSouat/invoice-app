@@ -1,7 +1,7 @@
 import { Typography } from "@/design-system/components";
 import styles from "./StatusTag.module.scss";
 import { FC } from "react";
-import { Oval } from "@/design-system/icons";
+import { DotFilledIcon } from "@radix-ui/react-icons";
 import classNames from "classnames";
 import { InvoiceStatus } from "@/types";
 
@@ -20,7 +20,7 @@ export const StatusTag: FC<StatusTagProps> = ({ status }) => {
     <div
       className={classNames(styles.wrapper, styles[status.toLocaleLowerCase()])}
     >
-      <Oval color={statusColors[status]} />
+      <DotFilledIcon color={statusColors[status]} width={30} height={30} />
 
       <Typography variant="label" tag="span">
         {status}

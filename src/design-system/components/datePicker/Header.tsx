@@ -3,7 +3,7 @@
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./Header.module.scss";
 
-import { LeftArrow, RightArrow } from "@/design-system/icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 import { Typography } from "../typography";
 
 type HeaderProps = {
@@ -33,7 +33,7 @@ export const Header = ({
         onClick={decreaseMonth}
         disabled={prevMonthButtonDisabled}
       >
-        <LeftArrow />
+        <ArrowLeftIcon />
       </button>
 
       <Typography className={styles.title} variant="body">
@@ -45,7 +45,7 @@ export const Header = ({
         onClick={increaseMonth}
         disabled={nextMonthButtonDisabled}
       >
-        <RightArrow />
+        <ArrowRightIcon />
       </button>
     </div>
   );

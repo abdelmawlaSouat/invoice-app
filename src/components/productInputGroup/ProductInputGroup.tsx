@@ -1,6 +1,6 @@
 import { TextField } from "@/design-system/components";
 import { useFormContext } from "react-hook-form";
-import { MdOutlineDeleteOutline } from "react-icons/md";
+import { TrashIcon } from "@radix-ui/react-icons";
 import styles from "./ProductInputGroup.module.scss";
 
 export type ProductInputGroupProps = {
@@ -75,7 +75,7 @@ export const ProductInputGroup = ({
         />
 
         <button className={styles.deleteBtn} onClick={onRemove}>
-          <MdOutlineDeleteOutline />
+          <TrashIcon />
         </button>
       </div>
     </div>

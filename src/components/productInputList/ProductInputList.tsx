@@ -3,7 +3,7 @@ import { ProductInputGroup } from "../productInputGroup";
 import styles from "./ProductInputList.module.scss";
 import classNames from "classnames";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { IoMdAdd } from "react-icons/io";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 export type ProductInputListProps = {
   className?: string;
@@ -48,7 +48,7 @@ export const ProductInputList = ({ className }: ProductInputListProps) => {
       ))}
 
       <button type="button" className={styles.addItemBtn} onClick={addNewItem}>
-        <IoMdAdd size={15} />
+        <PlusIcon />
 
         <Typography variant="body" tag="span">
           Add Item

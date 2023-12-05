@@ -3,7 +3,7 @@ import { Invoice, InvoiceStatus } from "@/types";
 import styles from "./DesktopCard.module.scss";
 import { FC } from "react";
 import { StatusTag } from "../statusTag";
-import { RightArrow } from "@/design-system/icons";
+import { ChevronRightIcon } from "@radix-ui/react-icons";
 
 type InvoiceOverviewCardProps = {
   invoice: Invoice;
@@ -46,7 +46,7 @@ export const DesktopCard: FC<InvoiceOverviewCardProps> = ({ invoice }) => {
 
         <StatusTag status={invoice.status as InvoiceStatus} />
 
-        <RightArrow />
+        <ChevronRightIcon />
       </div>
     </Card>
   );
