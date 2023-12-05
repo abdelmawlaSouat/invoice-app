@@ -69,22 +69,24 @@ export const InvoiceList = ({ invoices: data }: InvoiceListProps) => {
         body: JSON.stringify(data),
       });
 
-      const { status, invoice } = await res.json();
+      const { invoice, error } = await res.json();
 
-      if (status === "OK") {
-        showToast("success", {
-          title: "Invoice Created",
-          message: "The invoice was successfully created.",
-        });
-
-        setInvoices([invoice, ...invoices]);
-        setIsCreateInvoiceModalOpened(false);
+      if (error) {
+        throw new Error(error.message);
       }
-    } catch (error) {
+
+      showToast("success", {
+        title: "Invoice Created",
+        message: "The invoice was successfully created.",
+      });
+
+      setInvoices([invoice, ...invoices]);
+      setIsCreateInvoiceModalOpened(false);
+    } catch (error: any) {
       showToast("error", {
         title: "Error while creating the invoice",
         message:
-          "Something went wrong while creating the invoice. Please try again.",
+          error.message || "Something went wrong while updating the invoice.",
       });
     }
   };
