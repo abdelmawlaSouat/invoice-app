@@ -65,16 +65,14 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
 
       const { status, invoice: updatedInvoice } = await res.json();
 
-      if (status === "OK") {
-        showToast("success", {
-          title: "Invoice Paid",
-          message: "The invoice was successfully marked as paid.",
-        });
+      showToast("success", {
+        title: "Invoice Paid",
+        message: "The invoice was successfully marked as paid.",
+      });
 
-        setInvoice(updatedInvoice);
-        router.refresh();
-        router.prefetch("/");
-      }
+      setInvoice(updatedInvoice);
+      router.refresh();
+      router.prefetch("/");
     } catch (error) {
       showToast("error", {
         title: "Error while updating the invoice",
@@ -143,24 +141,26 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
         }),
       });
 
-      const { status, invoice: data } = await res.json();
+      const { invoice: data, error } = await res.json();
 
-      if (status === "OK") {
-        showToast("success", {
-          title: "Invoice Updated",
-          message: "The invoice was successfully updated.",
-        });
-
-        router.prefetch("/");
-        router.refresh();
-        setInvoice(data);
-        setIsEditInvoiceModalOpened(false);
+      if (error) {
+        throw new Error(error.message);
       }
-    } catch (error) {
+
+      showToast("success", {
+        title: "Invoice Updated",
+        message: "The invoice was successfully updated.",
+      });
+
+      router.prefetch("/");
+      router.refresh();
+      setInvoice(data);
+      setIsEditInvoiceModalOpened(false);
+    } catch (error: any) {
       showToast("error", {
         title: "Error while updating the invoice",
         message:
-          "Something went wrong while updating the invoice. Please try again.",
+          error.message || "Something went wrong while updating the invoice.",
       });
     }
   };

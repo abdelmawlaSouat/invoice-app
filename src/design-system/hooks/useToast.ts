@@ -23,9 +23,11 @@ export const useToast = () => {
   ) => {
     setToast({ open: true, title, message, type });
 
-    setTimeout(() => {
-      hideToast();
-    }, 4000);
+    if (type !== "error") {
+      setTimeout(() => {
+        hideToast();
+      }, 4000);
+    }
   };
 
   const hideToast = () => {
