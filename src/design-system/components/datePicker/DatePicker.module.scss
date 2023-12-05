@@ -20,7 +20,7 @@
 }
 
 .label {
-    color: var(--textColorSecondary);
+    color: map.get($colors, "blue-grey");
     font-size: 0.8125rem;
 }
 
@@ -28,13 +28,13 @@ input.datePicker {
     height: 3rem;
     box-sizing: border-box;
     border-radius: 4px;
-    border: 1px solid var(--inputBorderColor);
+    border: 1px solid map.get($colors, "light-grey");
     font-size: 0.8125rem;
     padding: 0 1.125rem;
     line-height: 1.5rem;
     font-weight: bold;
-    background-color: var(--inputBackgroundColor);
-    color: var(--textColor);
+    background-color: map.get($colors, "white-10");
+    color: map.get($colors, "black-70");
     padding: 1rem;
     width: 100%;
 
@@ -50,11 +50,11 @@ input.datePicker {
 }
 
 .calendar {
-    background-color: var(--inputBackgroundColor);
+    background-color: map.get($colors, "white-10");
     padding: 1.5rem;
     border: 0;
     box-shadow:
-        0 0 0 1px var(--inputBorderColor),
+        0 0 0 1px map.get($colors, "light-grey"),
         0 4px 11px 0 rgba(0, 0, 0, 0.18);
 }
 

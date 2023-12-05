@@ -9,20 +9,20 @@
 }
 
 .label {
-    color: var(--textColorSecondary);
+    color: map.get($colors, "blue-grey");
     font-size: 0.8125rem;
 }
 
 .trigger {
     height: 3rem;
     border-radius: 4px;
-    border: 1px solid var(--inputBorderColor);
+    border: 1px solid map.get($colors, "light-grey");
     padding: 0 1.125rem;
     font-size: 0.8125rem;
     line-height: 1.5rem;
     font-weight: bold;
-    background-color: var(--inputBackgroundColor);
-    color: var(--textColor);
+    background-color: map.get($colors, "white-10");
+    color: map.get($colors, "black-70");
 
     display: flex;
     justify-content: space-between;
@@ -46,8 +46,8 @@
 
 .content {
     overflow: hidden;
-    background-color: var(--inputBackgroundColor);
-    color: var(--textColor);
+    background-color: map.get($colors, "white-10");
+    color: map.get($colors, "black-70");
     border-radius: 6px;
     box-shadow:
         0px 10px 38px -10px rgba(22, 23, 24, 0.35),
@@ -85,7 +85,7 @@
     align-items: center;
     justify-content: center;
     height: 25px;
-    background-color: var(--inputBackgroundColor);
+    background-color: map.get($colors, "white-10");
     color: map.get($colors, "purple");
     cursor: default;
 }

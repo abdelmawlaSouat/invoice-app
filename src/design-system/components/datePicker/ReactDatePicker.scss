@@ -3,7 +3,7 @@
 @import "mixins";
 
 .react-datepicker__header.react-datepicker__header--custom {
-  background-color: var(--inputBackgroundColor);
+  background-color: map.get($colors, "white-10");
   border: 0;
 }
 
@@ -13,18 +13,18 @@
 
 .react-datepicker__day--selected {
   background-color: map.get($colors, "purple");
-  color: map.get($colors, "white");
+  color: map.get($colors, "white-10");
   padding: 0.5rem;
 
   &:hover {
     background-color: map.get($colors, "purple");
-    color: map.get($colors, "white");
+    color: map.get($colors, "white-10");
   }
 }
 
 .react-datepicker__day:not(.react-datepicker__day--selected) {
   margin: 0.5rem;
-  color: var(--textColor);
+  color: map.get($colors, "black-70");
 
   &:hover {
     background-color: transparent;

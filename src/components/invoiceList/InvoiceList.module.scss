@@ -46,11 +46,11 @@
 }
 
 .title {
-    color: var(--textColor);
+    color: map.get($colors, "black-70");
 }
 
 .invoicesLength {
-    color: var(--textColorSecondary);
+    color: map.get($colors, "blue-grey");
     margin: 0;
 }
 
@@ -71,7 +71,11 @@
 .addInvoiceBtn {
     background-color: map.get($colors, "purple");
     color: #fff;
-    padding: 6px 1rem 6px 6px;
+    padding: 1rem 1rem;
+
+    @include breakpoint-min(map.get($breakpoints, "xl")) {
+        padding: 1rem 1.5rem;
+    }
 
     > span {
         display: flex;

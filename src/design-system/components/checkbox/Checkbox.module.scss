@@ -10,7 +10,7 @@
 }
 
 .root {
-    background-color: var(--checkboxBackgroundColor);
+    background-color: map.get($colors, "light-grey");
     border: 0;
     width: 1.5rem;
     height: 1.5rem;
@@ -38,6 +38,6 @@
 
 .label {
     cursor: pointer;
-    color: var(--textColor);
+    color: map.get($colors, "black-70");
     padding-left: 0.875rem;
 }

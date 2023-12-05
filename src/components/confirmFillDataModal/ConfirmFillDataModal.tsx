@@ -1,6 +1,6 @@
 import { Button, Card, Modal, Typography } from "@/design-system/components";
 import styles from "./ConfirmFillDataModal.module.scss";
-import { IoWarningOutline } from "react-icons/io5";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
 export type ConfirmFillDataModalProps = {
   open: boolean;
@@ -32,7 +32,7 @@ export const ConfirmFillDataModal = ({
         </Typography>
 
         <div className={styles.warningWrapper}>
-          <IoWarningOutline size={30} color="#f6c350" />
+          <ExclamationTriangleIcon width={30} height={30} color="#f6c350" />
 
           <Typography variant="body" className={styles.warningMessage}>
             Important: Each {personType} can only have one unique email.

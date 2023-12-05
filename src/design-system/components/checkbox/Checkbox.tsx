@@ -5,7 +5,7 @@ import * as RadixCheckbox from "@radix-ui/react-checkbox";
 import styles from "./Checkbox.module.scss";
 import { Typography } from "../typography";
 import classNames from "classnames";
-import { Check } from "@/design-system/icons";
+import { CheckIcon } from "@radix-ui/react-icons";
 
 export type CheckboxProps = {
   label: string;
@@ -30,7 +30,7 @@ export const Checkbox: FC<CheckboxProps> = ({
       onCheckedChange={onChange}
     >
       <RadixCheckbox.Indicator className={styles.indicator}>
-        <Check />
+        <CheckIcon />
       </RadixCheckbox.Indicator>
     </RadixCheckbox.Root>
 

@@ -9,7 +9,9 @@ $colors: (
     "blue-grey": #7e88c3,
     "red": #ec5757,
     "pink": #ff9797,
-    "white": #f8f8fb,
+    "white-10": #f8f8fb,
+    "white-30": #f4f4f5,
+    "white": #ffffff,
     "black-10": #373b53,
     "black-20": #252945,
     "black-30": #1e2139,
@@ -25,40 +27,4 @@ $breakpoints: (
     "lg": 992px,
     "xl": 1200px,
     "xxl": 1400px
-);
-
-// Themes
-
-$light: (
-    "appBackgroundColor": map.get($colors, "white"),
-    "navbarBackgroundColor": map.get($colors, "black-10"),
-    "cardBackgroundColor": #fff,
-    "textColor": map.get($colors, "black-70"),
-    "textColorSecondary": map.get($colors, "blue-grey"),
-    "secondaryButtonText": map.get($colors, "black-10"),
-    "secondaryButtonBackground": #f4f4f5,
-    "checkboxBackgroundColor": map.get($colors, "light-grey"),
-    "filtersCardBackgroundColor": #fff,
-    "itemsCardBackgroundColor": #f9fafe,
-    "itemsCardFooterBackgroundColor": map.get($colors, "black-10"),
-    "itemsCardFooterText": map.get($colors, "white"),
-    "inputBorderColor": map.get($colors, "light-grey"),
-    "inputBackgroundColor": map.get($colors, "white")
-);
-
-$dark: (
-    "appBackgroundColor": map.get($colors, "black-50"),
-    "navbarBackgroundColor": map.get($colors, "black-30"),
-    "cardBackgroundColor": #1d2239,
-    "textColor": map.get($colors, "white"),
-    "textColorSecondary": map.get($colors, "white"),
-    "secondaryButtonText": #fff,
-    "secondaryButtonBackground": #292c44,
-    "checkboxBackgroundColor": #1d2239,
-    "filtersCardBackgroundColor": #252944,
-    "itemsCardBackgroundColor": map.get($colors, "black-20"),
-    "itemsCardFooterBackgroundColor": map.get($colors, "black-70"),
-    "itemsCardFooterText": map.get($colors, "white"),
-    "inputBorderColor": map.get($colors, "black-30"),
-    "inputBackgroundColor": map.get($colors, "black-30")
 );

@@ -29,10 +29,10 @@
 }
 
 .draft {
-    color: var(--secondaryButtonText);
-    background-color: var(--secondaryButtonBackground);
+    color: map.get($colors, "black-10");
+    background-color: map.get($colors, "white-30");
 
     circle {
-        fill: var(--secondaryButtonText);
+        fill: map.get($colors, "black-10");
     }
 }

@@ -1,3 +1,7 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -13,10 +17,10 @@
     align-items: center;
     gap: 1.5rem;
 
-    color: var(--textColor);
+    color: map.get($colors, "black-70");
 }
 
 .description {
-    color: var(--textColorSecondary);
+    color: map.get($colors, "blue-grey");
     text-align: center;
 }
