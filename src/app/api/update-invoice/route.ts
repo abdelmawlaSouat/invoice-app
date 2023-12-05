@@ -1,4 +1,6 @@
+import { ErrorMessages } from "@/constants/errorMessages";
 import { updateInvoice } from "@/services";
+import { PrismaErrorType } from "@/types";
 import { addDaysToDate } from "@/utils";
 
 export async function POST(request: Request) {
@@ -99,8 +101,22 @@ export async function POST(request: Request) {
   try {
     const response = await updateInvoice(invoice.id, formatedInvoice);
 
+    if (response.status === "KO") {
+      throw new Error(response.error);
+    }
+
     return Response.json(response);
-  } catch (error) {
-    return new Response(`${error}`, { status: 500 });
+  } catch (error: any) {
+    if (error.message === PrismaErrorType.EMAIL_ALREADY_EXISTS) {
+      return Response.json(
+        { error: ErrorMessages.email_already_exists },
+        { status: ErrorMessages.email_already_exists.status }
+      );
+    }
+
+    return Response.json(
+      { error: ErrorMessages.unknown_error },
+      { status: ErrorMessages.unknown_error.status }
+    );
   }
 }

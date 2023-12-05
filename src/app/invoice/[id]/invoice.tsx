@@ -63,23 +63,26 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
         }),
       });
 
-      const { status, invoice: updatedInvoice } = await res.json();
+      const { invoice: updatedInvoice, error } = await res.json();
 
-      if (status === "OK") {
-        showToast("success", {
-          title: "Invoice Paid",
-          message: "The invoice was successfully marked as paid.",
-        });
-
-        setInvoice(updatedInvoice);
-        router.refresh();
-        router.prefetch("/");
+      if (error) {
+        throw new Error(error.message);
       }
-    } catch (error) {
+
+      showToast("success", {
+        title: "Invoice Paid",
+        message: "The invoice was successfully marked as paid.",
+      });
+
+      setInvoice(updatedInvoice);
+      router.refresh();
+      router.prefetch("/");
+    } catch (error: any) {
       showToast("error", {
         title: "Error while updating the invoice",
         message:
-          "Something went wrong while updating the invoice. Please try again.",
+          error.message ||
+          "Something went wrong while updating the invoice status. Please try again.",
       });
     } finally {
       setIsUpdatingStatus(false);
@@ -94,28 +97,30 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
         method: "POST",
         body: JSON.stringify({ id: invoice.id }),
       });
-      const { status } = await res.json();
+      const { error } = await res.json();
 
-      if (status === "OK") {
-        setIsDeleteInvoiceModalOpened(false);
-        showToast("success", {
-          title: "Invoice Removed",
-          message:
-            "The invoice was successfully removed. You will now be redirected to the invoice list page in a few seconds...",
-        });
-
-        router.prefetch("/");
-        router.refresh();
-
-        setTimeout(() => {
-          router.push("/");
-        }, 4000);
+      if (error) {
+        throw new Error(error.message);
       }
-    } catch (error) {
+
+      setIsDeleteInvoiceModalOpened(false);
+      showToast("success", {
+        title: "Invoice Removed",
+        message:
+          "The invoice was successfully removed. You will now be redirected to the invoice list page in a few seconds...",
+      });
+
+      router.prefetch("/");
+      router.refresh();
+
+      setTimeout(() => {
+        router.push("/");
+      }, 4000);
+    } catch (error: any) {
       showToast("error", {
         title: "Error while deleting the invoice",
         message:
-          "Something went wrong while deleting the invoice. Please try again.",
+          error.message || "Something went wrong while deleting the invoice.",
       });
     } finally {
       setIsDeleting(false);
@@ -143,35 +148,35 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
         }),
       });
 
-      const { status, invoice: data } = await res.json();
+      const { invoice: data, error } = await res.json();
 
-      if (status === "OK") {
-        showToast("success", {
-          title: "Invoice Updated",
-          message: "The invoice was successfully updated.",
-        });
-
-        router.prefetch("/");
-        router.refresh();
-        setInvoice(data);
-        setIsEditInvoiceModalOpened(false);
+      if (error) {
+        throw new Error(error.message);
       }
-    } catch (error) {
+
+      showToast("success", {
+        title: "Invoice Updated",
+        message: "The invoice was successfully updated.",
+      });
+
+      router.prefetch("/");
+      router.refresh();
+      setInvoice(data);
+      setIsEditInvoiceModalOpened(false);
+    } catch (error: any) {
       showToast("error", {
         title: "Error while updating the invoice",
         message:
-          "Something went wrong while updating the invoice. Please try again.",
+          error.message || "Something went wrong while updating the invoice.",
       });
     }
   };
 
-  const dueDate = invoice.paymentDue
-    ? new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })
-    : null;
+  const dueDate = new Date(invoice.paymentDue).toLocaleDateString("en-BE", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
   const totalPrice = Intl.NumberFormat("en-BE", {
     style: "currency",

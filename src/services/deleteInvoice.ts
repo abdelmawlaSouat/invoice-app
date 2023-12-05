@@ -1,10 +1,11 @@
 import { invoiceDataToSelectFromPrisma } from "@/constants/invoiceDataToSelectFromPrisma";
-import { ResponseStatus, Invoice } from "@/types";
+import { ResponseStatus, Invoice, PrismaErrorType } from "@/types";
 import { PrismaClient } from "@prisma/client";
 
 type DeleteInvoiceResponse = {
-  invoice: Invoice;
   status: ResponseStatus;
+  invoice?: Invoice;
+  error?: string;
 };
 
 export const deleteInvoice = async (
@@ -22,9 +23,7 @@ export const deleteInvoice = async (
     });
 
     return { status: "OK", invoice };
-  } catch (error) {
-    console.error(error);
-
-    return { status: "OK", invoice };
+  } catch (error: any) {
+    return { status: "KO", error: PrismaErrorType.UNKNOWN_ERROR };
   }
 };

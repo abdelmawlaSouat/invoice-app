@@ -28,9 +28,6 @@ export async function GET(request: Request) {
 
     return Response.json({ status: "OK", data });
   } catch (error) {
-    return Response.json({
-      status: 500,
-      error,
-    });
+    return Response.json({ error }, { status: 500 });
   }
 }

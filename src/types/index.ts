@@ -5,3 +5,4 @@ export * from "./Product";
 export * from "./InvoiceStatus";
 export * from "./ResponseStatus";
 export * from "./PaymentTerms";
+export * from "./PrismaErrorType";

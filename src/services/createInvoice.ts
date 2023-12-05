@@ -1,5 +1,10 @@
 import { invoiceDataToSelectFromPrisma } from "@/constants/invoiceDataToSelectFromPrisma";
-import { InvoiceStatus, ResponseStatus } from "@/types";
+import {
+  Invoice,
+  InvoiceStatus,
+  PrismaErrorType,
+  ResponseStatus,
+} from "@/types";
 import { PrismaClient, Product } from "@prisma/client";
 
 type CreateInvoicePayload = {
@@ -75,14 +80,15 @@ type CreateInvoicePayload = {
 };
 
 type CreateInvoiceResponse = {
-  invoice: unknown;
   status: ResponseStatus;
+  invoice?: Invoice;
+  error?: string;
 };
 
 export const createInvoice = async (
   data: CreateInvoicePayload
 ): Promise<CreateInvoiceResponse> => {
-  let invoice = {};
+  let invoice = {} as Invoice;
 
   try {
     const prisma = new PrismaClient();
@@ -93,9 +99,12 @@ export const createInvoice = async (
     });
 
     return { status: "OK", invoice };
-  } catch (error) {
-    console.error(error);
-
-    return { status: "KO", invoice };
+  } catch (error: any) {
+    return {
+      status: "KO",
+      error: error.meta.target.includes("email")
+        ? PrismaErrorType.EMAIL_ALREADY_EXISTS
+        : PrismaErrorType.UNKNOWN_ERROR,
+    };
   }
 };
