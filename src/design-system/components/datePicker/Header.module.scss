@@ -1,8 +1,12 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
 .wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--inputBackgroundColor);
+    background-color: map.get($colors, "white-10");
 }
 
 .arrowBtn {
@@ -12,7 +16,7 @@
 }
 
 .title {
-    color: var(--textColor);
+    color: map.get($colors, "black-70");
     font-weight: bold;
     margin: 0;
 }

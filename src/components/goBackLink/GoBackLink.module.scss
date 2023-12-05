@@ -1,6 +1,10 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
 .wrapper {
     text-decoration: none;
-    color: var(--textColor);
+    color: map.get($colors, "black-70");
     display: flex;
     gap: 1.5rem;
     width: fit-content;

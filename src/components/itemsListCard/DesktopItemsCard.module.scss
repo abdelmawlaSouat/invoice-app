@@ -22,15 +22,15 @@
 }
 
 .label {
-    color: var(--textColorSecondary);
+    color: map.get($colors, "blue-grey");
 }
 
 .itemsFooter {
     padding: 1.5rem;
     border-radius: 0 0 0.5rem 0.5rem;
-    color: var(--itemsCardFooterText);
+    color: map.get($colors, "white-10");
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--itemsCardFooterBackgroundColor);
+    background-color: map.get($colors, "black-10");
 }

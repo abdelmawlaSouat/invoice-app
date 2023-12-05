@@ -13,7 +13,7 @@
 }
 
 .secondaryText {
-    color: var(--textColorSecondary);
+    color: map.get($colors, "blue-grey");
     margin: 0;
     line-height: 1.125rem;
 }
@@ -32,7 +32,7 @@
 }
 
 .hashtag {
-    color: var(--textColorSecondary);
+    color: map.get($colors, "blue-grey");
 }
 
 .addressWrapper {

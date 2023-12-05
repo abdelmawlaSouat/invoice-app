@@ -46,11 +46,11 @@
 }
 
 .title {
-    color: var(--textColor);
+    color: map.get($colors, "black-70");
 }
 
 .invoicesLength {
-    color: var(--textColorSecondary);
+    color: map.get($colors, "blue-grey");
     margin: 0;
 }
 

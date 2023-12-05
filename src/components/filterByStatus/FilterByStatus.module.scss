@@ -1,3 +1,7 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
 .trigger {
     background: transparent;
     border: 0;
@@ -5,11 +9,11 @@
     align-items: center;
     gap: 0.875rem;
     cursor: pointer;
-    color: var(--textColor);
+    color: map.get($colors, "black-70");
 }
 
 .card {
-    background-color: var(--filtersCardBackgroundColor);
+    background-color: map.get($colors, "white");
     display: flex;
     flex-direction: column;
     padding: 0;

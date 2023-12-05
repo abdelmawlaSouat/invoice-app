@@ -1,3 +1,7 @@
+@use "sass:map";
+@import "variables";
+@import "mixins";
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -27,6 +31,6 @@
     svg {
         width: 1.25rem;
         height: 1.25rem;
-        color: var(--textColorSecondary);
+        color: map.get($colors, "blue-grey");
     }
 }

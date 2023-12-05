@@ -32,7 +32,7 @@
 }
 
 .label {
-    color: var(--textColorSecondary);
+    color: map.get($colors, "blue-grey");
     font-size: 14px;
     font-weight: 500;
 }
@@ -41,13 +41,13 @@
     box-sizing: border-box;
     height: 3rem;
     border-radius: 4px;
-    border: 1px solid var(--inputBorderColor);
+    border: 1px solid map.get($colors, "light-grey");
     padding: 1.25rem 1.125rem;
     font-size: 0.8125rem;
     line-height: 1.5rem;
     font-weight: bold;
-    background-color: var(--inputBackgroundColor);
-    color: var(--textColor);
+    background-color: map.get($colors, "white-10");
+    color: map.get($colors, "black-70");
 
     @include breakpoint-min(map.get($breakpoints, "md")) {
         font-size: 1rem;
