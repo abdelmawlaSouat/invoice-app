@@ -45,7 +45,7 @@ export const InvoiceFormModal = ({
             aria-label="Close"
             onClick={onClose}
           >
-            <Cross2Icon width={30} height={30} />
+            <Cross2Icon color="#0c0e16" width={25} height={25} />
           </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>

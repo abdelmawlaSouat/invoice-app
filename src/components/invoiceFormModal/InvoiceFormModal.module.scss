@@ -41,11 +41,11 @@
     }
 
     @include breakpoint-min(map.get($breakpoints, "md")) {
-        width: 60vw;
+        width: 65vw;
     }
 
     @include breakpoint-min(map.get($breakpoints, "lg")) {
-        width: 45vw;
+        width: 55vw;
     }
 
     &:focus {
@@ -55,7 +55,7 @@
 
 .iconButton {
     position: absolute;
-    top: 0.5rem;
+    top: 1rem;
     right: 1rem;
     cursor: pointer;
     background-color: transparent;
