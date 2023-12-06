@@ -35,7 +35,7 @@ export const Checkbox: FC<CheckboxProps> = ({
     </RadixCheckbox.Root>
 
     <Typography
-      variant="headingS"
+      variant="body"
       tag="label"
       className={styles.label}
       htmlFor={id}

@@ -333,6 +333,7 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
             onDelete={toggleDeleteModal}
             onMarkAsPaid={handleonMarkAsPaid}
             isUpdatingStatus={isUpdatingStatus}
+            className={styles.ctasOnMobile}
           />
         </Card>
       )}
