@@ -4,7 +4,7 @@
 .wrapper {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
     padding: 0.5rem 0.75rem;
     cursor: pointer;
 }
@@ -32,12 +32,11 @@
 
 .indicator {
     color: #fff;
-    position: relative;
-    top: -2px;
 }
 
 .label {
     cursor: pointer;
+    font-weight: bold;
+    line-height: 1;
     color: map.get($colors, "black-70");
-    padding-left: 0.875rem;
 }
