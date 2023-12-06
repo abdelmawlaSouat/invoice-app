@@ -40,14 +40,12 @@ export const InvoiceFormModal = ({
             onSubmit={onSubmit}
           />
 
-          <Dialog.Close asChild>
-            <button
-              className={styles.iconButton}
-              aria-label="Close"
-              onClick={onClose}
-            >
-              <Cross2Icon width={40} height={40} />
-            </button>
+          <Dialog.Close
+            className={styles.iconButton}
+            aria-label="Close"
+            onClick={onClose}
+          >
+            <Cross2Icon width={30} height={30} />
           </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
