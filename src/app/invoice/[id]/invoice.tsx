@@ -75,8 +75,6 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
       });
 
       setInvoice(updatedInvoice);
-      router.refresh();
-      router.prefetch("/");
     } catch (error: any) {
       showToast("error", {
         title: "Error while updating the invoice",
@@ -109,9 +107,6 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
         message:
           "The invoice was successfully removed. You will now be redirected to the invoice list page in a few seconds...",
       });
-
-      router.prefetch("/");
-      router.refresh();
 
       setTimeout(() => {
         router.push("/");
@@ -159,8 +154,6 @@ export default function InvoiceDetail({ invoice: data }: InvoiceDetailProps) {
         message: "The invoice was successfully updated.",
       });
 
-      router.prefetch("/");
-      router.refresh();
       setInvoice(data);
       setIsEditInvoiceModalOpened(false);
     } catch (error: any) {
